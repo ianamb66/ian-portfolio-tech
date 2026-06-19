@@ -260,30 +260,6 @@ const webBuilds = [
     image: '/previews/bim.png',
   },
   {
-    title: 'LinkedIn 2026',
-    type: 'Reporte HTML / estrategia B2B',
-    url: '/reportes/linkedin-2026.html',
-    image: '/previews/reporte-linkedin-2026.png',
-  },
-  {
-    title: 'BAT + Heraldo/Expansión',
-    type: 'Reporte HTML / propuesta comercial',
-    url: '/reportes/bat-heraldo-expansion.html',
-    image: '/previews/reporte-bat-heraldo.png',
-  },
-  {
-    title: 'Country Managers',
-    type: 'Reporte HTML / inteligencia de mercado',
-    url: '/reportes/country-managers.html',
-    image: '/previews/reporte-country-managers.png',
-  },
-  {
-    title: 'FMI Transparencia',
-    type: 'Reporte HTML / impacto institucional',
-    url: '/reportes/fmi-transparencia.html',
-    image: '/previews/reporte-fmi-transparencia.png',
-  },
-  {
     title: 'Museo del Gato',
     type: 'Experiencia cultural',
     url: 'https://museo-del-gato-web.vercel.app',
