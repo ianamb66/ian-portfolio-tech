@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
   ArrowUpRight,
   ArrowLeft,
   Bot,
   BriefcaseBusiness,
+  Camera,
   Cpu,
   FileText,
   Globe2,
@@ -12,11 +14,15 @@ import {
   Mail,
   Megaphone,
   MonitorCog,
+  Moon,
   Play,
   Sparkles,
+  Sun,
   Workflow,
 } from 'lucide-react'
 import './App.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const navItems = [
   ['Perfil', '/#perfil'],
@@ -322,10 +328,22 @@ function DotMatrix() {
 
 function SignalPanel() {
   return (
-    <div className="signal-panel reveal">
+    <div className="signal-panel liquid-panel reveal">
+      <span className="liquid-layer liquid-layer-a" />
+      <span className="liquid-layer liquid-layer-b" />
       <div className="panel-top">
         <span>IAN_OS</span>
         <span>STRATEGY MODE</span>
+      </div>
+      <div className="portrait-card liquid-card">
+        <div className="portrait-frame">
+          <Camera size={30} strokeWidth={1.5} />
+          <span>Foto de Ian</span>
+        </div>
+        <div>
+          <small>Hero portrait</small>
+          <strong>Espacio listo para retrato profesional</strong>
+        </div>
       </div>
       <DotMatrix />
       <div className="core-orbit" aria-hidden="true">
@@ -351,6 +369,23 @@ function SignalPanel() {
         </div>
       </div>
     </div>
+  )
+}
+
+function ThemeToggle({ theme, onToggle }) {
+  const isDark = theme === 'dark'
+
+  return (
+    <button
+      className="theme-toggle"
+      type="button"
+      onClick={onToggle}
+      aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      title={isDark ? 'Modo claro' : 'Modo oscuro'}
+    >
+      {isDark ? <Sun size={17} /> : <Moon size={17} />}
+      <span>{isDark ? 'Claro' : 'Oscuro'}</span>
+    </button>
   )
 }
 
@@ -472,21 +507,50 @@ function CasePage({ project }) {
 
 function App() {
   const rootRef = useRef(null)
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = window.localStorage.getItem('portfolio-theme')
+
+    if (storedTheme === 'dark' || storedTheme === 'light') {
+      return storedTheme
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
   const caseSlug = window.location.pathname.startsWith('/casos/')
     ? window.location.pathname.split('/').filter(Boolean).at(-1)
     : null
   const activeCase = caseSlug ? projects.find((project) => project.slug === caseSlug) : null
 
   useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    window.localStorage.setItem('portfolio-theme', theme)
+  }, [theme])
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-      gsap.set('.reveal', { y: reduceMotion ? 0 : 22 })
-      gsap.to('.reveal', {
-        y: 0,
-        duration: reduceMotion ? 0.01 : 0.8,
-        ease: 'power3.out',
-        stagger: 0.08,
+      gsap.utils.toArray('.reveal').forEach((element) => {
+        gsap.fromTo(
+          element,
+          {
+            autoAlpha: 0,
+            y: reduceMotion ? 0 : 24,
+            filter: reduceMotion ? 'blur(0px)' : 'blur(10px)',
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: reduceMotion ? 0.01 : 0.82,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 88%',
+              once: true,
+            },
+          },
+        )
       })
 
       if (!reduceMotion) {
@@ -510,6 +574,42 @@ function App() {
             },
           })
         }
+        if (document.querySelector('.liquid-layer')) {
+          gsap.to('.liquid-layer-a', {
+            y: -90,
+            x: 36,
+            rotate: 18,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.8,
+            },
+          })
+          gsap.to('.liquid-layer-b', {
+            y: 72,
+            x: -24,
+            rotate: -14,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.8,
+            },
+          })
+          gsap.to('.liquid-card', {
+            y: -42,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.9,
+            },
+          })
+        }
       }
     }, rootRef)
 
@@ -517,7 +617,7 @@ function App() {
   }, [])
 
   return (
-    <div ref={rootRef} className="site-shell">
+    <div ref={rootRef} className="site-shell" data-theme={theme}>
       <a className="skip-link" href="#main">Saltar al contenido</a>
       <nav className="topbar" aria-label="Navegación principal">
         <a className="brand-mark" href="/" aria-label="Ir al inicio">
@@ -531,10 +631,16 @@ function App() {
             </a>
           ))}
         </div>
-        <a className="nav-cta" href="mailto:ianamb.mkt@gmail.com">
-          <Mail size={16} />
-          Contacto
-        </a>
+        <div className="nav-actions">
+          <ThemeToggle
+            theme={theme}
+            onToggle={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
+          />
+          <a className="nav-cta" href="mailto:ianamb.mkt@gmail.com">
+            <Mail size={16} />
+            Contacto
+          </a>
+        </div>
       </nav>
 
       <main id="main">
