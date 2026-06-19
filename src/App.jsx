@@ -83,7 +83,20 @@ const projects = [
       y: 'El resultado fue una ruta de proyecto clara para educación, infraestructura artística y toma de decisiones.',
       z: 'Se resolvió con análisis de necesidades, documentación estratégica, presupuestos y una narrativa lista para presentación.',
     },
-    images: ['Mapa de necesidades', 'Ruta de implementación'],
+    images: [
+      {
+        title: 'Mapa de necesidades',
+        label: 'Diagnóstico',
+        bullets: ['Espacios', 'Audiencias', 'Presupuesto'],
+        variant: 'grid',
+      },
+      {
+        title: 'Ruta de implementación',
+        label: 'Plan ejecutivo',
+        bullets: ['Fases', 'Responsables', 'Entregables'],
+        variant: 'timeline',
+      },
+    ],
   },
   {
     slug: 'reckitt-marcas-consumo',
@@ -98,7 +111,20 @@ const projects = [
       y: 'Se logró ordenar mensajes, piezas y rutas de trabajo para comunicar con claridad ante audiencias distintas.',
       z: 'Se resolvió con propuestas, mensajes clave, estructura de campaña y coordinación de entregables con enfoque RCA.',
     },
-    images: ['Arquitectura de campaña', 'Mensajes por audiencia'],
+    images: [
+      {
+        title: 'Arquitectura de campaña',
+        label: 'Sistema narrativo',
+        bullets: ['Insight', 'Mensaje', 'Piezas'],
+        variant: 'grid',
+      },
+      {
+        title: 'Mensajes por audiencia',
+        label: 'Comunicación',
+        bullets: ['Cliente', 'Consumidor', 'Stakeholders'],
+        variant: 'cards',
+      },
+    ],
   },
   {
     slug: 'activaciones-eventos',
@@ -113,7 +139,20 @@ const projects = [
       y: 'El resultado fue una operación más controlada y materiales listos para implementación.',
       z: 'Se resolvió con licitación, coordinación, revisión de materiales, seguimiento y respuesta rápida a incidencias.',
     },
-    images: ['Layout operativo', 'Checklist de producción'],
+    images: [
+      {
+        title: 'Layout operativo',
+        label: 'Producción',
+        bullets: ['Zona', 'Flujo', 'Montaje'],
+        variant: 'cards',
+      },
+      {
+        title: 'Checklist de producción',
+        label: 'Control',
+        bullets: ['Proveedor', 'Materiales', 'Incidencias'],
+        variant: 'timeline',
+      },
+    ],
   },
   {
     slug: 'ia-procesos-internos',
@@ -128,7 +167,20 @@ const projects = [
       y: 'Se obtuvo una operación más ágil para documentar, analizar, prototipar y presentar avances.',
       z: 'Se resolvió con flujos usando ChatGPT, Claude, Gemini, NotebookLM, dashboards, CRM y prototipos rápidos.',
     },
-    images: ['Flujo IA operativo', 'Dashboard de decisiones'],
+    images: [
+      {
+        title: 'Flujo IA operativo',
+        label: 'Automatización',
+        bullets: ['Input', 'Prompt', 'Salida'],
+        variant: 'timeline',
+      },
+      {
+        title: 'Dashboard de decisiones',
+        label: 'Sistema',
+        bullets: ['Datos', 'Estado', 'Prioridad'],
+        variant: 'grid',
+      },
+    ],
   },
   {
     slug: 'comunicacion-politica',
@@ -143,7 +195,20 @@ const projects = [
       y: 'El resultado fue una narrativa pública más ordenada para comunicados, contenidos y piezas estratégicas.',
       z: 'Se resolvió con análisis de contexto, redacción, estructura de mensajes y adaptación a formatos de difusión.',
     },
-    images: ['Mapa narrativo', 'Sistema de mensajes'],
+    images: [
+      {
+        title: 'Mapa narrativo',
+        label: 'Contexto',
+        bullets: ['Tema', 'Audiencia', 'Ángulo'],
+        variant: 'grid',
+      },
+      {
+        title: 'Sistema de mensajes',
+        label: 'Difusión',
+        bullets: ['Comunicado', 'Contenido', 'Seguimiento'],
+        variant: 'cards',
+      },
+    ],
   },
   {
     slug: 'organizaciones-sociales',
@@ -158,7 +223,20 @@ const projects = [
       y: 'Se generaron materiales de difusión más útiles para explicar impacto, convocar y presentar iniciativas.',
       z: 'Se resolvió con comunicados, campañas, piezas visuales y producción audiovisual orientada a audiencias específicas.',
     },
-    images: ['Piezas de difusión', 'Narrativa de impacto'],
+    images: [
+      {
+        title: 'Piezas de difusión',
+        label: 'Campaña',
+        bullets: ['Convocatoria', 'Visuales', 'Entrega'],
+        variant: 'cards',
+      },
+      {
+        title: 'Narrativa de impacto',
+        label: 'Institucional',
+        bullets: ['Causa', 'Evidencia', 'Acción'],
+        variant: 'timeline',
+      },
+    ],
   },
 ]
 
@@ -294,6 +372,44 @@ function SignalPanel() {
   )
 }
 
+function CaseVisual({ item, index }) {
+  const rows = useMemo(() => Array.from({ length: 18 }, (_, row) => row), [])
+
+  return (
+    <div className={`case-media-card case-media-${item.variant} reveal`}>
+      <div className="case-media-top">
+        <span>{item.label}</span>
+        <small>Imagen {index + 1}</small>
+      </div>
+      <strong>{item.title}</strong>
+      <div className="case-art" aria-hidden="true">
+        {item.variant === 'timeline' ? (
+          <div className="case-art-timeline">
+            {item.bullets.map((bullet, bulletIndex) => (
+              <i key={bullet}>
+                <b>{String(bulletIndex + 1).padStart(2, '0')}</b>
+                {bullet}
+              </i>
+            ))}
+          </div>
+        ) : item.variant === 'cards' ? (
+          <div className="case-art-cards">
+            {item.bullets.map((bullet) => (
+              <i key={bullet}>{bullet}</i>
+            ))}
+          </div>
+        ) : (
+          <div className="case-art-grid">
+            {rows.map((row) => (
+              <i key={row} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function CasePage({ project }) {
   if (!project) {
     return (
@@ -328,12 +444,17 @@ function CasePage({ project }) {
           </div>
         </div>
 
+        <div className="case-overview reveal">
+          <span>{project.type}</span>
+          <p>
+            Caso desplegado como página propia para mostrar contexto, par visual del trabajo y
+            resolución en formato X/Y/Z.
+          </p>
+        </div>
+
         <div className="case-media-grid">
           {project.images.map((image, index) => (
-            <div className="case-media-card reveal" key={image}>
-              <span>Imagen {index + 1}</span>
-              <strong>{image}</strong>
-            </div>
+            <CaseVisual item={image} index={index} key={image.title} />
           ))}
         </div>
 
