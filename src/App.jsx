@@ -314,6 +314,65 @@ const tools = [
   'JavaScript',
 ]
 
+const liquidDots = [
+  { x: '4vw', y: '8vh', size: '220px', delay: '0s', duration: '18s', tone: 'var(--red)' },
+  { x: '18vw', y: '28vh', size: '120px', delay: '-7s', duration: '15s', tone: 'var(--green)' },
+  { x: '68vw', y: '10vh', size: '260px', delay: '-3s', duration: '21s', tone: 'var(--red)' },
+  { x: '82vw', y: '34vh', size: '150px', delay: '-11s', duration: '16s', tone: 'var(--green)' },
+  { x: '10vw', y: '68vh', size: '320px', delay: '-5s', duration: '24s', tone: 'var(--red)' },
+  { x: '42vw', y: '76vh', size: '180px', delay: '-13s', duration: '19s', tone: 'var(--green)' },
+  { x: '76vw', y: '78vh', size: '300px', delay: '-9s', duration: '22s', tone: 'var(--red)' },
+  { x: '56vw', y: '44vh', size: '110px', delay: '-15s', duration: '14s', tone: 'var(--green)' },
+]
+
+const glassShards = ['hero-glass-a', 'hero-glass-b', 'hero-glass-c', 'hero-glass-d']
+
+function LiquidBackdrop() {
+  return (
+    <div className="liquid-backdrop" aria-hidden="true">
+      <svg className="goo-filter" focusable="false">
+        <filter id="liquid-goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur" />
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+            result="goo"
+          />
+          <feBlend in="SourceGraphic" in2="goo" />
+        </filter>
+      </svg>
+      <div className="goo-field">
+        {liquidDots.map((dot, index) => (
+          <span
+            className="goo-dot"
+            key={`${dot.x}-${dot.y}`}
+            style={{
+              '--x': dot.x,
+              '--y': dot.y,
+              '--size': dot.size,
+              '--delay': dot.delay,
+              '--duration': dot.duration,
+              '--tone': dot.tone,
+              '--index': index,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function GlassCurtain() {
+  return (
+    <div className="glass-curtain" aria-hidden="true">
+      {glassShards.map((shard, index) => (
+        <span className={`glass-shard ${shard}`} key={shard} style={{ '--shard': index }} />
+      ))}
+    </div>
+  )
+}
+
 function DotMatrix() {
   const dots = useMemo(() => Array.from({ length: 168 }, (_, index) => index), [])
 
@@ -554,6 +613,33 @@ function App() {
       })
 
       if (!reduceMotion) {
+        const glassPanels = gsap.utils.toArray(
+          '.capability-card, .client-card, .project-card, .web-card, .process-board, .timeline-panel, .tools-panel, .contact-panel, .case-overview, .case-media-card, .xyz-card',
+        )
+
+        glassPanels.forEach((panel, index) => {
+          gsap.fromTo(
+            panel,
+            {
+              x: index % 2 === 0 ? -54 : 54,
+              rotate: index % 2 === 0 ? -1.4 : 1.4,
+              scale: 0.96,
+            },
+            {
+              x: 0,
+              rotate: 0,
+              scale: 1,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: panel,
+                start: 'top 86%',
+                once: true,
+              },
+            },
+          )
+        })
+
         if (document.querySelector('.core-orbit')) {
           gsap.to('.core-orbit', {
             rotate: 360,
@@ -571,6 +657,73 @@ function App() {
               each: 0.012,
               repeat: -1,
               yoyo: true,
+            },
+          })
+        }
+        if (document.querySelector('.goo-field')) {
+          gsap.to('.goo-field', {
+            y: -180,
+            scale: 1.08,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: rootRef.current,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1.2,
+            },
+          })
+        }
+        if (document.querySelector('.glass-shard')) {
+          gsap.to('.hero-glass-a', {
+            xPercent: -85,
+            yPercent: -22,
+            rotate: -9,
+            opacity: 0.26,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.9,
+            },
+          })
+          gsap.to('.hero-glass-b', {
+            xPercent: 82,
+            yPercent: -16,
+            rotate: 8,
+            opacity: 0.22,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.9,
+            },
+          })
+          gsap.to('.hero-glass-c', {
+            xPercent: -62,
+            yPercent: 28,
+            rotate: 7,
+            opacity: 0.18,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          })
+          gsap.to('.hero-glass-d', {
+            xPercent: 66,
+            yPercent: 26,
+            rotate: -7,
+            opacity: 0.18,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 1,
             },
           })
         }
@@ -618,6 +771,7 @@ function App() {
 
   return (
     <div ref={rootRef} className="site-shell" data-theme={theme}>
+      <LiquidBackdrop />
       <a className="skip-link" href="#main">Saltar al contenido</a>
       <nav className="topbar" aria-label="Navegación principal">
         <a className="brand-mark" href="/" aria-label="Ir al inicio">
@@ -649,6 +803,7 @@ function App() {
         ) : (
           <>
         <section id="inicio" className="hero-section">
+          <GlassCurtain />
           <div className="hero-grid">
             <div className="hero-copy">
               <div className="system-pill reveal">
