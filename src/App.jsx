@@ -325,7 +325,13 @@ const liquidDots = [
   { x: '56vw', y: '44vh', size: '110px', delay: '-15s', duration: '14s', tone: 'var(--ink)' },
 ]
 
-const glassShards = ['hero-glass-a', 'hero-glass-b', 'hero-glass-c', 'hero-glass-d']
+const glassShards = [
+  { className: 'hero-glass-a', depth: 'back' },
+  { className: 'hero-glass-b', depth: 'mid' },
+  { className: 'hero-glass-c', depth: 'front' },
+  { className: 'hero-glass-d', depth: 'mid' },
+  { className: 'hero-glass-e', depth: 'front' },
+]
 
 function LiquidBackdrop() {
   return (
@@ -367,18 +373,25 @@ function GlassCurtain() {
   return (
     <div className="glass-curtain" aria-hidden="true">
       {glassShards.map((shard, index) => (
-        <span className={`glass-shard ${shard}`} key={shard} style={{ '--shard': index }} />
+        <span
+          className={`glass-shard ${shard.className}`}
+          data-depth={shard.depth}
+          key={shard.className}
+          style={{ '--shard': index }}
+        />
       ))}
     </div>
   )
 }
 
-function WordMarquee({ words }) {
+function MotionDivider({ words }) {
   return (
-    <div className="word-marquee" aria-hidden="true">
-      <div>
-        {[...words, ...words].map((word, index) => (
-          <span key={`${word}-${index}`}>{word}</span>
+    <div className="motion-divider reveal" aria-hidden="true">
+      <div className="motion-track">
+        {words.map((word, index) => (
+          <span className={`motion-chip motion-chip-${index + 1}`} key={word}>
+            {word}
+          </span>
         ))}
       </div>
     </div>
@@ -650,10 +663,10 @@ function App() {
         }
         if (document.querySelector('.glass-shard')) {
           gsap.to('.hero-glass-a', {
-            xPercent: -85,
-            yPercent: -22,
-            rotate: -9,
-            opacity: 0.26,
+            xPercent: -26,
+            yPercent: -14,
+            rotate: -5,
+            opacity: 0.4,
             ease: 'none',
             scrollTrigger: {
               trigger: '.hero-section',
@@ -663,10 +676,10 @@ function App() {
             },
           })
           gsap.to('.hero-glass-b', {
-            xPercent: 82,
-            yPercent: -16,
-            rotate: 8,
-            opacity: 0.22,
+            xPercent: 22,
+            yPercent: -28,
+            rotate: 4,
+            opacity: 0.34,
             ease: 'none',
             scrollTrigger: {
               trigger: '.hero-section',
@@ -676,10 +689,10 @@ function App() {
             },
           })
           gsap.to('.hero-glass-c', {
-            xPercent: -62,
-            yPercent: 28,
-            rotate: 7,
-            opacity: 0.18,
+            xPercent: -18,
+            yPercent: 34,
+            rotate: 5,
+            opacity: 0.42,
             ease: 'none',
             scrollTrigger: {
               trigger: '.hero-section',
@@ -689,10 +702,23 @@ function App() {
             },
           })
           gsap.to('.hero-glass-d', {
-            xPercent: 66,
-            yPercent: 26,
-            rotate: -7,
-            opacity: 0.18,
+            xPercent: 26,
+            yPercent: 24,
+            rotate: -5,
+            opacity: 0.32,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          })
+          gsap.to('.hero-glass-e', {
+            xPercent: 10,
+            yPercent: -42,
+            rotate: 6,
+            opacity: 0.46,
             ease: 'none',
             scrollTrigger: {
               trigger: '.hero-section',
@@ -738,14 +764,40 @@ function App() {
             },
           })
         }
-        if (document.querySelector('.word-marquee div')) {
-          gsap.to('.word-marquee div', {
-            xPercent: -50,
-            duration: 28,
+        gsap.utils.toArray('.motion-divider').forEach((divider) => {
+          gsap.fromTo(
+            divider.querySelectorAll('.motion-chip'),
+            {
+              yPercent: 64,
+              rotate: (index) => (index % 2 === 0 ? -7 : 7),
+              autoAlpha: 0,
+            },
+            {
+              yPercent: 0,
+              rotate: 0,
+              autoAlpha: 1,
+              duration: 0.9,
+              ease: 'power3.out',
+              stagger: 0.08,
+              scrollTrigger: {
+                trigger: divider,
+                start: 'top 88%',
+                once: true,
+              },
+            },
+          )
+          gsap.to(divider.querySelectorAll('.motion-chip'), {
+            y: (index) => (index % 2 === 0 ? -28 : 24),
+            x: (index) => (index % 2 === 0 ? 18 : -18),
             ease: 'none',
-            repeat: -1,
+            scrollTrigger: {
+              trigger: divider,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
           })
-        }
+        })
       }
     }, rootRef)
 
@@ -759,7 +811,7 @@ function App() {
       <nav className="topbar" aria-label="Navegación principal">
         <a className="brand-mark" href="/" aria-label="Ir al inicio">
           <span>IA</span>
-          <span>Videaste</span>
+          <span>Comunicador visual</span>
         </a>
         <div className="nav-links">
           {navItems.map(([label, href]) => (
@@ -818,7 +870,7 @@ function App() {
           </div>
         </section>
 
-        <WordMarquee words={['about', 'about', 'about', 'about']} />
+        <MotionDivider words={['about', 'criterio', 'visual']} />
 
         <section id="perfil" className="section-block profile-section">
           <div className="section-kicker reveal">Perfil</div>
@@ -861,7 +913,7 @@ function App() {
           </div>
         </section>
 
-        <WordMarquee words={['portfolio', 'portfolio', 'portfolio']} />
+        <MotionDivider words={['portfolio', 'estrategia', 'produccion']} />
 
         <section id="trabajo" className="section-block work-section">
           <div className="section-header">
@@ -896,7 +948,7 @@ function App() {
           </div>
         </section>
 
-        <WordMarquee words={['reportes', 'webs', 'html', 'interfaces']} />
+        <MotionDivider words={['reportes', 'webs', 'html']} />
 
         <section id="webs" className="section-block web-section">
           <div className="section-header">
