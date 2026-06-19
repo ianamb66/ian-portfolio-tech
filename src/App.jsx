@@ -21,7 +21,7 @@ import './App.css'
 const navItems = [
   ['Perfil', '/#perfil'],
   ['Trabajo', '/#trabajo'],
-  ['Webs', '/#webs'],
+  ['Reportes', '/#webs'],
   ['Sistema', '/#sistema'],
   ['Contacto', '/#contacto'],
 ]
@@ -254,52 +254,34 @@ const webBuilds = [
     image: '/previews/bim.png',
   },
   {
-    title: 'Reporte 32MX',
-    type: 'Reporte editorial digital',
-    url: 'https://reporte-32mx-web.vercel.app',
-    image: '/previews/reporte-32mx.png',
+    title: 'LinkedIn 2026',
+    type: 'Reporte HTML / estrategia B2B',
+    url: '/reportes/linkedin-2026.html',
+    image: '/previews/reporte-linkedin-2026.png',
   },
   {
-    title: 'Cheatsheet AI Enterprise',
-    type: 'Guía interactiva de IA',
-    url: 'https://cheatsheet-ai-enterprise.vercel.app',
-    image: '/previews/cheatsheet-ai.png',
+    title: 'BAT + Heraldo/Expansión',
+    type: 'Reporte HTML / propuesta comercial',
+    url: '/reportes/bat-heraldo-expansion.html',
+    image: '/previews/reporte-bat-heraldo.png',
   },
   {
-    title: 'LasarVision',
-    type: 'Landing médica premium',
-    url: 'https://lasarvision-v1.vercel.app',
-    image: '/previews/lasarvision.png',
+    title: 'Country Managers',
+    type: 'Reporte HTML / inteligencia de mercado',
+    url: '/reportes/country-managers.html',
+    image: '/previews/reporte-country-managers.png',
   },
   {
-    title: 'GestoCar',
-    type: 'Producto digital automotriz',
-    url: 'https://gestocar-web.vercel.app',
-    image: '/previews/gestocar.png',
-  },
-  {
-    title: 'Alcaleaf',
-    type: 'Marca y experiencia web',
-    url: 'https://alcaleaf-web.vercel.app',
-    image: '/previews/alcaleaf.png',
-  },
-  {
-    title: 'Stand Builder Pro',
-    type: 'Herramienta web 3D/operativa',
-    url: 'https://stand-builder-ai.vercel.app',
-    image: '/previews/stand-builder.png',
+    title: 'FMI Transparencia',
+    type: 'Reporte HTML / impacto institucional',
+    url: '/reportes/fmi-transparencia.html',
+    image: '/previews/reporte-fmi-transparencia.png',
   },
   {
     title: 'Museo del Gato',
     type: 'Experiencia cultural',
     url: 'https://museo-del-gato-web.vercel.app',
     image: '/previews/museo-gato.png',
-  },
-  {
-    title: 'Yum Yum',
-    type: 'Concepto food/consumer',
-    url: 'https://yum-yum-one.vercel.app',
-    image: '/previews/yum-yum.png',
   },
 ]
 
@@ -669,12 +651,12 @@ function App() {
         <section id="webs" className="section-block web-section">
           <div className="section-header">
             <div>
-              <div className="section-kicker reveal">Webs construidas</div>
-              <h2 className="section-title reveal">Interfaces publicadas, con preview real del hero.</h2>
+              <div className="section-kicker reveal">Webs y reportes HTML</div>
+              <h2 className="section-title reveal">Interfaces publicadas y reportes navegables.</h2>
             </div>
             <p className="section-note reveal">
-              Una vitrina de sitios y herramientas que muestran rango visual: landing pages,
-              productos, experiencias culturales, sistemas internos y piezas editoriales.
+              Una vitrina curada de sitios, experiencias y reportes HTML hechos para presentar
+              estrategia, hallazgos y propuestas con una capa visual más clara que un documento plano.
             </p>
           </div>
           <div className="web-grid">

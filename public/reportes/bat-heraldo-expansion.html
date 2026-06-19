@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Slides — El Heraldo/Expansión + BAT (offline)</title>
+  <style>
+    :root{
+      --bg0:#07080b; --bg1:#0c0f16; --panel:rgba(255,255,255,.04);
+      --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.62);
+      --border:rgba(255,255,255,.10); --blue:#4da3ff; --silver:rgba(230,236,245,.86);
+      --shadow: 0 22px 70px rgba(0,0,0,.50);
+    }
+    *{box-sizing:border-box}
+    body{margin:0; background:radial-gradient(900px 600px at 20% 0%, rgba(77,163,255,.10), transparent 55%), var(--bg0); color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    .deck{padding:40px 24px 80px; max-width:1200px; margin:0 auto}
+    .slide{
+      width: 1920px; height: 1080px; 
+      transform: scale(.52);
+      transform-origin: top left;
+      border:1px solid var(--border);
+      border-radius:24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      margin: 0 0 38px;
+      padding: 72px;
+      position: relative;
+      overflow:hidden;
+    }
+    .slide::after{content:""; position:absolute; inset:-2px; background: radial-gradient(700px 400px at 20% 0%, rgba(77,163,255,.16), transparent 60%);
+      opacity:.7; pointer-events:none; mix-blend-mode:screen;}
+    .kicker{font-size:18px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted)}
+    h1{font-size:74px; line-height:1.03; margin:18px 0 18px; letter-spacing:.01em}
+    h2{font-size:58px; line-height:1.06; margin:18px 0 18px}
+    p{font-size:28px; line-height:1.45; color:var(--muted); margin:0}
+    .grid{display:grid; gap:24px}
+    .bento5{grid-template-columns: repeat(5, 1fr)}
+    .cards6{grid-template-columns: repeat(3, 1fr)}
+    .cards3{grid-template-columns: repeat(3, 1fr)}
+    .cards2{grid-template-columns: repeat(2, 1fr)}
+    .card{border:1px solid var(--border); border-radius:20px; padding:22px; background: rgba(0,0,0,.22)}
+    .card .t{font-size:22px; letter-spacing:.24em; text-transform:uppercase; color:var(--silver)}
+    .card .d{font-size:24px; color:var(--muted); margin-top:10px; line-height:1.4}
+    .pill{display:inline-block; font-size:16px; letter-spacing:.22em; text-transform:uppercase; padding:10px 14px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.03)}
+    .accent{color:var(--blue)}
+    .table{display:grid; grid-template-columns: repeat(3, 1fr); gap:24px; margin-top:22px}
+    .pkg{border:1px solid rgba(77,163,255,.25); background: rgba(77,163,255,.05); border-radius:22px; padding:26px}
+    .pkg h3{margin:0; font-size:34px}
+    .pkg .name{margin-top:10px; font-size:24px; color:var(--silver)}
+    .pkg .desc{margin-top:12px; font-size:24px; color:var(--muted); line-height:1.45}
+    .note{position:absolute; bottom:48px; left:72px; right:72px; display:flex; justify-content:space-between; gap:18px; color:rgba(255,255,255,.52); font-size:18px}
+    .hr{height:1px; background:var(--border); margin:28px 0}
+    .steps{display:grid; grid-template-columns: repeat(4, 1fr); gap:18px; margin-top:18px}
+    .step{border:1px solid var(--border); border-radius:18px; padding:18px; background: rgba(255,255,255,.03)}
+    .step .n{font-size:20px; letter-spacing:.24em; text-transform:uppercase; color:var(--blue)}
+    .step .s{margin-top:10px; font-size:26px; color:var(--silver)}
+    @media (max-width: 1200px){ .slide{transform: scale(.42);} }
+  </style>
+</head>
+<body>
+  <div class="deck">
+
+    <!-- 1) Comunicación integral -->
+    <section class="slide" id="slide-01">
+      <div class="kicker">Propuesta comercial</div>
+      <h1>Propuesta de comunicación integral</h1>
+      <p>Una estrategia diseñada para posicionar la iniciativa a través de <span class="accent">relaciones públicas</span>, <span class="accent">medios exteriores</span>, <span class="accent">televisión (incl. El Heraldo)</span>, <span class="accent">Grupo Expansión</span> y <span class="accent">vocerías estratégicas</span>.</p>
+      <div class="hr"></div>
+      <div class="grid cards6" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card"><div class="t">Relaciones públicas</div><div class="d">Generación de conversación pública y presencia mediática.</div></div>
+        <div class="card"><div class="t">Speakers & influencers</div><div class="d">Perfiles alineados al mensaje para credibilidad y cercanía.</div></div>
+        <div class="card"><div class="t">Medios exteriores</div><div class="d">Presencia en puntos clave de alto flujo.</div></div>
+        <div class="card"><div class="t">Televisión + El Heraldo</div><div class="d">Amplificación del mensaje en alcance masivo.</div></div>
+        <div class="card"><div class="t">Grupo Expansión</div><div class="d">Inserciones y formatos para audiencias de alto valor.</div></div>
+        <div class="card"><div class="t">3 escenarios</div><div class="d">Tres rutas de inversión según nivel de cobertura.</div></div>
+      </div>
+      <div class="note"><span>Nota: se omite todo lo digital (pauta, redes, contenidos).</span><span>Montos: placeholders, sujetos a validación.</span></div>
+    </section>
+
+    <section class="slide" id="slide-02">
+      <div class="kicker">Ejes de comunicación</div>
+      <h2>Canales de alto impacto</h2>
+      <p>La propuesta concentra esfuerzos en canales que generan <span class="accent">visibilidad</span>, <span class="accent">conversación</span> y <span class="accent">posicionamiento</span>.</p>
+      <div class="hr"></div>
+      <div class="grid bento5">
+        <div class="card"><div class="t">Relaciones públicas</div><div class="d">Gestión de contenidos, presencia mediática y conversación pública.</div></div>
+        <div class="card"><div class="t">Speakers & influencers</div><div class="d">Perfiles estratégicos para reforzar credibilidad y cercanía.</div></div>
+        <div class="card"><div class="t">Medios exteriores</div><div class="d">Espectaculares, vallas móviles, autobuses y Metrobús (Reforma).</div></div>
+        <div class="card"><div class="t">Televisión + El Heraldo</div><div class="d">Amplificación del mensaje en medios con alcance masivo.</div></div>
+        <div class="card"><div class="t">Grupo Expansión</div><div class="d">Inserciones y formatos de posicionamiento.</div></div>
+      </div>
+      <div class="note"><span>Tip: claridad sobre detalle. Sin saturación técnica.</span><span>Objetivo: abrir conversación de inversión.</span></div>
+    </section>
+
+    <section class="slide" id="slide-03">
+      <div class="kicker">Escenarios de inversión</div>
+      <h2>Tres rutas para ajustar alcance</h2>
+      <p>No se desglosan costos: se presentan paquetes con beneficios generales y espacio para personalizar montos.</p>
+      <div class="table">
+        <div class="pkg"><h3>Paquete 1</h3><div class="name">Plan base / presencia esencial</div><div class="desc">Presencia en medios clave y acciones puntuales de posicionamiento.</div></div>
+        <div class="pkg"><h3>Paquete 2</h3><div class="name">Plan intermedio / mayor cobertura</div><div class="desc">Mayor cobertura en exteriores, medios aliados y relaciones públicas.</div></div>
+        <div class="pkg"><h3>Paquete 3</h3><div class="name">Plan premium / cobertura robusta</div><div class="desc">Más frecuencia, presencia extendida y formatos de alto impacto.</div></div>
+      </div>
+      <div class="note"><span>Montos estimados sujetos a validación con proveedores y disponibilidad de espacios.</span><span>Los textos quedan armados; números son editables.</span></div>
+    </section>
+
+    <!-- 2) BAT gimmicks -->
+    <section class="slide" id="slide-04">
+      <div class="kicker">BAT • Gimmicks</div>
+      <h1>Gimmicks personalizados BAT</h1>
+      <p>Productos útiles y personalizables para generar una experiencia más cercana con asistentes. <span class="accent">Cada asistente elige 1 producto</span> (no se entregan los tres).</p>
+      <div class="hr"></div>
+      <div class="grid cards3">
+        <div class="card"><div class="t">Pluma</div><div class="d">(Estimado aquí)</div></div>
+        <div class="card"><div class="t">Termo</div><div class="d">(Estimado aquí)</div></div>
+        <div class="card"><div class="t">Libreta</div><div class="d">(Estimado aquí)</div></div>
+      </div>
+      <div class="note"><span>Sin llaveros ni productos extra. Sin renders que cambien el producto.</span><span>Brief: breve e ilustrativo.</span></div>
+    </section>
+
+    <section class="slide" id="slide-05">
+      <div class="kicker">BAT • Alternativas</div>
+      <h2>Dos formas de entrega</h2>
+      <div class="grid cards2">
+        <div class="card">
+          <div class="t">Opción 1</div>
+          <div class="d">Producto previamente grabado con <strong>logo BAT</strong>.</div>
+        </div>
+        <div class="card" style="border-color: rgba(77,163,255,.25); background: rgba(77,163,255,.05);">
+          <div class="t">Opción 2</div>
+          <div class="d"><strong>Experiencia</strong> de grabado personalizado en sitio (nombre / apodo / texto corto autorizado).</div>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <p><span class="accent">La personalización</span> convierte el giveaway en una experiencia directa con el asistente.</p>
+      <div class="note"><span>Logo puede ir pregrabado y el nombre agregarse en sitio.</span><span>Considerar 400 piezas (según mix definido).</span></div>
+    </section>
+
+    <section class="slide" id="slide-06">
+      <div class="kicker">BAT • Experiencia</div>
+      <h2>Experiencia de grabado en sitio</h2>
+      <p>El asistente elige su producto, comparte el nombre o texto corto y recibe una pieza personalizada durante el evento.</p>
+      <div class="steps">
+        <div class="step"><div class="n">Paso 1</div><div class="s">Selección del producto</div></div>
+        <div class="step"><div class="n">Paso 2</div><div class="s">Confirmación del nombre</div></div>
+        <div class="step"><div class="n">Paso 3</div><div class="s">Grabado láser</div></div>
+        <div class="step"><div class="n">Paso 4</div><div class="s">Entrega personalizada</div></div>
+      </div>
+      <div class="note"><span>Presentar como valor diferencial.</span><span>Visual: activación corporativa premium.</span></div>
+    </section>
+
+    <!-- 3) BAT producción/streaming -->
+    <section class="slide" id="slide-07">
+      <div class="kicker">BAT • Producción técnica</div>
+      <h1>Producción técnica y transmisión</h1>
+      <p>Operación estable para asegurar experiencia profesional en sala y transmisión fluida vía <span class="accent">Microsoft Teams</span>.</p>
+      <div class="hr"></div>
+      <div class="grid cards6" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card"><div class="t">Pantallas LED</div><div class="d">Escenario + visuales en sala.</div></div>
+        <div class="card"><div class="t">Audio profesional</div><div class="d">Cobertura uniforme + claridad.</div></div>
+        <div class="card"><div class="t">Micrófonos</div><div class="d">Conducción + participación.</div></div>
+        <div class="card"><div class="t">Cámaras + switcher</div><div class="d">Realización para streaming.</div></div>
+        <div class="card"><div class="t">Internet dedicado</div><div class="d">Capacidad garantizada para Teams.</div></div>
+        <div class="card"><div class="t">Respaldo técnico</div><div class="d">Redundancia de transmisión.</div></div>
+      </div>
+      <div class="note"><span>Evento con alta seguridad técnica: transmisión nacional.</span><span>No prometer nada no cotizado.</span></div>
+    </section>
+
+    <section class="slide" id="slide-08">
+      <div class="kicker">BAT • Redundancia</div>
+      <h2>Respaldo técnico para transmisión</h2>
+      <p>Validar <span class="accent">redundancia de transmisión</span> para reducir riesgos si falla conexión, equipo o señal principal.</p>
+      <div class="hr"></div>
+      <div class="grid cards3">
+        <div class="card"><div class="t">Internet principal</div><div class="d">Enlace dedicado para streaming.</div></div>
+        <div class="card"><div class="t">Backup de conexión</div><div class="d">Ruta alterna de conectividad.</div></div>
+        <div class="card"><div class="t">Señal alternativa</div><div class="d">Cambio rápido de señal en vivo.</div></div>
+      </div>
+      <div class="note"><span>Respaldo ≠ grabación. Es continuidad de señal.</span><span>Primero cotizar; luego decidir si se elimina por costo.</span></div>
+    </section>
+
+    <section class="slide" id="slide-09">
+      <div class="kicker">BAT • Validaciones</div>
+      <h2>Puntos por validar con proveedor</h2>
+      <div class="hr"></div>
+      <div class="grid cards2">
+        <div class="card">
+          <div class="t">Confirmar por escrito</div>
+          <div class="d">
+            • Internet dedicado<br>
+            • Backup de conexión<br>
+            • Redundancia de transmisión / respaldo técnico<br>
+            • Equipo de streaming (Teams) + operación en vivo
+          </div>
+        </div>
+        <div class="card" style="border-color: rgba(77,163,255,.25); background: rgba(77,163,255,.05);">
+          <div class="t">Pregunta clave</div>
+          <div class="d">
+            ¿La cotización contempla <strong>redundancia de transmisión</strong> en caso de falla de internet, switcher, enlace o señal principal?
+            <div style="height:10px"></div>
+            Si no: ¿qué implica agregarla (costo, equipo, personal, alcance real)?
+          </div>
+        </div>
+      </div>
+      <div class="note"><span>Incluibles en cotización: LED, audio, micros, cámaras, switcher, Teams, internet + backup, operación, grabación si aplica.</span><span>Sin “partidas a validar”.</span></div>
+    </section>
+
+  </div>
+</body>
+</html>

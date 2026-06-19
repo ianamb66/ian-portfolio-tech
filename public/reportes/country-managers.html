@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CM | Country Managers</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fuente Secundaria: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Habilitar modo oscuro por clase
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'], 
+                        heading: ['"Lemon Milk"', 'Montserrat', 'sans-serif'], 
+                    },
+                    colors: {
+                        brand: {
+                            white: '#FFFFFF',
+                            black: '#000000',
+                            grayBg: '#F4F4F3', 
+                            primary1: '#9C9D9A',   // Gris claro
+                            primary2: '#8B8281',   // Topo / Gris cálido
+                            secondary1: '#5A4E54', // Ciruela oscuro / Acento principal
+                            secondary2: '#464B56', // Pizarra oscuro
+                            secondary3: '#2A3A43'  // Azul marino carbón
+                        }
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '3rem',
+                    }
+                }
+            }
+        }
+
+        // Evitar el parpadeo de colores antes de que cargue la página
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'Lemon Milk';
+            src: url('assets/fonts/lemonmilk-regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lemon Milk';
+            src: url('assets/fonts/lemonmilk-bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .image-box {
+            position: relative;
+            overflow: hidden;
+            background-color: theme('colors.brand.primary1');
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .image-box:hover img {
+            transform: scale(1.03);
+        }
+
+        .tint-primary2::after { content: ''; position: absolute; inset: 0; background-color: rgba(139, 130, 129, 0.35); mix-blend-mode: multiply; pointer-events: none; }
+        .tint-secondary1::after { content: ''; position: absolute; inset: 0; background-color: rgba(90, 78, 84, 0.4); mix-blend-mode: multiply; pointer-events: none; }
+        .tint-secondary2::after { content: ''; position: absolute; inset: 0; background-color: rgba(70, 75, 86, 0.4); mix-blend-mode: multiply; pointer-events: none; }
+        .tint-secondary3::after { content: ''; position: absolute; inset: 0; background-color: rgba(42, 58, 67, 0.4); mix-blend-mode: multiply; pointer-events: none; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: theme('colors.brand.black'); border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background-color: theme('colors.brand.primary1'); }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* iOS-friendly scrolling inside fixed modals */
+        .scroll-touch {
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<!-- PLACEHOLDERS: Replace images in /assets/img and logo/favicon in /assets when real assets are ready. -->
+<body class="bg-brand-white dark:bg-brand-black text-brand-black dark:text-brand-white selection:bg-brand-secondary1 selection:text-white transition-colors duration-300 relative">
+
+    <!-- CANVAS GLOBAL (Fondo animado de conexiones en toda la web) -->
+    <canvas id="connections-canvas" class="fixed inset-0 w-full h-full z-[0] pointer-events-none opacity-60 dark:opacity-40 transition-opacity duration-500"></canvas>
+
+    <!-- NAVBAR ULTRA LIMPIO -->
+    <nav class="fixed w-full top-0 z-50 bg-brand-white/95 dark:bg-brand-black/95 backdrop-blur-md border-b border-brand-primary1/20 dark:border-brand-white/10 py-4 transition-colors duration-300">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center relative z-10">
+            
+            <!-- LOGO (placeholder) -->
+            <a href="#inicio" class="flex items-center gap-3 text-2xl md:text-3xl font-heading font-bold tracking-tighter text-brand-black dark:text-brand-white transition-colors">
+                <img src="/assets/img/logo.svg" alt="Country Managers" class="w-9 h-9 rounded-full bg-brand-black/5 dark:bg-brand-white/10 p-1" />
+                <span>CM<span class="text-brand-secondary1 text-3xl leading-none">.</span></span>
+            </a>
+            
+            <!-- LINKS -->
+            <div class="hidden lg:flex flex-1 justify-center space-x-10 text-xs font-bold font-heading uppercase tracking-widest text-brand-black dark:text-brand-primary1">
+                <a href="#quienes-somos" class="hover:text-brand-secondary1 dark:hover:text-brand-white transition-colors">Nosotros</a>
+                <a href="#servicios" class="hover:text-brand-secondary1 dark:hover:text-brand-white transition-colors">Servicios</a>
+                <a href="#misiones" class="hover:text-brand-secondary1 dark:hover:text-brand-white transition-colors">Misiones</a>
+                <a href="#equipo" class="hover:text-brand-secondary1 dark:hover:text-brand-white transition-colors">Equipo</a>
+            </div>
+            
+            <!-- CONTROLES (IDIOMA, TEMA Y CONTACTO) -->
+            <div class="hidden lg:flex items-center gap-6">
+                
+                <!-- Selector de Idioma Minimalista -->
+                <div class="flex items-center gap-2 text-xs font-heading font-bold uppercase tracking-widest text-brand-black dark:text-brand-white">
+                    <button class="text-brand-secondary1 font-black">ES</button>
+                    <span class="text-brand-primary1 font-light">|</span>
+                    <button class="text-brand-primary1 hover:text-brand-secondary1 dark:hover:text-brand-white transition-colors">EN</button>
+                </div>
+
+                <!-- Toggle Modo Oscuro -->
+                <button id="theme-toggle" class="text-brand-black dark:text-brand-white hover:text-brand-secondary1 transition-colors">
+                    <i id="theme-icon" data-lucide="moon" class="w-5 h-5"></i>
+                </button>
+
+                <!-- BOTÓN CONTACTO CON GRADIENTE -->
+                <a href="#contacto" class="bg-gradient-to-r from-brand-black to-brand-secondary3 dark:from-brand-white dark:to-brand-primary1 text-brand-white dark:text-brand-black px-8 py-3 rounded-full text-xs font-heading font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-md">
+                    Contactar
+                </a>
+            </div>
+
+            <!-- MENÚ MÓVIL BTN -->
+            <button id="mobile-menu-btn" class="lg:hidden text-brand-black dark:text-brand-white">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+
+        <!-- MENÚ MÓVIL -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-brand-white dark:bg-brand-black border-b border-brand-primary1/20 dark:border-brand-white/10 shadow-xl transition-colors duration-300">
+            <div class="flex flex-col p-6 space-y-6 font-heading font-bold text-sm tracking-widest uppercase text-brand-black dark:text-brand-white">
+                <a href="#quienes-somos" class="mobile-link hover:text-brand-secondary1">Nosotros</a>
+                <a href="#servicios" class="mobile-link hover:text-brand-secondary1">Servicios</a>
+                <a href="#misiones" class="mobile-link hover:text-brand-secondary1">Misiones</a>
+                <a href="#equipo" class="mobile-link hover:text-brand-secondary1">Equipo</a>
+                
+                <div class="flex justify-between items-center border-t border-brand-primary1/20 dark:border-brand-white/10 pt-6">
+                    <div class="flex items-center gap-2 text-xs">
+                        <button class="text-brand-secondary1">ES</button>
+                        <span class="text-brand-primary1">|</span>
+                        <button class="text-brand-primary1">EN</button>
+                    </div>
+                    <button id="mobile-theme-toggle" class="text-brand-black dark:text-brand-white">
+                        <i id="mobile-theme-icon" data-lucide="moon" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <a href="#contacto" class="mobile-link bg-brand-black dark:bg-brand-white text-brand-white dark:text-brand-black px-6 py-4 rounded-full text-center hover:bg-brand-secondary1">Contactar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION -->
+    <section id="inicio" class="pt-40 pb-20 px-6 md:px-12 min-h-[95vh] flex items-center relative z-10 transition-colors duration-300">
+        
+        <div class="max-w-[1400px] w-full mx-auto flex flex-col lg:flex-row gap-16 items-center relative z-10">
+            
+            <div class="w-full lg:w-1/2 space-y-10 reveal">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border-2 border-brand-black dark:border-brand-white text-xs font-heading font-bold uppercase tracking-widest text-brand-black dark:text-brand-white transition-colors duration-300 bg-brand-white/50 dark:bg-brand-black/50 backdrop-blur-md">
+                    <span class="w-2 h-2 bg-brand-secondary1 rounded-full animate-pulse"></span>
+                    Expande tu negocio
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-heading font-bold uppercase leading-[1.05] tracking-tighter text-brand-black dark:text-brand-white transition-colors duration-300 drop-shadow-sm">
+                    Inversión Extranjera Directa
+                </h1>
+                
+                <p class="text-lg md:text-xl text-brand-secondary2 dark:text-brand-primary1 font-medium max-w-lg leading-relaxed transition-colors duration-300">
+                    Acompañamos tu expansión global conectándote con las oportunidades estratégicas de más alto impacto.
+                </p>
+                
+                <div class="pt-4">
+                    <!-- BOTÓN HERO CON GRADIENTE -->
+                    <a href="#contacto" class="inline-flex bg-gradient-to-r from-brand-secondary1 to-brand-secondary2 text-brand-white px-10 py-5 rounded-full font-heading font-bold uppercase tracking-widest hover:scale-105 transition-all items-center gap-3 group text-sm shadow-lg hover:shadow-brand-secondary1/30">
+                        Agendar Llamada
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 reveal" style="transition-delay: 200ms;">
+                <div class="image-box rounded-[3rem] aspect-square lg:aspect-[4/5] w-full max-w-[600px] mx-auto tint-secondary1 shadow-2xl">
+                    <img src="/assets/img/hero.jpg" alt="Ejecutiva">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 2. QUIÉNES SOMOS -->
+    <section id="quienes-somos" class="py-24 px-6 md:px-12 bg-brand-grayBg/90 dark:bg-brand-secondary3/90 backdrop-blur-md transition-colors duration-300 relative z-10">
+        <div class="max-w-[1400px] mx-auto reveal relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-xs font-heading font-bold text-brand-primary1 tracking-[0.3em] uppercase mb-6 drop-shadow-sm">/// La Firma</h2>
+                <p class="text-4xl md:text-6xl font-heading font-bold uppercase leading-tight max-w-4xl mx-auto text-brand-black dark:text-brand-white transition-colors duration-300">
+                    México: Tu puerta de entrada al éxito global.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Text Box -->
+                <div class="bg-brand-white dark:bg-brand-black rounded-[2.5rem] p-10 md:p-14 flex flex-col justify-center border border-brand-black/5 dark:border-brand-white/10 transition-colors duration-300 shadow-xl">
+                    <p class="text-lg font-medium text-brand-black dark:text-brand-white leading-relaxed mb-8 transition-colors duration-300">
+                        <strong class="font-heading uppercase">Country Managers</strong> es una consultora privada especializada que apoya a empresas extranjeras en su expansión a México. Entendemos las complejidades del mercado y las convertimos en oportunidades claras.
+                    </p>
+                    <ul class="space-y-4 font-heading font-bold text-sm tracking-widest uppercase text-brand-black dark:text-brand-primary1 transition-colors duration-300">
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand-secondary1 w-5 h-5"></i> Consultoría Especializada</li>
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand-secondary1 w-5 h-5"></i> Alianzas Gubernamentales</li>
+                        <li class="flex items-center gap-4"><i data-lucide="check" class="text-brand-secondary1 w-5 h-5"></i> Red de Alto Nivel</li>
+                    </ul>
+                </div>
+                
+                <!-- Image 1 -->
+                <div class="image-box rounded-[2.5rem] h-[400px] lg:h-auto tint-secondary3 shadow-xl">
+                    <img src="/assets/img/about-1.jpg" alt="Corporativo">
+                </div>
+                
+                <!-- Image 2 -->
+                <div class="image-box rounded-[2.5rem] h-[400px] lg:h-auto tint-primary2 shadow-xl">
+                    <img src="/assets/img/about-2.jpg" alt="Reunión">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SERVICIOS -->
+    <section id="servicios" class="py-32 px-6 md:px-12 max-w-[1400px] mx-auto relative z-10">
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-xs font-heading font-bold text-brand-primary1 tracking-[0.3em] uppercase mb-6 drop-shadow-sm">/// Experiencia</h2>
+            <p class="text-4xl md:text-6xl font-heading font-bold uppercase leading-tight text-brand-black dark:text-brand-white transition-colors duration-300">
+                Soluciones Estratégicas
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+            <!-- Servicio 1 -->
+            <div onclick="openServiceModal('identificacion')" class="group relative z-10 cursor-pointer bg-brand-white/90 dark:bg-brand-secondary2/90 backdrop-blur-md border border-brand-primary1/20 hover:border-brand-black dark:hover:border-brand-white rounded-[2.5rem] p-10 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-brand-black/10 dark:to-brand-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                
+                <div class="w-16 h-16 bg-gradient-to-br from-brand-grayBg to-brand-primary1/40 dark:from-brand-black/50 dark:to-brand-secondary3 group-hover:from-brand-black group-hover:to-brand-black dark:group-hover:from-brand-white dark:group-hover:to-brand-white rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
+                    <i data-lucide="search" class="w-8 h-8 text-brand-black dark:text-brand-white group-hover:text-brand-white dark:group-hover:text-brand-black transition-colors"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold uppercase mb-4 text-brand-black dark:text-brand-white transition-colors">Identificación<br>de Proveedores</h3>
+                <p class="text-brand-secondary2 dark:text-brand-primary1 font-medium mb-8 transition-colors">Localizamos socios locales que se ajusten a los más estrictos estándares operativos.</p>
+                <span class="font-heading font-bold text-xs tracking-widest uppercase text-brand-secondary1 dark:text-brand-primary1 group-hover:text-brand-black dark:group-hover:text-brand-white flex items-center gap-2 transition-colors">
+                    Ver Detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </span>
+            </div>
+
+            <!-- Servicio 2 -->
+            <div onclick="openServiceModal('misiones')" class="group relative z-10 cursor-pointer bg-brand-white/90 dark:bg-brand-secondary2/90 backdrop-blur-md border border-brand-primary1/20 hover:border-brand-secondary1 dark:hover:border-brand-white rounded-[2.5rem] p-10 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-brand-secondary1/15 dark:to-brand-secondary1/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                
+                <div class="w-16 h-16 bg-gradient-to-br from-brand-grayBg to-brand-primary1/40 dark:from-brand-black/50 dark:to-brand-secondary3 group-hover:from-brand-secondary1 group-hover:to-brand-secondary1 dark:group-hover:from-brand-white dark:group-hover:to-brand-white rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
+                    <i data-lucide="briefcase" class="w-8 h-8 text-brand-black dark:text-brand-white group-hover:text-brand-white dark:group-hover:text-brand-secondary1 transition-colors"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold uppercase mb-4 text-brand-black dark:text-brand-white transition-colors">Misiones<br>Comerciales</h3>
+                <p class="text-brand-secondary2 dark:text-brand-primary1 font-medium mb-8 transition-colors">Organizamos agendas B2B estratégicas para delegaciones internacionales.</p>
+                <span class="font-heading font-bold text-xs tracking-widest uppercase text-brand-secondary1 dark:text-brand-primary1 group-hover:text-brand-secondary1 dark:group-hover:text-brand-white flex items-center gap-2 transition-colors">
+                    Ver Detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </span>
+            </div>
+
+            <!-- Servicio 3 -->
+            <div onclick="openServiceModal('inversiones')" class="group relative z-10 cursor-pointer bg-brand-white/90 dark:bg-brand-secondary2/90 backdrop-blur-md border border-brand-primary1/20 hover:border-brand-secondary3 dark:hover:border-brand-white rounded-[2.5rem] p-10 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-brand-secondary3/15 dark:to-brand-secondary3/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                
+                <div class="w-16 h-16 bg-gradient-to-br from-brand-grayBg to-brand-primary1/40 dark:from-brand-black/50 dark:to-brand-secondary3 group-hover:from-brand-secondary3 group-hover:to-brand-secondary3 dark:group-hover:from-brand-white dark:group-hover:to-brand-white rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
+                    <i data-lucide="trending-up" class="w-8 h-8 text-brand-black dark:text-brand-white group-hover:text-brand-white dark:group-hover:text-brand-secondary3 transition-colors"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold uppercase mb-4 text-brand-black dark:text-brand-white transition-colors">Atracción<br>de Inversiones</h3>
+                <p class="text-brand-secondary2 dark:text-brand-primary1 font-medium mb-8 transition-colors">Facilitamos el proceso de soft-landing, guiando el capital extranjero de manera segura.</p>
+                <span class="font-heading font-bold text-xs tracking-widest uppercase text-brand-secondary1 dark:text-brand-primary1 group-hover:text-brand-secondary3 dark:group-hover:text-brand-white flex items-center gap-2 transition-colors">
+                    Ver Detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </span>
+            </div>
+
+            <!-- Servicio 4 -->
+            <div onclick="openServiceModal('demanda')" class="group relative z-10 cursor-pointer bg-brand-white/90 dark:bg-brand-secondary2/90 backdrop-blur-md border border-brand-primary1/20 hover:border-brand-secondary2 dark:hover:border-brand-white rounded-[2.5rem] p-10 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-brand-secondary2/15 dark:to-brand-secondary2/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                
+                <div class="w-16 h-16 bg-gradient-to-br from-brand-grayBg to-brand-primary1/40 dark:from-brand-black/50 dark:to-brand-secondary3 group-hover:from-brand-secondary2 group-hover:to-brand-secondary2 dark:group-hover:from-brand-white dark:group-hover:to-brand-white rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
+                    <i data-lucide="users" class="w-8 h-8 text-brand-black dark:text-brand-white group-hover:text-brand-white dark:group-hover:text-brand-secondary2 transition-colors"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold uppercase mb-4 text-brand-black dark:text-brand-white transition-colors">Generación<br>de Demanda</h3>
+                <p class="text-brand-secondary2 dark:text-brand-primary1 font-medium mb-8 transition-colors">Creamos estrategias de posicionamiento para introducir productos en mercados clave.</p>
+                <span class="font-heading font-bold text-xs tracking-widest uppercase text-brand-secondary1 dark:text-brand-primary1 group-hover:text-brand-secondary2 dark:group-hover:text-brand-white flex items-center gap-2 transition-colors">
+                    Ver Detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. MISIONES INTERNACIONALES -->
+    <section id="misiones" class="py-24 px-6 md:px-12 bg-brand-secondary3/90 dark:bg-brand-black/90 backdrop-blur-md transition-colors duration-300 text-brand-white relative z-10">
+        
+        <div class="max-w-[1400px] mx-auto reveal relative z-10">
+            <div class="text-center mb-20 pointer-events-none">
+                <h2 class="text-xs font-heading font-bold text-brand-white tracking-[0.3em] uppercase mb-6 drop-shadow-sm">/// Panoramas Globales</h2>
+                <p class="text-4xl md:text-6xl font-heading font-bold uppercase leading-tight text-brand-white drop-shadow-md">
+                    Conexiones Estratégicas
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- CANADÁ -->
+                <div onclick="openMisionModal('canada')" class="group cursor-pointer bg-brand-white/10 hover:bg-brand-white/20 border border-brand-white/20 hover:border-brand-white/40 rounded-[2.5rem] p-10 lg:p-14 transition-all duration-300 relative overflow-hidden backdrop-blur-lg shadow-xl">
+                    <div class="flex items-center gap-4 mb-8">
+                        <i data-lucide="map" class="w-8 h-8 text-brand-white"></i>
+                        <h3 class="text-3xl font-heading font-bold uppercase text-brand-white">Misión Canadá</h3>
+                    </div>
+                    <ul class="space-y-6 mb-10">
+                        <li class="flex items-start gap-4">
+                            <span class="font-heading font-bold text-brand-white text-xl leading-none">1.</span>
+                            <p class="font-medium text-brand-white"><strong>56 mil MDD</strong> de comercio bilateral en 2024.</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="font-heading font-bold text-brand-white text-xl leading-none">2.</span>
+                            <p class="font-medium text-brand-white">Intercambio multiplicado <strong>12 veces</strong> desde 1994.</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="font-heading font-bold text-brand-white text-xl leading-none">3.</span>
+                            <p class="font-medium text-brand-white"><strong>99%</strong> de bienes con arancel preferencial 0% bajo T-MEC.</p>
+                        </li>
+                    </ul>
+                    <div class="pt-6 border-t border-brand-white/20 flex justify-between items-center">
+                        <span class="text-sm font-heading font-bold uppercase tracking-widest text-brand-white/80 group-hover:text-brand-white transition-colors flex items-center gap-2">
+                            Ver Panorama Completo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- PAÍSES BAJOS -->
+                <div onclick="openMisionModal('holanda')" class="group cursor-pointer bg-brand-secondary2/90 hover:bg-brand-secondary1/90 rounded-[2.5rem] p-10 lg:p-14 border border-brand-white/10 transition-all duration-300 relative overflow-hidden backdrop-blur-lg shadow-xl">
+                    <div class="flex items-center gap-4 mb-8">
+                        <i data-lucide="anchor" class="w-8 h-8 text-brand-white transition-colors"></i>
+                        <h3 class="text-3xl font-heading font-bold uppercase text-brand-white">Países Bajos</h3>
+                    </div>
+                    <ul class="space-y-6 mb-10">
+                        <li class="flex items-start gap-4">
+                            <span class="font-heading font-bold text-brand-white text-xl leading-none">1.</span>
+                            <p class="font-medium text-brand-white"><strong>17ª</strong> Economía del mundo y una de las más abiertas.</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="font-heading font-bold text-brand-white text-xl leading-none">2.</span>
+                            <p class="font-medium text-brand-white">Hub Global: <strong>2º</strong> mayor exportador y <strong>4º</strong> importador mundial.</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="font-heading font-bold text-brand-white text-xl leading-none">3.</span>
+                            <p class="font-medium text-brand-white">Puerta a Europa con acceso a <strong>500+ Millones</strong> de consumidores.</p>
+                        </li>
+                    </ul>
+                    <div class="pt-6 border-t border-brand-white/20 flex justify-between items-center">
+                        <span class="text-sm font-heading font-bold uppercase tracking-widest text-brand-white/80 group-hover:text-brand-white transition-colors flex items-center gap-2">
+                            Ver Panorama Completo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. POR QUÉ MÉXICO -->
+    <section class="py-24 px-6 md:px-12 max-w-[1400px] mx-auto reveal relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-[3rem] overflow-hidden bg-brand-grayBg/90 dark:bg-brand-secondary2/90 backdrop-blur-md transition-colors duration-300 shadow-xl">
+            <div class="p-12 md:p-20 flex flex-col justify-center border border-brand-primary1/20 border-r-0 rounded-l-[3rem] dark:border-brand-white/10 relative z-10">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold uppercase leading-tight text-brand-black dark:text-brand-white mb-8 transition-colors drop-shadow-sm">
+                    El Destino<br>Estratégico
+                </h2>
+                <p class="text-lg font-medium text-brand-black dark:text-brand-white leading-relaxed mb-6 transition-colors">
+                    Gracias a su ubicación geográfica y avanzada red logística, <strong>México es la puerta de entrada natural a Latinoamérica</strong> y el puente perfecto hacia Norteamérica.
+                </p>
+                <p class="text-lg font-medium text-brand-black dark:text-brand-white leading-relaxed transition-colors">
+                    Su economía impulsa el crecimiento en sectores como <strong>manufactura, tecnología y energía.</strong>
+                </p>
+            </div>
+            <div class="image-box min-h-[400px] tint-secondary1 rounded-r-[3rem] relative z-10">
+                <img src="/assets/img/mexico.jpg" alt="Industria México">
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. EQUIPO EJECUTIVO -->
+    <section id="equipo" class="py-24 px-6 md:px-12 bg-brand-secondary2/90 dark:bg-brand-black/90 backdrop-blur-md text-brand-white transition-colors duration-300 relative z-10">
+        <div class="max-w-[1400px] mx-auto reveal relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-xs font-heading font-bold text-brand-primary1 tracking-[0.3em] uppercase mb-6 drop-shadow-sm">/// Liderazgo</h2>
+                <p class="text-4xl md:text-6xl font-heading font-bold uppercase leading-tight">
+                    Consejo Ejecutivo
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Miembro 1 -->
+                <div class="bg-brand-black/90 dark:bg-brand-secondary2/90 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] border border-brand-white/10 transition-colors duration-300 shadow-xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-brand-primary1/20 shrink-0 bg-brand-primary1">
+                            <img src="/assets/img/team-1.jpg" alt="Carlos Uribe" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-heading font-bold uppercase mb-2">Carlos Uribe</h3>
+                            <p class="text-brand-primary1 font-heading text-xs tracking-widest uppercase">Querétaro, MX.</p>
+                        </div>
+                    </div>
+                    <p class="text-brand-white/80 text-sm font-medium leading-relaxed">
+                        Enfoque en escalar la expansión de empresas extranjeras en México desde 2014. Ha establecido compañías de Holanda, EE.UU., Francia, Canadá e India. Su experiencia en sectores público y privado conecta negocios internacionales con oportunidades locales.
+                    </p>
+                </div>
+
+                <!-- Miembro 2 -->
+                <div class="bg-brand-black/90 dark:bg-brand-secondary2/90 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] border border-brand-white/10 transition-colors duration-300 shadow-xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-brand-primary1/20 shrink-0 bg-brand-primary1">
+                            <img src="/assets/img/team-2.jpg" alt="Sergio García" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-heading font-bold uppercase mb-2">Sergio García</h3>
+                            <p class="text-brand-primary1 font-heading text-xs tracking-widest uppercase">Washington, DC.</p>
+                        </div>
+                    </div>
+                    <p class="text-brand-white/80 text-sm font-medium leading-relaxed">
+                        Asesor Internacional (público y privado). Ex funcionario de Hacienda y Energía, y Embajada de México en DC. Consultor del Banco Mundial con procesos de reestructuración en Uruguay y Argentina. Egresado del LSE y el ITAM.
+                    </p>
+                </div>
+
+                <!-- Miembro 3 -->
+                <div class="bg-brand-black/90 dark:bg-brand-secondary2/90 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] border border-brand-white/10 transition-colors duration-300 shadow-xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-brand-primary1/20 shrink-0 bg-brand-primary1">
+                            <img src="/assets/img/team-3.jpg" alt="Gabriela Morales" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-heading font-bold uppercase mb-2">Gabriela Morales</h3>
+                            <p class="text-brand-primary1 font-heading text-xs tracking-widest uppercase">Laredo, TX.</p>
+                        </div>
+                    </div>
+                    <p class="text-brand-white/80 text-sm font-medium leading-relaxed">
+                        Exfuncionaria del Departamento de Comercio de EE.UU. (Medalla de Oro). Experta en comercio internacional e inversión. Dos MBAs globales (Georgetown y ESADE). Experiencia en gobiernos locales y organismos multilaterales.
+                    </p>
+                </div>
+
+                <!-- Miembro 4 -->
+                <div class="bg-brand-black/90 dark:bg-brand-secondary2/90 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] border border-brand-white/10 transition-colors duration-300 shadow-xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-brand-primary1/20 shrink-0 bg-brand-primary1">
+                            <img src="/assets/img/team-4.jpg" alt="Gerardo del Castillo" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-heading font-bold uppercase mb-2">Gerardo del Castillo</h3>
+                            <p class="text-brand-primary1 font-heading text-xs tracking-widest uppercase">Madrid, ESP.</p>
+                        </div>
+                    </div>
+                    <p class="text-brand-white/80 text-sm font-medium leading-relaxed">
+                        Empresario y consultor con trayectoria en el desarrollo de nuevos emprendimientos (sectores industrial y servicios). Experiencia en internacionalización y profundo conocimiento del mercado inmobiliario en el centro de México.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CONTACTO -->
+    <section id="contacto" class="py-32 px-6 md:px-12 max-w-[1400px] mx-auto reveal scroll-mt-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div class="flex flex-col justify-center">
+                <h2 class="text-5xl md:text-7xl font-heading font-bold uppercase leading-[1.1] text-brand-black dark:text-brand-white mb-8 transition-colors duration-300 drop-shadow-sm">
+                    Inicia tu<br>Expansión.
+                </h2>
+                <p class="text-xl text-brand-secondary2 dark:text-brand-primary1 font-medium mb-12 max-w-md transition-colors">
+                    Agenda una llamada estratégica con nuestro equipo directivo.
+                </p>
+                
+                <div class="space-y-8">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-brand-grayBg/90 dark:bg-brand-black/90 backdrop-blur-md flex items-center justify-center transition-colors shadow-sm">
+                            <i data-lucide="mail" class="w-6 h-6 text-brand-black dark:text-brand-white"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-heading font-bold uppercase tracking-widest text-brand-primary1 mb-1">Email</p>
+                            <a href="mailto:info@countrymanagers.com" class="text-lg font-bold text-brand-black dark:text-brand-white hover:text-brand-secondary1 dark:hover:text-brand-secondary1 transition-colors">info@countrymanagers.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full bg-brand-grayBg/90 dark:bg-brand-black/90 backdrop-blur-md flex items-center justify-center transition-colors shadow-sm">
+                            <i data-lucide="phone" class="w-6 h-6 text-brand-black dark:text-brand-white"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-heading font-bold uppercase tracking-widest text-brand-primary1 mb-1">Teléfono / Chat</p>
+                            <a href="https://wa.me/521234567890" target="_blank" class="text-lg font-bold text-brand-black dark:text-brand-white hover:text-brand-secondary1 dark:hover:text-brand-secondary1 transition-colors">+52 123 456 7890</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-brand-grayBg/90 dark:bg-brand-secondary2/90 backdrop-blur-md border border-brand-primary1/20 dark:border-brand-white/5 rounded-[3rem] p-10 md:p-14 transition-colors duration-300 shadow-xl">
+                <form action="#" method="POST" class="space-y-8">
+                    <div>
+                        <label class="block text-xs font-heading font-bold uppercase tracking-widest text-brand-black dark:text-brand-white mb-4 transition-colors">Nombre Completo</label>
+                        <input type="text" class="w-full bg-brand-white dark:bg-brand-black border-none px-6 py-5 rounded-2xl focus:ring-2 focus:ring-brand-secondary1 outline-none font-medium text-brand-black dark:text-brand-white dark:placeholder-brand-primary1 transition-colors shadow-inner" placeholder="Ej. Juan Pérez">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-heading font-bold uppercase tracking-widest text-brand-black dark:text-brand-white mb-4 transition-colors">Correo Corporativo</label>
+                        <input type="email" class="w-full bg-brand-white dark:bg-brand-black border-none px-6 py-5 rounded-2xl focus:ring-2 focus:ring-brand-secondary1 outline-none font-medium text-brand-black dark:text-brand-white dark:placeholder-brand-primary1 transition-colors shadow-inner" placeholder="juan@empresa.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-heading font-bold uppercase tracking-widest text-brand-black dark:text-brand-white mb-4 transition-colors">Mensaje</label>
+                        <textarea rows="4" class="w-full bg-brand-white dark:bg-brand-black border-none px-6 py-5 rounded-2xl focus:ring-2 focus:ring-brand-secondary1 outline-none font-medium text-brand-black dark:text-brand-white dark:placeholder-brand-primary1 resize-none transition-colors shadow-inner" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-brand-black to-brand-secondary3 dark:from-brand-white dark:to-brand-primary1 text-brand-white dark:text-brand-black py-6 rounded-2xl font-heading font-bold uppercase tracking-widest hover:opacity-90 transition-all shadow-lg hover:shadow-xl">
+                        Enviar Consulta
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-brand-primary1/20 py-12 px-6 relative z-10 bg-brand-white dark:bg-brand-black transition-colors duration-300">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-heading font-bold tracking-tighter text-brand-black dark:text-brand-white transition-colors">
+                CM<span class="text-brand-secondary1">.</span>
+            </div>
+            <div class="text-xs font-heading font-bold uppercase tracking-widest text-brand-primary1">
+                © 2024 Country Managers.
+            </div>
+            <div class="flex gap-6">
+                 <a href="#" class="text-brand-black dark:text-brand-white hover:text-brand-secondary1 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                 <a href="#" class="text-brand-black dark:text-brand-white hover:text-brand-secondary1 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE SERVICIOS -->
+    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-brand-black/95 backdrop-blur-sm transition-opacity opacity-0 duration-300">
+        <div class="bg-brand-white dark:bg-brand-secondary2 w-full max-w-5xl rounded-[2.5rem] flex flex-col lg:flex-row relative transform scale-95 transition-transform duration-300 overflow-hidden max-h-[90vh] min-h-0" id="service-modal-content">
+            
+            <button onclick="closeServiceModal()" class="absolute top-6 right-6 z-30 w-12 h-12 bg-brand-grayBg dark:bg-brand-black hover:bg-brand-black dark:hover:bg-brand-white hover:text-brand-white dark:hover:text-brand-black text-brand-black dark:text-brand-white rounded-full flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="w-full lg:w-1/2 p-6 sm:p-8 md:p-16 flex flex-col justify-center overflow-y-auto scroll-touch min-h-0">
+                <h3 id="modal-title" class="text-3xl sm:text-4xl md:text-4xl font-heading font-bold uppercase text-brand-black dark:text-brand-white mb-4 sm:mb-6 leading-tight transition-colors break-words">
+                    Título
+                </h3>
+                <p id="modal-desc" class="text-brand-secondary2 dark:text-brand-primary1 font-medium text-base sm:text-lg mb-6 sm:mb-10 leading-relaxed transition-colors">
+                    Descripción
+                </p>
+                <div class="h-px w-full bg-brand-primary1/20 mb-6 sm:mb-8"></div>
+                <h4 class="font-heading font-bold text-brand-black dark:text-brand-white mb-4 sm:mb-6 text-xs sm:text-sm tracking-widest uppercase transition-colors">
+                    Qué incluye:
+                </h4>
+                <ul id="modal-includes" class="space-y-4">
+                    <!-- Dinámico -->
+                </ul>
+            </div>
+            
+            <div class="w-full lg:w-1/2 bg-brand-grayBg dark:bg-brand-black image-box tint-secondary2 h-56 sm:h-72 lg:h-auto min-h-0">
+                <img id="modal-img" src="" alt="Detalle" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/img/hero.jpg';">
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE MISIONES (Infografías) -->
+    <div id="mision-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8 bg-brand-black/95 backdrop-blur-sm transition-opacity opacity-0 duration-300">
+        <div class="bg-brand-white dark:bg-brand-secondary2 w-full max-w-6xl max-h-[95vh] rounded-[2.5rem] relative transform scale-95 transition-transform duration-300 overflow-hidden flex flex-col" id="mision-modal-content">
+            
+            <button onclick="closeMisionModal()" class="absolute top-6 right-6 z-30 w-12 h-12 bg-brand-grayBg dark:bg-brand-black hover:bg-brand-secondary1 dark:hover:bg-brand-white hover:text-brand-white dark:hover:text-brand-black text-brand-black dark:text-brand-white rounded-full flex items-center justify-center transition-colors shadow-md">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div id="mision-modal-body" class="w-full h-full overflow-y-auto p-8 md:p-14">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/521234567890" target="_blank" rel="noopener noreferrer" class="fixed bottom-8 right-8 z-50 bg-brand-black dark:bg-brand-white text-brand-white dark:text-brand-black p-4 rounded-full shadow-2xl hover:bg-brand-secondary1 dark:hover:bg-brand-primary1 hover:scale-105 transition-all duration-300 group flex items-center justify-center">
+        <i data-lucide="message-square" class="w-7 h-7"></i>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        lucide.createIcons();
+
+        // 1. TEMA CLARO / OSCURO (Modo Oscuro)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+
+        function updateIcons() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const iconName = isDark ? 'sun' : 'moon';
+            
+            if(themeIcon) themeIcon.setAttribute('data-lucide', iconName);
+            if(mobileThemeIcon) mobileThemeIcon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
+        }
+        
+        updateIcons();
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+            updateIcons();
+        }
+
+        if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if(mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
+        // 2. Menú Móvil
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if(mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // 3. Modal Logic Servicios
+        const servicesDetails = {
+            'identificacion': {
+                title: 'Identificación de Proveedores',
+                desc: 'Buscamos, auditamos y conectamos a tu empresa con los mejores socios comerciales en México.',
+                img: '/assets/img/service-1.jpg',
+                includes: [
+                    'Análisis del mercado local', 'Verificación de antecedentes', 
+                    'Negociación de contratos', 'Auditorías de calidad'
+                ]
+            },
+            'misiones': {
+                title: 'Misiones Comerciales',
+                desc: 'Diseñamos agendas estratégicas de alto nivel para conectar con las personas adecuadas.',
+                img: '/assets/img/service-2.jpg',
+                includes: [
+                    'Agendas B2B personalizadas', 'Logística integral', 
+                    'Eventos de networking', 'Reuniones con gobierno'
+                ]
+            },
+            'inversiones': {
+                title: 'Atracción de Inversiones',
+                desc: 'Guiamos la inyección de capital extranjero asegurando una transición fluida y segura.',
+                img: '/assets/img/service-3.jpg',
+                includes: [
+                    'Asesoría legal y fiscal', 'Incentivos gubernamentales', 
+                    'Site Selection', 'Enlace industrial'
+                ]
+            },
+            'demanda': {
+                title: 'Generación de Demanda',
+                desc: 'Estrategias de posicionamiento para escalar ventas de productos en el ecosistema local.',
+                img: '/assets/img/service-4.jpg',
+                includes: [
+                    'Estudios de mercado', 'Marketing B2B localizado', 
+                    'Generación de leads', 'Ferias y exposiciones'
+                ]
+            }
+        };
+
+        const modal = document.getElementById('service-modal');
+        const modalContent = document.getElementById('service-modal-content');
+        
+        function openServiceModal(id) {
+            const data = servicesDetails[id];
+            if(!data) return;
+            
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-desc').textContent = data.desc;
+            document.getElementById('modal-img').src = data.img;
+            
+            const ul = document.getElementById('modal-includes');
+            ul.innerHTML = data.includes.map(item => `
+                <li class="flex items-center gap-4 text-brand-black dark:text-brand-white font-medium transition-colors">
+                    <span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full shrink-0"></span>
+                    ${item}
+                </li>
+            `).join('');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeServiceModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = ''; 
+            }, 300);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeServiceModal();
+            }
+        });
+
+        // 4. MISIONES MODAL LOGIC (INFOGRAFÍAS)
+        const misionesDetails = {
+            'canada': `
+                <div class="mb-12 border-b border-brand-primary1/20 pb-8">
+                    <span class="text-brand-secondary1 dark:text-brand-primary1 font-heading font-bold uppercase tracking-[0.3em] text-xs mb-4 block">/// Expansión Norteamérica</span>
+                    <h2 class="text-4xl md:text-6xl font-heading font-bold uppercase text-brand-black dark:text-brand-white leading-tight">Misión Comercial<br>México - Canadá</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Izquierda: Por qué Canadá -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <h3 class="text-2xl font-heading font-bold uppercase text-brand-secondary1 dark:text-brand-white">¿Por qué Canadá?</h3>
+                        <p class="text-brand-secondary2 dark:text-brand-primary1 font-medium text-lg">Canadá, un mercado estratégico para México.</p>
+                        
+                        <ul class="space-y-6">
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="play" class="w-6 h-6 text-brand-secondary1 dark:text-brand-white shrink-0 mt-0.5 fill-current"></i>
+                                <p class="text-brand-black dark:text-brand-white font-medium text-lg"><strong class="font-bold">56 mil mdd</strong> de comercio bilateral en 2024</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="play" class="w-6 h-6 text-brand-secondary1 dark:text-brand-white shrink-0 mt-0.5 fill-current"></i>
+                                <p class="text-brand-black dark:text-brand-white font-medium text-lg">Intercambio multiplicado <strong class="font-bold">12 veces</strong> desde 1994</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="play" class="w-6 h-6 text-brand-secondary1 dark:text-brand-white shrink-0 mt-0.5 fill-current"></i>
+                                <p class="text-brand-black dark:text-brand-white font-medium text-lg"><strong class="font-bold">99%</strong> de los bienes con arancel preferencial 0% bajo el T-MEC</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="play" class="w-6 h-6 text-brand-secondary1 dark:text-brand-white shrink-0 mt-0.5 fill-current"></i>
+                                <p class="text-brand-black dark:text-brand-white font-medium text-lg">Un entorno estable para diversificar exportaciones y generar alianzas</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Derecha: Detalles -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Qué ofrece -->
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-xl font-heading font-bold uppercase text-brand-black dark:text-brand-white mb-6 flex items-center gap-3">
+                                <i data-lucide="clipboard-list" class="w-6 h-6 text-brand-secondary1"></i> ¿Qué ofrece la misión?
+                            </h4>
+                            <p class="text-xs font-heading tracking-widest uppercase text-brand-secondary1 dark:text-brand-primary1 mb-4">Beneficios para las empresas participantes</p>
+                            <ul class="space-y-3 font-medium text-brand-secondary2 dark:text-brand-white text-sm">
+                                <li class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Reuniones B2B preagendadas con contrapartes calificadas</li>
+                                <li class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Vinculación con actores estratégicos del mercado canadiense</li>
+                                <li class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Asesoría previa sobre requisitos regulatorios</li>
+                                <li class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Visibilidad ante fondos e inversionistas</li>
+                                <li class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Directorio exclusivo de contactos generados durante la misión</li>
+                            </ul>
+                        </div>
+
+                        <!-- Sectores -->
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-xl font-heading font-bold uppercase text-brand-black dark:text-brand-white mb-6 flex items-center gap-3">
+                                <i data-lucide="layers" class="w-6 h-6 text-brand-secondary1"></i> Sectores Estratégicos
+                            </h4>
+                            <p class="text-xs font-heading tracking-widest uppercase text-brand-secondary1 dark:text-brand-primary1 mb-4">10 sectores de alto potencial</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 font-medium text-brand-secondary2 dark:text-brand-white text-sm">
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Infraestructura</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Patentes e innovación</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Agroindustria</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Industrias creativas</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Manufactura</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Fondos de inversión y clústeres</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Farmacéutica y dispositivos</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Logística</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Energía, economía circular y sostenibilidad</div>
+                                <div class="flex gap-3 items-start"><span class="w-1.5 h-1.5 bg-brand-secondary1 rounded-full mt-2 shrink-0"></span> Educación y desarrollo</div>
+                            </div>
+                        </div>
+
+                        <!-- Participantes -->
+                        <div class="bg-brand-secondary1 text-brand-white p-8 rounded-[2rem]">
+                            <h4 class="text-xl font-heading font-bold uppercase mb-4 flex items-center gap-3">
+                                <i data-lucide="globe" class="w-6 h-6"></i> ¿Quiénes pueden participar?
+                            </h4>
+                            <p class="font-bold text-sm mb-2">Empresas mexicanas con potencial de vinculación internacional.</p>
+                            <p class="text-sm font-medium text-brand-white/80 leading-relaxed border-l-2 border-brand-white/30 pl-4 mt-4">
+                                La convocatoria está dirigida a empresas mexicanas con capacidad real de generar relaciones comerciales con empresas canadienses, que operen en sectores elegibles y cuenten con una oferta clara de productos o servicios.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'holanda': `
+                <div class="mb-10 border-b border-brand-primary1/20 pb-8">
+                    <span class="text-brand-secondary1 dark:text-brand-primary1 font-heading font-bold uppercase tracking-[0.3em] text-xs mb-4 block">/// Expansión Europea</span>
+                    <h2 class="text-4xl md:text-6xl font-heading font-bold uppercase text-brand-black dark:text-brand-white leading-tight">Países Bajos:<br>An Overview</h2>
+                </div>
+
+                <!-- Stats Top Bar -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    <div class="bg-brand-secondary3 text-brand-white p-6 rounded-[1.5rem] border border-brand-primary1/20 flex flex-col justify-center">
+                        <p class="text-3xl lg:text-4xl font-heading font-bold mb-2">17th</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-brand-primary1">Largest<br>Economy</p>
+                    </div>
+                    <div class="bg-brand-grayBg dark:bg-brand-black text-brand-black dark:text-brand-white p-6 rounded-[1.5rem] border border-brand-primary1/20 flex flex-col justify-center">
+                        <p class="text-xl font-heading font-bold mb-2">Most Open</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-brand-secondary1 dark:text-brand-primary1">Trade = 173% of GDP</p>
+                    </div>
+                    <div class="bg-brand-grayBg dark:bg-brand-black text-brand-black dark:text-brand-white p-6 rounded-[1.5rem] border border-brand-primary1/20 flex flex-col justify-center">
+                        <p class="text-3xl lg:text-4xl font-heading font-bold mb-2 text-brand-secondary1">0.8%</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-brand-secondary2 dark:text-brand-primary1">GDP Growth '24</p>
+                        <p class="text-[10px] mt-1 font-medium text-brand-primary2">Forecast '25: 1.2% - 1.5%</p>
+                    </div>
+                    <div class="bg-brand-secondary1 text-brand-white p-6 rounded-[1.5rem] border border-brand-primary1/20 flex flex-col justify-center items-center text-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest text-brand-primary1 mb-1">Member of</p>
+                        <p class="text-lg font-heading font-bold">EU & NATO</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left Column: Facts & Politics -->
+                    <div class="space-y-8">
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-lg font-heading font-bold uppercase text-brand-secondary1 dark:text-brand-white mb-6 border-b border-brand-primary1/20 pb-3">Country Facts</h4>
+                            <ul class="space-y-4 text-sm font-medium text-brand-black dark:text-brand-white">
+                                <li class="flex items-center gap-4"><i data-lucide="map-pin" class="w-5 h-5 text-brand-primary2"></i> <strong>Capital:</strong> Amsterdam</li>
+                                <li class="flex items-center gap-4"><i data-lucide="users" class="w-5 h-5 text-brand-primary2"></i> <strong>Population:</strong> 17.9 Million</li>
+                                <li class="flex items-center gap-4"><i data-lucide="message-square" class="w-5 h-5 text-brand-primary2"></i> <strong>Languages:</strong> Dutch, English</li>
+                                <li class="flex items-center gap-4"><i data-lucide="coins" class="w-5 h-5 text-brand-primary2"></i> <strong>Currency:</strong> Euro (€)</li>
+                                <li class="flex items-center gap-4"><i data-lucide="clock" class="w-5 h-5 text-brand-primary2"></i> <strong>Time Zone:</strong> CET (UTC+1)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-lg font-heading font-bold uppercase text-brand-secondary1 dark:text-brand-white mb-6 border-b border-brand-primary1/20 pb-3">Political Snapshot</h4>
+                            <ul class="space-y-6 text-sm font-medium text-brand-black dark:text-brand-white">
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="landmark" class="w-6 h-6 text-brand-primary2 shrink-0"></i>
+                                    <div>Constitutional Monarchy with Parliamentary Democracy</div>
+                                </li>
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="scale" class="w-6 h-6 text-brand-primary2 shrink-0"></i>
+                                    <div><strong>Political Stability: 1.30 / 2.5</strong><br><span class="text-xs text-brand-secondary2 dark:text-brand-primary1">Very Stable - World Bank Indicator</span></div>
+                                </li>
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="mic" class="w-6 h-6 text-brand-primary2 shrink-0"></i>
+                                    <div><strong>Freedom of the Press: 22 / 180</strong><br><span class="text-xs text-brand-secondary2 dark:text-brand-primary1">Reporters Without Borders 2024</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Middle Column: Trade Partners & Consumer -->
+                    <div class="space-y-8">
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-lg font-heading font-bold uppercase text-brand-secondary1 dark:text-brand-white mb-6 border-b border-brand-primary1/20 pb-3">Trade Partners</h4>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-brand-primary2 mb-3">Top Export</p>
+                                    <ul class="text-sm font-medium text-brand-black dark:text-brand-white space-y-2">
+                                        <li>• Germany</li><li>• Belgium</li><li>• France</li><li>• UK</li><li>• Other EU</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-brand-primary2 mb-3">Top Import</p>
+                                    <ul class="text-sm font-medium text-brand-black dark:text-brand-white space-y-2">
+                                        <li>• Germany</li><li>• China</li><li>• USA</li><li>• Belgium</li><li>• Other EU</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-lg font-heading font-bold uppercase text-brand-secondary1 dark:text-brand-white mb-6 border-b border-brand-primary1/20 pb-3">Consumer Market</h4>
+                            <ul class="space-y-6 text-sm font-medium text-brand-black dark:text-brand-white">
+                                <li class="flex gap-4 items-center">
+                                    <i data-lucide="users-2" class="w-6 h-6 text-brand-primary2 shrink-0"></i>
+                                    <div>Labor Force:<br><strong class="text-lg font-heading">9.4 Million</strong></div>
+                                </li>
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="shopping-bag" class="w-6 h-6 text-brand-primary2 shrink-0"></i>
+                                    <div><strong>High Buying Power</strong><br><span class="text-xs text-brand-secondary2 dark:text-brand-primary1">Top 5 in the world (PPP)</span></div>
+                                </li>
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="smartphone" class="w-6 h-6 text-brand-primary2 shrink-0"></i>
+                                    <div><strong>Digital & International</strong><br><span class="text-xs text-brand-secondary2 dark:text-brand-primary1">Strong demand for quality, innovation and sustainability.</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Industries & Advantages -->
+                    <div class="space-y-8">
+                        <div class="bg-brand-secondary3 text-brand-white p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-lg font-heading font-bold uppercase mb-6 border-b border-brand-primary1/20 pb-3">Strategic Advantages</h4>
+                            <ul class="space-y-6 text-sm font-medium">
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="map" class="w-6 h-6 text-brand-primary1 shrink-0"></i>
+                                    <div><strong>Gateway to Europe</strong><br><span class="text-xs text-brand-primary1">Access to 500+ million consumers within 24 hours.</span></div>
+                                </li>
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="briefcase" class="w-6 h-6 text-brand-primary1 shrink-0"></i>
+                                    <div><strong>Strong Business Climate</strong><br><span class="text-xs text-brand-primary1">Stable, transparent, pro-business and skilled workforce.</span></div>
+                                </li>
+                                <li class="flex gap-4 items-start">
+                                    <i data-lucide="ship" class="w-6 h-6 text-brand-primary1 shrink-0"></i>
+                                    <div><strong>World-Class Infra</strong><br><span class="text-xs text-brand-primary1">One of the best logistics/port systems (Port of Rotterdam).</span></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-brand-grayBg dark:bg-brand-black p-8 rounded-[2rem] border border-brand-primary1/20">
+                            <h4 class="text-lg font-heading font-bold uppercase text-brand-secondary1 dark:text-brand-white mb-6 border-b border-brand-primary1/20 pb-3">Main Industries</h4>
+                            <ul class="space-y-5 text-sm font-medium text-brand-black dark:text-brand-white">
+                                <li>
+                                    <strong class="uppercase text-xs tracking-widest text-brand-secondary1 dark:text-brand-primary1">Advanced Manufacturing</strong><br>
+                                    <span class="text-xs text-brand-secondary2 dark:text-brand-white">Semiconductors, machinery, chemicals, pharma.</span>
+                                </li>
+                                <li>
+                                    <strong class="uppercase text-xs tracking-widest text-brand-secondary1 dark:text-brand-primary1">Technology & Innovation</strong><br>
+                                    <span class="text-xs text-brand-secondary2 dark:text-brand-white">ICT, software, AI, fintech, startups.</span>
+                                </li>
+                                <li>
+                                    <strong class="uppercase text-xs tracking-widest text-brand-secondary1 dark:text-brand-primary1">Renewable Energy</strong><br>
+                                    <span class="text-xs text-brand-secondary2 dark:text-brand-white">Wind energy, green hydrogen, circular economy.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        const misionModal = document.getElementById('mision-modal');
+        const misionModalContent = document.getElementById('mision-modal-content');
+        const misionModalBody = document.getElementById('mision-modal-body');
+        
+        function openMisionModal(id) {
+            const content = misionesDetails[id];
+            if(!content) return;
+            
+            misionModalBody.innerHTML = content;
+            lucide.createIcons(); 
+            
+            misionModal.classList.remove('hidden');
+            misionModal.classList.add('flex');
+            setTimeout(() => {
+                misionModal.classList.remove('opacity-0');
+                misionModalContent.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMisionModal() {
+            misionModal.classList.add('opacity-0');
+            misionModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                misionModal.classList.add('hidden');
+                misionModal.classList.remove('flex');
+                document.body.style.overflow = ''; 
+                misionModalBody.innerHTML = ''; 
+            }, 300);
+        }
+
+        misionModal.addEventListener('click', (e) => {
+            if (e.target === misionModal) {
+                closeMisionModal();
+            }
+        });
+
+        // 5. ANIMACIÓN AL HACER SCROLL (REVEAL)
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedSelectors = ['.reveal'];
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, { 
+                threshold: 0.1, 
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+
+        // 6. ANIMACIÓN DE CONEXIONES (GLOBAL EN TODA LA WEB)
+        const canvas = document.getElementById('connections-canvas');
+        if (canvas) {
+            window.__cmCanvasFound = true;
+            const ctx = canvas.getContext('2d');
+            window.__cmCanvasCtx = !!ctx;
+            let width, height;
+            let particles = [];
+            let mouse = { x: null, y: null, radius: 180 };
+
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                initParticles(); 
+            }
+            
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+            
+            window.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 1.0; 
+                    this.vy = (Math.random() - 0.5) * 1.0;
+                    this.radius = Math.random() * 2 + 1; 
+                }
+                update() {
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                    this.x += this.vx;
+                    this.y += this.vy;
+                }
+                draw(isDark) {
+                    ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.4)' : 'rgba(90, 78, 84, 0.3)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                const particleCount = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 18000), 120);
+                window.__cmParticleCount = particleCount;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function animateConnections() {
+                window.__cmCanvasTick = (window.__cmCanvasTick || 0) + 1;
+                ctx.clearRect(0, 0, width, height);
+                
+                const isDark = document.documentElement.classList.contains('dark');
+                const lineColor = isDark ? '255, 255, 255' : '90, 78, 84';
+
+                particles.forEach(p => {
+                    p.update();
+                    p.draw(isDark);
+                });
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 130) {
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.15 - dist / 866})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+
+                    if (mouse.x != null && mouse.y != null) {
+                        const dx = particles[i].x - mouse.x;
+                        const dy = particles[i].y - mouse.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < mouse.radius) {
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.4 - dist / (mouse.radius * 2.5)})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateConnections);
+            }
+            window.__cmAnimateInvoked = true;
+            animateConnections();
+        }
+    </script>
+</body>
+</html>

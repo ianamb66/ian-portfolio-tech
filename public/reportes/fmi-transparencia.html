@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fundación Mier y Pesado - Educación y Bienestar</title>
+
+    <!-- SEO / Social -->
+    <meta
+      name="description"
+      content="Institución de Asistencia Privada con más de 100 años de historia. Educación de excelencia y cuidado digno para adultos mayores."
+    />
+    <meta name="theme-color" content="#003DA6" />
+    <link rel="icon" href="/assets/logos/favicon.ico" />
+
+    <meta property="og:title" content="Fundación Mier y Pesado" />
+    <meta
+      property="og:description"
+      content="Educación y bienestar con impacto social directo. Conoce nuestra historia, centros asistenciales, transparencia y formas de alianza."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:image" content="/assets/images/hero/hero.jpg" />
+
+    <!-- Performance: preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons (CSS, más estable en móvil) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Enables progressive enhancement for reveal animations
+      document.documentElement.classList.add("js");
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Poppins", "sans-serif"],
+              serif: ['"Abril Fatface"', "serif"],
+            },
+            colors: {
+              primary: "#003DA6", // Azul principal institucional
+              accent: "#4EC1E0", // Celeste secundario
+              light: "#FAFAFA", // Blanco/Gris muy tenue
+              dark: "#0B1B3D", // Azul marino oscuro
+              // Colores para detalles y marcos
+              "detail-blue": "#002E6D",
+              "detail-gray": "#5C6670",
+              "detail-yellow": "#F9BE00",
+              "detail-orange": "#FF4C00",
+              "detail-red": "#DD0031",
+              "detail-green": "#13A538",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .title-accent {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+      }
+
+      .title-accent::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 60px;
+        background-color: #f9be00;
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      .title-accent:hover::after {
+        width: 100px;
+      }
+
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Sistema SPA */
+      .page-section {
+        display: none;
+        animation: pageFadeIn 0.6s ease-out forwards;
+      }
+
+      .page-section.active {
+        display: block;
+      }
+
+      @keyframes pageFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Scroll Horizontal Invisible */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Modal Backdrop */
+      .modal-active {
+        overflow: hidden;
+      }
+
+      /* ANIMACIONES PROFESIONALES (Scroll Reveal)
+         Importante: no “escondemos” contenido si JS no carga.
+         Solo se aplica el hidden-state cuando existe la clase .js en <html>. */
+      .reveal-up,
+      .reveal-left,
+      .reveal-right,
+      .reveal-zoom {
+        opacity: 1;
+        transform: none;
+      }
+
+      html.js .reveal-up,
+      html.js .reveal-left,
+      html.js .reveal-right,
+      html.js .reveal-zoom {
+        opacity: 0;
+        transition: all 0.85s ease-out;
+        will-change: transform, opacity;
+      }
+
+      html.js .reveal-up {
+        transform: translateY(40px);
+      }
+
+      html.js .reveal-left {
+        transform: translateX(-48px);
+      }
+
+      html.js .reveal-right {
+        transform: translateX(48px);
+      }
+
+      html.js .reveal-zoom {
+        transform: scale(0.96);
+      }
+
+      html.js .reveal-up.active,
+      html.js .reveal-left.active,
+      html.js .reveal-right.active,
+      html.js .reveal-zoom.active {
+        opacity: 1;
+        transform: none;
+      }
+
+      .delay-100 {
+        transition-delay: 100ms;
+      }
+
+      .delay-200 {
+        transition-delay: 200ms;
+      }
+
+      .delay-300 {
+        transition-delay: 300ms;
+      }
+
+      .delay-400 {
+        transition-delay: 400ms;
+      }
+
+      /* Tailwind CDN no incluye line-clamp por defecto */
+      .line-clamp-2,
+      .line-clamp-4 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .line-clamp-2 {
+        -webkit-line-clamp: 2;
+      }
+
+      .line-clamp-4 {
+        -webkit-line-clamp: 4;
+      }
+
+      /* Phosphor baseline */
+      .ph {
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+
+    <script>
+      // Sistema de Navegación SPA
+      function navigateTo(pageId) {
+        document.querySelectorAll(".page-section").forEach((el) => {
+          el.classList.remove("active");
+        });
+        const targetPage = document.getElementById("page-" + pageId);
+        targetPage.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Reiniciar animaciones de la nueva página (alternando estilos)
+        const reveals = targetPage.querySelectorAll(
+          ".reveal-up, .reveal-left, .reveal-right, .reveal-zoom"
+        );
+        reveals.forEach((el) => el.classList.remove("active"));
+        setTimeout(() => {
+          revealAnimations();
+          // Evita huecos visibles si el usuario no scrollea
+          setTimeout(revealAllInActivePage, 350);
+        }, 50);
+
+        const mobileMenu = document.getElementById("mobile-menu");
+        if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+          mobileMenu.classList.add("hidden");
+        }
+      }
+
+      // Animaciones al scrollear
+      function getActiveReveals() {
+        return document.querySelectorAll(
+          ".page-section.active .reveal-up, .page-section.active .reveal-left, .page-section.active .reveal-right, .page-section.active .reveal-zoom"
+        );
+      }
+
+      function revealAnimations() {
+        var reveals = getActiveReveals();
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 50; // Se activa un poco antes
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          }
+        }
+      }
+
+      // Para evitar "huecos" visibles (contenido invisible hasta scroll),
+      // activamos todo después de que el layout se estabiliza.
+      function revealAllInActivePage() {
+        var reveals = getActiveReveals();
+        reveals.forEach((el) => el.classList.add("active"));
+      }
+      window.addEventListener("scroll", revealAnimations);
+      window.addEventListener("load", () => {
+        revealAnimations();
+        // Después del load, activamos todo para evitar huecos visibles.
+        setTimeout(revealAllInActivePage, 350);
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        revealAnimations();
+        // second pass after fonts/layout settle
+        setTimeout(revealAnimations, 150);
+        // y una activación completa un poco después
+        setTimeout(revealAllInActivePage, 650);
+      });
+
+      // Funciones para el Modal de Noticias
+      function openNewsModal(
+        title,
+        category,
+        date,
+        content,
+        imageSrc,
+        categoryColorClass
+      ) {
+        document.getElementById("modal-category").className =
+          `text-xs font-bold uppercase tracking-wider mb-2 block ${categoryColorClass}`;
+        document.getElementById("modal-category").innerText = category;
+        document.getElementById("modal-title").innerText = title;
+        document.getElementById("modal-date").innerText = date;
+        document.getElementById("modal-content").innerHTML = content;
+        document.getElementById("modal-image").src = imageSrc;
+        document.getElementById("news-modal").classList.remove("hidden");
+        document.body.classList.add("modal-active");
+      }
+
+      function closeNewsModal() {
+        document.getElementById("news-modal").classList.add("hidden");
+        document.body.classList.remove("modal-active");
+      }
+    </script>
+  </head>
+
+  <body class="font-sans text-gray-800 bg-white flex flex-col min-h-screen">
+    <!-- Top Bar -->
+    <div
+      class="bg-primary text-white text-sm py-2 px-4 hidden md:flex justify-between items-center z-50 relative"
+    >
+      <div class="flex space-x-4">
+        <a
+          href="tel:+525512345678"
+          class="flex items-center gap-1 hover:text-accent transition-colors"
+          ><i class="ph ph-phone"></i> (55) 1234-5678</a
+        >
+        <a
+          href="mailto:contacto@fundacionmierypesado.org.mx"
+          class="flex items-center gap-1 hover:text-accent transition-colors"
+          ><i class="ph ph-envelope-simple"></i>
+          contacto@fundacionmierypesado.org.mx</a
+        >
+      </div>
+      <div class="flex space-x-4">
+        <a href="#" class="hover:text-accent transition-colors" aria-label="Facebook" title="Facebook">
+          <i class="ph ph-facebook-logo text-lg" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="hover:text-accent transition-colors" aria-label="Instagram" title="Instagram">
+          <i class="ph ph-instagram-logo text-lg" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navegación Principal -->
+    <header class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-accent">
+      <div class="container mx-auto px-4 py-4 flex items-center gap-4">
+        <!-- Logo -->
+        <button
+          type="button"
+          onclick="navigateTo('home')"
+          class="flex items-center gap-3 w-56 h-14 rounded cursor-pointer hover:bg-gray-50 transition-colors shrink-0"
+          aria-label="Ir a Inicio"
+        >
+          <img
+            src="/assets/logos/logo-color.png"
+            alt="Fundación Mier y Pesado"
+            class="h-12 w-auto object-contain"
+            onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+          />
+          <span class="hidden text-detail-blue font-bold text-xs uppercase tracking-wider leading-tight">
+            Fundación<br />Mier y Pesado
+          </span>
+        </button>
+
+        <!-- Menú -->
+        <nav
+          id="mobile-menu"
+          class="hidden absolute top-full left-0 w-full bg-white shadow-lg lg:static lg:shadow-none lg:w-full lg:flex-1 lg:flex lg:justify-center lg:flex-wrap flex-col lg:flex-row space-y-4 lg:space-y-0 lg:gap-x-5 lg:gap-y-2 p-6 lg:p-0 font-medium text-gray-700 transition-all z-40 text-sm"
+        >
+          <a
+            href="#"
+            onclick="navigateTo('home'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Inicio</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('quienes-somos'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Quiénes Somos</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('historia'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Historia</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('centros'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Centros</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('renta'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Instalaciones en renta</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('transparencia'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Transparencia</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('alianzas'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Alianzas</a
+          >
+          <a
+            href="#"
+            onclick="navigateTo('contacto'); return false;"
+            class="hover:text-primary transition-colors inline-block"
+            >Contacto</a
+          >
+        </nav>
+
+        <!-- Botón Contacto y Menú Móvil -->
+        <div class="flex items-center gap-4 shrink-0">
+          <a
+            href="#"
+            onclick="navigateTo('alianzas'); return false;"
+            class="hidden md:inline-flex bg-accent text-dark px-5 py-2 rounded font-bold shadow-md hover:bg-detail-yellow transition-colors"
+          >
+            Únete a la Causa
+          </a>
+          <button
+            onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+            class="lg:hidden text-2xl text-primary"
+          >
+            <i class="ph ph-list"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL MULTI-PÁGINA -->
+    <main class="flex-grow">
+      <!-- ================= PÁGINA 1: INICIO ================= -->
+      <div id="page-home" class="page-section active">
+        <!-- Hero Section -->
+        <section
+          class="relative h-[70vh] flex items-center justify-center overflow-hidden"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop"
+            alt="[Imagen de Edificio Histórico y Educación]"
+            class="absolute inset-0 w-full h-full object-cover object-center transform scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]"
+          />
+          <div class="absolute inset-0 bg-primary/80 mix-blend-multiply"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10 reveal-up">
+            <span
+              class="text-accent font-bold tracking-widest uppercase text-sm md:text-base mb-4 block"
+              >Institución de Asistencia Privada</span
+            >
+            <h2
+              class="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight drop-shadow-lg"
+            >
+              Juntos, compartiendo ideales que trascienden
+            </h2>
+            <p
+              class="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto font-light"
+            >
+              Brindamos educación de excelencia a la niñez y cuidado digno a nuestros
+              adultos mayores. ¡Estamos al inicio y al final de la vida!
+            </p>
+            <a
+              href="#"
+              onclick="navigateTo('quienes-somos'); return false;"
+              class="inline-block bg-detail-yellow text-primary font-bold px-10 py-4 rounded hover:bg-yellow-400 transition-colors shadow-xl hover:shadow-yellow-500/30 transform hover:-translate-y-1"
+            >
+              Conoce Nuestra Historia
+            </a>
+          </div>
+        </section>
+
+        <!-- Resumen: Quiénes Somos -->
+        <section class="py-20 bg-light border-b border-gray-200">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+              <div class="md:w-1/2 reveal-left">
+                <h3 class="text-4xl font-serif text-detail-blue mb-6 title-accent">
+                  Nuestra Filosofía y Legado
+                </h3>
+                <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                  Con más de 102 años de experiencia y tradición, somos una
+                  Institución de Asistencia Privada afiliada a la JAP y CEMEFI.
+                  Beneficiamos a más de <strong>3,380 mexicanos diariamente</strong>.
+                </p>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                  Honramos el legado filantrópico de doña Isabel Pesado y don Antonio
+                  Mier a través de una gobernanza transparente y solidaria,
+                  transformando nuestro patrimonio en oportunidades de vida.
+                </p>
+                <a
+                  href="#"
+                  onclick="navigateTo('quienes-somos'); return false;"
+                  class="inline-flex items-center gap-2 text-primary font-bold hover:text-detail-blue transition-colors bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg border border-gray-100"
+                >
+                  Leer historia completa <i class="ph ph-arrow-right"></i>
+                </a>
+              </div>
+              <div class="md:w-1/2 grid grid-cols-2 gap-4 reveal-right delay-200">
+                <div
+                  class="relative group overflow-hidden rounded-xl shadow-lg border-2 border-detail-blue/20"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop"
+                    class="h-64 object-cover w-full transition-transform duration-700 group-hover:scale-110"
+                    alt="[Imagen de Niños Estudiando]"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-detail-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
+                  >
+                    <span class="text-white font-bold">Educación</span>
+                  </div>
+                </div>
+                <div
+                  class="relative group overflow-hidden rounded-xl shadow-lg border-2 border-detail-green/20 mt-8"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop"
+                    class="h-64 object-cover w-full transition-transform duration-700 group-hover:scale-110"
+                    alt="[Imagen de Adultos Mayores]"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-detail-green/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
+                  >
+                    <span class="text-white font-bold">Residencias</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Resumen: Centros Asistenciales (Más Visual) -->
+        <section class="py-20 bg-white border-b border-gray-200">
+          <div class="container mx-auto px-4 max-w-6xl text-center">
+            <h3
+              class="text-4xl font-serif text-detail-blue mb-4 title-accent inline-block reveal-up"
+            >
+              Impacto Social Directo
+            </h3>
+            <p
+              class="text-gray-600 max-w-2xl mx-auto mb-12 reveal-up delay-100 text-lg"
+            >
+              Transformamos obstáculos en oportunidades a través de 4 centros
+              especializados que operan bajo los más altos estándares de calidad
+              humana y académica.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <!-- Educación -->
+              <div
+                class="bg-light rounded-2xl shadow-xl overflow-hidden text-left card-hover reveal-left delay-200 flex flex-col"
+              >
+                <div class="relative h-56 overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1000&auto=format&fit=crop"
+                    class="w-full h-full object-cover"
+                    alt="[Imagen de Instituto Educativo]"
+                  />
+                  <div
+                    class="absolute top-4 left-4 bg-detail-blue text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider"
+                  >
+                    Centros Educativos
+                  </div>
+                </div>
+                <div
+                  class="p-8 flex-grow flex flex-col justify-between border-b-4 border-detail-blue"
+                >
+                  <div>
+                    <h4 class="text-2xl font-serif text-detail-blue mb-4">
+                      Instituto y Escuela Mier y Pesado
+                    </h4>
+                    <p class="text-gray-600 mb-6">
+                      Más de 3,000 alumnas becadas recibiendo educación integral de
+                      excelencia para forjar a las líderes solidarias del mañana.
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    onclick="navigateTo('centros'); return false;"
+                    class="inline-flex w-max text-sm font-bold text-white bg-detail-blue px-6 py-2 rounded-lg hover:bg-primary transition-colors"
+                  >
+                    Conocer los institutos &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <!-- Residencias -->
+              <div
+                class="bg-light rounded-2xl shadow-xl overflow-hidden text-left card-hover reveal-right delay-300 flex flex-col"
+              >
+                <div class="relative h-56 overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1000&auto=format&fit=crop"
+                    class="w-full h-full object-cover"
+                    alt="[Imagen de Cuidado Geriátrico]"
+                  />
+                  <div
+                    class="absolute top-4 left-4 bg-detail-green text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider"
+                  >
+                    Residencias
+                  </div>
+                </div>
+                <div
+                  class="p-8 flex-grow flex flex-col justify-between border-b-4 border-detail-green"
+                >
+                  <div>
+                    <h4 class="text-2xl font-serif text-detail-green mb-4">
+                      Residencias Tacubaya y Orizaba
+                    </h4>
+                    <p class="text-gray-600 mb-6">
+                      Atención médica integral, talleres terapéuticos, calidez y un
+                      verdadero hogar subsidiado para cerca de 180 adultos mayores.
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    onclick="navigateTo('centros'); return false;"
+                    class="inline-flex w-max text-sm font-bold text-white bg-detail-green px-6 py-2 rounded-lg hover:bg-[#0f8c2e] transition-colors"
+                  >
+                    Ver residencias &rarr;
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Noticias y Actualidad -->
+        <section id="noticias" class="py-20 bg-[#e5e7eb] border-b border-gray-200">
+          <div class="container mx-auto px-4 max-w-6xl reveal-up">
+            <div
+              class="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-detail-yellow pb-4"
+            >
+              <div>
+                <h3 class="text-4xl font-serif text-detail-blue mb-2">Noticias y Actualidad</h3>
+                <p class="text-gray-600 max-w-2xl text-lg">
+                  Mantente informado. Conoce los esfuerzos y logros de la Comunidad
+                  Mier y Pesado que impulsan la calidad de vida en México.
+                </p>
+              </div>
+              <a
+                href="#"
+                onclick="navigateTo('transparencia'); return false;"
+                class="hidden md:inline-flex items-center gap-2 text-detail-blue font-bold hover:text-primary transition-colors mt-4 md:mt-0 uppercase tracking-widest text-sm"
+              >
+                VER MÁS NOTICIAS <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <!-- Carrusel Horizontal de Tarjetas -->
+            <div
+              class="flex overflow-x-auto gap-6 pb-8 hide-scrollbar snap-x snap-mandatory reveal-zoom delay-200"
+            >
+              <!-- Tarjeta 1 (Educación) -->
+              <div
+                onclick="openNewsModal( 'Formación integral en el Instituto Mier y Pesado', 'Educación', '15 de Mayo, 2026', '<p class=\'mb-4\'>El Instituto Mier y Pesado celebró esta semana la clausura de su programa de liderazgo estudiantil. Durante este ciclo, nuestras alumnas han participado activamente en talleres extracurriculares enfocados en el desarrollo de habilidades blandas, inteligencia emocional y responsabilidad social.</p><p>Como parte de nuestro compromiso con la educación integral de excelencia, estas actividades buscan que cada joven se convierta en un agente de cambio y solidaridad en su entorno inmediato.</p>', 'https://images.unsplash.com/photo-1503676382389-4809596d5290?q=80&w=800&auto=format&fit=crop', 'text-detail-yellow' )"
+                class="w-[320px] flex-shrink-0 bg-transparent rounded-lg cursor-pointer snap-start group"
+              >
+                <div class="overflow-hidden rounded-t-lg h-48 w-full border border-gray-200/50">
+                  <img
+                    src="https://images.unsplash.com/photo-1503676382389-4809596d5290?q=80&w=600&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt="[Imagen Noticia Educación]"
+                  />
+                </div>
+                <div
+                  class="p-6 bg-gray-100/80 backdrop-blur-sm rounded-b-lg border border-t-0 border-gray-200 shadow-sm h-[280px] flex flex-col justify-between group-hover:bg-white transition-colors"
+                >
+                  <div>
+                    <span
+                      class="text-xs font-bold text-detail-yellow uppercase tracking-wider mb-3 block"
+                      >Educación</span
+                    >
+                    <h4 class="font-bold text-detail-blue mb-3 text-lg leading-tight line-clamp-2">
+                      Formación integral en el Instituto Mier y Pesado
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-4">
+                      Nuestras alumnas continúan desarrollando habilidades y valores
+                      para convertirse en agentes de cambio y solidaridad.
+                    </p>
+                  </div>
+                  <span
+                    class="text-sm font-bold text-detail-blue flex items-center gap-1 group-hover:text-primary transition-colors"
+                    >Leer nota completa &rarr;</span
+                  >
+                </div>
+              </div>
+
+              <!-- Tarjeta 2 (Residencias) -->
+              <div
+                onclick="openNewsModal( 'Comunidad en Residencia Orizaba', 'Residencias', '2 de Junio, 2026', '<p class=\'mb-4\'>La Residencia Mier y Pesado en Orizaba ha implementado un nuevo ciclo de talleres terapéuticos y ocupacionales. Estas actividades están diseñadas específicamente para fortalecer la independencia, la movilidad y la agilidad cognitiva de nuestros residentes.</p><p>Nuestro objetivo principal es seguir brindando un verdadero hogar donde cada adulto mayor se sienta productivo, valioso y profundamente amado.</p>', 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop', 'text-detail-green' )"
+                class="w-[320px] flex-shrink-0 bg-transparent rounded-lg cursor-pointer snap-start group"
+              >
+                <div class="overflow-hidden rounded-t-lg h-48 w-full border border-gray-200/50">
+                  <img
+                    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=600&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt="[Imagen Noticia Residencias]"
+                  />
+                </div>
+                <div
+                  class="p-6 bg-gray-100/80 backdrop-blur-sm rounded-b-lg border border-t-0 border-gray-200 shadow-sm h-[280px] flex flex-col justify-between group-hover:bg-white transition-colors"
+                >
+                  <div>
+                    <span
+                      class="text-xs font-bold text-detail-green uppercase tracking-wider mb-3 block"
+                      >Residencias</span
+                    >
+                    <h4 class="font-bold text-detail-blue mb-3 text-lg leading-tight line-clamp-2">
+                      Comunidad en Residencia Orizaba
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-4">
+                      Fortaleciendo la independencia de nuestros adultos mayores
+                      mediante talleres que los hacen sentir productivos y amados.
+                    </p>
+                  </div>
+                  <span
+                    class="text-sm font-bold text-detail-blue flex items-center gap-1 group-hover:text-primary transition-colors"
+                    >Leer nota completa &rarr;</span
+                  >
+                </div>
+              </div>
+
+              <!-- Tarjeta 3 (Transparencia) -->
+              <div
+                onclick="openNewsModal( 'Conservación del Legado de nuestra Fundadora', 'Transparencia', '28 de Junio, 2026', '<p class=\'mb-4\'>Como parte de nuestro firme compromiso con la preservación del patrimonio institucional, el Patronato ha aprobado las nuevas fases de intervención y mantenimiento preventivo en nuestros inmuebles históricos en la Ciudad de México.</p><p>Estas labores, guiadas por los más estrictos protocolos de protección civil, son fundamentales para garantizar el sustento económico de nuestra labor.</p>', 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop', 'text-detail-orange' )"
+                class="w-[320px] flex-shrink-0 bg-transparent rounded-lg cursor-pointer snap-start group"
+              >
+                <div class="overflow-hidden rounded-t-lg h-48 w-full border border-gray-200/50">
+                  <img
+                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt="[Imagen Noticia Patrimonio]"
+                  />
+                </div>
+                <div
+                  class="p-6 bg-gray-100/80 backdrop-blur-sm rounded-b-lg border border-t-0 border-gray-200 shadow-sm h-[280px] flex flex-col justify-between group-hover:bg-white transition-colors"
+                >
+                  <div>
+                    <span
+                      class="text-xs font-bold text-detail-orange uppercase tracking-wider mb-3 block"
+                      >Transparencia</span
+                    >
+                    <h4 class="font-bold text-detail-blue mb-3 text-lg leading-tight line-clamp-2">
+                      Conservación del Legado de nuestra Fundadora
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-4">
+                      Continuamos con las labores de protección civil para salvaguardar
+                      el patrimonio institucional que hace posible nuestra obra.
+                    </p>
+                  </div>
+                  <span
+                    class="text-sm font-bold text-detail-blue flex items-center gap-1 group-hover:text-primary transition-colors"
+                    >Leer nota completa &rarr;</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Banner Intermedio: Alianzas -->
+        <section class="relative py-24 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2000&auto=format&fit=crop"
+            class="absolute inset-0 w-full h-full object-cover grayscale opacity-30"
+            alt="[Imagen Voluntariado]"
+          />
+          <div class="absolute inset-0 bg-detail-blue/90"></div>
+          <div class="container mx-auto px-4 max-w-4xl relative z-10 text-center reveal-zoom">
+            <i class="ph ph-handshake text-6xl text-detail-yellow mb-6"></i>
+            <h3 class="text-4xl font-serif text-white mb-6">
+              Las grandes transformaciones requieren aliados
+            </h3>
+            <p class="text-gray-300 mb-10 text-xl font-light">
+              Invitamos a las empresas e individuos comprometidos con México a sumar sus
+              estrategias de Responsabilidad Social a nuestra causa.
+            </p>
+            <a
+              href="#"
+              onclick="navigateTo('alianzas'); return false;"
+              class="inline-block bg-detail-yellow text-primary font-bold px-12 py-4 rounded shadow-xl hover:bg-white transition-all transform hover:-translate-y-1"
+            >
+              Súmate a la Causa
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 2: QUIÉNES SOMOS ================= -->
+      <div id="page-quienes-somos" class="page-section">
+        <div class="relative py-24 border-b border-gray-200 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2000&auto=format&fit=crop"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Quiénes Somos"
+          />
+          <div class="absolute inset-0 bg-primary/95"></div>
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Nuestra Filosofía e Historia</h1>
+            <p class="mt-6 text-detail-yellow text-xl">Más de 102 años de experiencia y tradición al servicio de México.</p>
+          </div>
+        </div>
+        <section class="py-20 bg-light">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 reveal-zoom">
+              <div>
+                <h3 class="text-4xl font-serif text-primary mb-6 title-accent">¿Quiénes Somos?</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed text-lg">
+                  La <strong>Fundación Mier y Pesado</strong> es una Institución de Asistencia Privada sin fines de lucro.
+                  Estamos afiliados a la Junta de Asistencia Privada de la CDMX y somos asociados del CEMEFI.
+                </p>
+                <p class="text-gray-600 mb-8 leading-relaxed text-lg">Beneficiamos a <strong>3,380 mexicanos cada día</strong> a través de nuestros 4 Centros Asistenciales.</p>
+                <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-detail-blue/20">
+                  <img
+                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop"
+                    class="w-full h-48 object-cover"
+                    alt="[Imagen de Fachada Institucional]"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 gap-6 reveal-right delay-200">
+                <div class="bg-primary text-white p-8 rounded-xl shadow-xl border-l-8 border-detail-yellow card-hover">
+                  <h4 class="font-serif text-3xl mb-4">Nuestra Misión</h4>
+                  <p class="text-base text-gray-200 leading-relaxed">
+                    Somos una institución asistencial con más de 100 años de historia, comprometidos con nuestras niñas,
+                    niños, jóvenes y personas adultas mayores. Integramos una comunidad que permite a nuestros huéspedes
+                    vivir en plenitud y a nuestros estudiantes contar con una educación de excelencia fundamentada en valores.
+                  </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-xl border-l-8 border-accent card-hover">
+                  <h4 class="font-serif text-primary text-3xl mb-4">Nuestra Visión</h4>
+                  <p class="text-base text-gray-600 leading-relaxed">
+                    Ser siempre una Institución Asistencial sólida y reconocida como un modelo a seguir en la búsqueda
+                    permanente de la excelencia en la atención y mejora de la calidad de vida, con un alto sentido de
+                    reciprocidad social.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 2B: HISTORIA ================= -->
+      <div id="page-historia" class="page-section">
+        <div class="relative py-24 border-b border-gray-200 overflow-hidden">
+          <img
+            src="/assets/images/patrimonio/patrimonio-1.jpg"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Historia"
+            onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2000&auto=format&fit=crop'"
+          />
+          <div class="absolute inset-0 bg-primary/95"></div>
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Historia y Legado</h1>
+            <p class="mt-6 text-detail-yellow text-xl">
+              Una obra filantrópica que transforma patrimonio en oportunidades de vida.
+            </p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-light">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+              <div class="lg:col-span-2 reveal-left">
+                <h3 class="text-4xl font-serif text-primary mb-6 title-accent">De la fundación al impacto de hoy</h3>
+                <div class="space-y-5 text-gray-600 leading-relaxed text-lg">
+                  <p>
+                    La Fundación Mier y Pesado I.A.P. nace del legado de doña Isabel Pesado y don Antonio Mier, con el propósito
+                    de sostener proyectos sociales de largo plazo, priorizando educación y bienestar.
+                  </p>
+                  <p>
+                    Nuestra historia no es solo pasado: es un modelo de administración responsable que permite financiar la
+                    operación de nuestros centros y asegurar calidad humana y excelencia en el servicio.
+                  </p>
+                </div>
+
+                <div class="mt-10 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden reveal-zoom">
+                  <div class="p-8 md:p-10">
+                    <h4 class="text-2xl font-serif text-detail-blue mb-6">Línea del tiempo (resumen)</h4>
+                    <ol class="relative border-s border-gray-200 ms-3 space-y-8">
+                      <li class="ms-8">
+                        <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-detail-yellow text-primary font-bold">1</span>
+                        <h5 class="font-bold text-primary">Origen del legado</h5>
+                        <p class="text-sm text-gray-600">Nacimiento del proyecto filantrópico y visión institucional.</p>
+                      </li>
+                      <li class="ms-8">
+                        <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-detail-yellow text-primary font-bold">2</span>
+                        <h5 class="font-bold text-primary">Consolidación de centros</h5>
+                        <p class="text-sm text-gray-600">Crecimiento operativo y fortalecimiento del modelo asistencial.</p>
+                      </li>
+                      <li class="ms-8">
+                        <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-detail-yellow text-primary font-bold">3</span>
+                        <h5 class="font-bold text-primary">Transparencia y sostenibilidad</h5>
+                        <p class="text-sm text-gray-600">Gobernanza y cuidado patrimonial para garantizar continuidad.</p>
+                      </li>
+                    </ol>
+                    <p class="mt-8 text-xs text-gray-500">
+                      Nota: Podemos ajustar esta línea del tiempo con fechas y hitos oficiales (cuando nos pases la información).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="reveal-right">
+                <div class="bg-primary text-white rounded-2xl shadow-xl p-8 border-l-8 border-detail-yellow">
+                  <h4 class="font-serif text-3xl mb-4">Enfoque institucional</h4>
+                  <ul class="space-y-3 text-white/90 text-sm">
+                    <li class="flex gap-3"><i class="ph ph-check-circle text-detail-yellow text-xl"></i> Educación de excelencia</li>
+                    <li class="flex gap-3"><i class="ph ph-check-circle text-detail-yellow text-xl"></i> Bienestar y cuidado digno</li>
+                    <li class="flex gap-3"><i class="ph ph-check-circle text-detail-yellow text-xl"></i> Transparencia y gobernanza</li>
+                    <li class="flex gap-3"><i class="ph ph-check-circle text-detail-yellow text-xl"></i> Conservación patrimonial</li>
+                  </ul>
+                  <div class="mt-8">
+                    <a
+                      href="#"
+                      onclick="navigateTo('transparencia'); return false;"
+                      class="inline-flex items-center gap-2 bg-detail-yellow text-primary font-bold px-6 py-3 rounded-lg hover:bg-white transition-colors"
+                      >Ver transparencia <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 2C: INSTALACIONES EN RENTA ================= -->
+      <div id="page-renta" class="page-section">
+        <div class="bg-detail-blue py-24 relative overflow-hidden">
+          <img
+            src="/assets/images/patrimonio/patrimonio-1.jpg"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Instalaciones"
+            onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop'"
+          />
+          <div class="absolute inset-0 bg-detail-blue/95"></div>
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Instalaciones en renta</h1>
+            <p class="mt-6 text-detail-yellow text-xl">
+              Espacios con propósito: renta responsable que impulsa nuestra labor social.
+            </p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-white">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              <div class="lg:col-span-2 reveal-left">
+                <h3 class="text-4xl font-serif text-primary mb-6 title-accent">¿Qué ofrecemos?</h3>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                  Administramos inmuebles y espacios que, al rentarse, contribuyen a sostener nuestros centros asistenciales.
+                  Esta sección debe reflejar oferta real: tipo de espacios, zonas, capacidades y requisitos.
+                </p>
+
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div class="bg-light rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover reveal-zoom">
+                    <div class="h-48 bg-gray-200">
+                      <img
+                        src="/assets/images/patrimonio/patrimonio-1.jpg"
+                        class="w-full h-full object-cover"
+                        alt="Espacio en renta (placeholder)"
+                        onerror="this.src='https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop'"
+                      />
+                    </div>
+                    <div class="p-7 border-b-4 border-detail-yellow">
+                      <h4 class="font-bold text-detail-blue mb-2">Espacio A (ejemplo)</h4>
+                      <p class="text-sm text-gray-600">Oficinas / local / bodega • Metraje • Zona • Disponibilidad</p>
+                      <div class="mt-5 flex gap-3">
+                        <a
+                          href="#"
+                          onclick="navigateTo('contacto'); return false;"
+                          class="text-sm font-bold bg-detail-blue text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors"
+                          >Solicitar info</a
+                        >
+                        <a href="#" class="text-sm font-bold text-detail-blue hover:text-primary transition-colors">Ficha &rarr;</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-light rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover reveal-zoom">
+                    <div class="h-48 bg-gray-200">
+                      <img
+                        src="/assets/images/patrimonio/patrimonio-1.jpg"
+                        class="w-full h-full object-cover"
+                        alt="Espacio en renta (placeholder)"
+                        onerror="this.src='https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&auto=format&fit=crop'"
+                      />
+                    </div>
+                    <div class="p-7 border-b-4 border-accent">
+                      <h4 class="font-bold text-detail-blue mb-2">Espacio B (ejemplo)</h4>
+                      <p class="text-sm text-gray-600">Eventos / salón • Capacidad • Ubicación • Requisitos</p>
+                      <div class="mt-5 flex gap-3">
+                        <a
+                          href="#"
+                          onclick="navigateTo('contacto'); return false;"
+                          class="text-sm font-bold bg-detail-blue text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors"
+                          >Solicitar info</a
+                        >
+                        <a href="#" class="text-sm font-bold text-detail-blue hover:text-primary transition-colors">Ficha &rarr;</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-12 bg-light rounded-2xl p-8 border border-gray-200 reveal-up">
+                  <h4 class="font-bold text-detail-blue mb-3">Qué necesitamos de ti (cliente)</h4>
+                  <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex gap-2"><i class="ph ph-dot-outline text-detail-yellow"></i> Giro / uso del espacio</li>
+                    <li class="flex gap-2"><i class="ph ph-dot-outline text-detail-yellow"></i> Metros requeridos / capacidad</li>
+                    <li class="flex gap-2"><i class="ph ph-dot-outline text-detail-yellow"></i> Ubicación deseada</li>
+                    <li class="flex gap-2"><i class="ph ph-dot-outline text-detail-yellow"></i> Fecha de inicio / plazo</li>
+                  </ul>
+                </div>
+              </div>
+
+              <aside class="reveal-right">
+                <div class="bg-primary text-white rounded-2xl shadow-xl p-8">
+                  <h4 class="font-serif text-3xl mb-4">Contacto para renta</h4>
+                  <p class="text-white/80 text-sm mb-6">
+                    Para publicar aquí la oferta real, necesitamos confirmar: lista de inmuebles, fotos, condiciones y contacto.
+                  </p>
+                  <a
+                    href="#"
+                    onclick="navigateTo('contacto'); return false;"
+                    class="inline-flex items-center gap-2 bg-detail-yellow text-primary font-bold px-6 py-3 rounded-lg hover:bg-white transition-colors"
+                    >Escríbenos <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 2D: TRANSPARENCIA ================= -->
+      <div id="page-transparencia" class="page-section">
+        <div class="bg-primary py-24 border-b border-detail-yellow/50 relative overflow-hidden">
+          <img
+            src="/assets/images/patrimonio/patrimonio-1.jpg"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Transparencia"
+            onerror="this.src='https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2000&auto=format&fit=crop'"
+          />
+          <div class="absolute inset-0 bg-primary/95"></div>
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Transparencia</h1>
+            <p class="mt-6 text-detail-yellow text-xl">Gobernanza, cumplimiento y rendición de cuentas.</p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-light">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+              <div class="lg:col-span-2 reveal-left">
+                <h3 class="text-4xl font-serif text-primary mb-6 title-accent">Información pública</h3>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                  Esta sección debe concentrar lo que un donante o aliado busca: reportes, acreditaciones, marco legal, y datos de
+                  contacto institucional.
+                </p>
+
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div class="bg-white rounded-2xl shadow-lg p-8 border-l-8 border-detail-yellow reveal-zoom">
+                    <h4 class="font-bold text-detail-blue mb-2 flex items-center gap-2">
+                      <i class="ph ph-file-text text-xl text-detail-blue"></i> Reporte anual
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-4">PDF con indicadores, programas y resultados.</p>
+                    <a href="#" class="text-sm font-bold text-primary hover:text-detail-blue transition-colors">Descargar (pendiente) &rarr;</a>
+                  </div>
+                  <div class="bg-white rounded-2xl shadow-lg p-8 border-l-8 border-accent reveal-zoom">
+                    <h4 class="font-bold text-detail-blue mb-2 flex items-center gap-2">
+                      <i class="ph ph-shield-check text-xl text-detail-blue"></i> Acreditaciones
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-4">JAP, CEMEFI y otros reconocimientos.</p>
+                    <a href="#" class="text-sm font-bold text-primary hover:text-detail-blue transition-colors">Ver detalle (pendiente) &rarr;</a>
+                  </div>
+                </div>
+
+                <div class="mt-10 bg-white rounded-2xl shadow-lg p-8 border border-gray-100 reveal-up">
+                  <h4 class="font-bold text-detail-blue mb-3">Datos que necesito confirmar contigo</h4>
+                  <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex gap-2"><i class="ph ph-question text-detail-yellow"></i> Razón social exacta + RFC</li>
+                    <li class="flex gap-2"><i class="ph ph-question text-detail-yellow"></i> Políticas / aviso de privacidad (PDF)</li>
+                    <li class="flex gap-2"><i class="ph ph-question text-detail-yellow"></i> Reportes oficiales disponibles</li>
+                    <li class="flex gap-2"><i class="ph ph-question text-detail-yellow"></i> Datos bancarios (si aplica) / plataforma de donación</li>
+                  </ul>
+                </div>
+              </div>
+
+              <aside class="reveal-right">
+                <div class="bg-detail-blue text-white rounded-2xl shadow-xl p-8">
+                  <h4 class="font-serif text-3xl mb-4">¿Eres donante o aliado?</h4>
+                  <p class="text-white/80 text-sm mb-6">
+                    Te ayudamos a elegir la mejor forma de sumar: donativo, especie, voluntariado o alianza estratégica.
+                  </p>
+                  <a
+                    href="#"
+                    onclick="navigateTo('alianzas'); return false;"
+                    class="inline-flex items-center gap-2 bg-detail-yellow text-primary font-bold px-6 py-3 rounded-lg hover:bg-white transition-colors"
+                    >Ver alianzas <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 2E: CONTACTO ================= -->
+      <div id="page-contacto" class="page-section">
+        <div class="bg-primary py-24 relative overflow-hidden">
+          <img
+            src="/assets/images/hero/hero.jpg"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Contacto"
+            onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2000&auto=format&fit=crop'"
+          />
+          <div class="absolute inset-0 bg-primary/95"></div>
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Contacto</h1>
+            <p class="mt-6 text-detail-yellow text-xl">Escríbenos para alianzas, renta de espacios o información institucional.</p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-light">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div class="reveal-left">
+                <h3 class="text-4xl font-serif text-primary mb-6 title-accent">Envíanos un mensaje</h3>
+                <form onsubmit="event.preventDefault(); alert('Gracias. Este formulario es demo: conectarlo a correo/CRM en siguiente fase.');" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label class="text-sm font-bold text-gray-700">Nombre</label>
+                      <input class="mt-2 w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-accent" placeholder="Tu nombre" required />
+                    </div>
+                    <div>
+                      <label class="text-sm font-bold text-gray-700">Correo</label>
+                      <input type="email" class="mt-2 w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-accent" placeholder="tucorreo@dominio.com" required />
+                    </div>
+                    <div class="md:col-span-2">
+                      <label class="text-sm font-bold text-gray-700">Asunto</label>
+                      <select class="mt-2 w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-accent" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option>Alianzas / RSE</option>
+                        <option>Instalaciones en renta</option>
+                        <option>Donativos</option>
+                        <option>Información general</option>
+                      </select>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label class="text-sm font-bold text-gray-700">Mensaje</label>
+                      <textarea rows="5" class="mt-2 w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-accent" placeholder="Cuéntanos qué necesitas" required></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="mt-6 w-full bg-detail-blue text-white px-6 py-3 rounded-lg font-bold hover:bg-primary transition-colors">
+                    Enviar
+                  </button>
+                  <p class="mt-3 text-xs text-gray-500">
+                    Este formulario es demostrativo. Podemos conectarlo a Notion, un correo, HubSpot o WhatsApp.
+                  </p>
+                </form>
+              </div>
+
+              <div class="reveal-right">
+                <div class="bg-primary text-white p-10 rounded-2xl shadow-xl border-l-8 border-detail-yellow">
+                  <h4 class="font-serif text-3xl mb-5">Datos de contacto</h4>
+                  <div class="space-y-4 text-white/90 text-sm">
+                    <p class="flex items-center gap-3"><i class="ph ph-phone text-xl text-detail-yellow"></i> (55) 1234-5678</p>
+                    <p class="flex items-center gap-3"><i class="ph ph-envelope-simple text-xl text-detail-yellow"></i> contacto@fundacionmierypesado.org.mx</p>
+                    <p class="flex items-center gap-3"><i class="ph ph-map-pin text-xl text-detail-yellow"></i> CDMX, México (dirección pendiente)</p>
+                  </div>
+                  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a
+                      href="mailto:contacto@fundacionmierypesado.org.mx"
+                      class="bg-detail-yellow text-primary px-6 py-3 rounded-lg font-bold text-center hover:bg-white transition-colors"
+                      >Enviar correo</a
+                    >
+                    <a
+                      href="https://wa.me/525512345678?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Fundaci%C3%B3n%20Mier%20y%20Pesado."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold text-center hover:opacity-90 transition-opacity"
+                      >WhatsApp</a
+                    >
+                  </div>
+
+                  <div class="mt-10 bg-white/10 rounded-xl p-6">
+                    <h5 class="font-bold mb-2">Preguntas rápidas</h5>
+                    <ul class="text-xs text-white/80 space-y-2">
+                      <li>• ¿Cuál es el objetivo principal de la Fundación?</li>
+                      <li>• ¿Cómo puedo aportar como empresa?</li>
+                      <li>• ¿Qué espacios están disponibles para renta?</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 3: CENTROS ASISTENCIALES ================= -->
+      <div id="page-centros" class="page-section">
+        <div class="relative py-24 border-b border-detail-blue/10 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000&auto=format&fit=crop"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Centros"
+          />
+          <div class="absolute inset-0 bg-detail-blue/95"></div>
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Nuestros Centros Asistenciales</h1>
+            <p class="mt-6 text-detail-yellow text-xl">4 centros operando para transformar obstáculos en oportunidades de vida.</p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-white">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <!-- Educativos -->
+              <div class="bg-light p-8 rounded-2xl shadow-lg border-t-4 border-detail-blue card-hover transition-all reveal-left">
+                <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-inner">
+                  <img
+                    src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop"
+                    class="w-full h-full object-cover"
+                    alt="[Imagen Aulas de Estudio]"
+                  />
+                </div>
+                <h4 class="text-sm font-bold text-detail-yellow tracking-widest uppercase mb-2">Centros Educativos</h4>
+                <h3 class="text-3xl font-serif text-primary mb-4">"Juntos descubrimos futuros prometedores"</h3>
+                <p class="text-gray-600 mb-8">
+                  Inculcamos el sentido de la solidaridad, haciendo conscientes a nuestros estudiantes de que somos responsables
+                  de forjar una sociedad más justa.
+                </p>
+                <div class="space-y-4">
+                  <div class="bg-white p-4 rounded-lg border border-gray-100 flex gap-4 items-center">
+                    <i class="ph ph-student text-3xl text-detail-blue"></i>
+                    <div>
+                      <strong class="text-primary block">Instituto Mier y Pesado</strong>
+                      <span class="text-sm text-gray-500">Educación integral de excelencia para niñas.</span>
+                    </div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg border border-gray-100 flex gap-4 items-center">
+                    <i class="ph ph-books text-3xl text-detail-yellow"></i>
+                    <div>
+                      <strong class="text-primary block">Escuela Mier y Pesado</strong>
+                      <span class="text-sm text-gray-500">Preparación académica de alto nivel.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Residencias -->
+              <div class="bg-light p-8 rounded-2xl shadow-lg border-t-4 border-detail-green card-hover transition-all reveal-right delay-200">
+                <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-inner">
+                  <img
+                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=800&auto=format&fit=crop"
+                    class="w-full h-full object-cover"
+                    alt="[Imagen Cuidados Residencias]"
+                  />
+                </div>
+                <h4 class="text-sm font-bold text-detail-green tracking-widest uppercase mb-2">Residencias de Adultos Mayores</h4>
+                <h3 class="text-3xl font-serif text-primary mb-4">"Un verdadero hogar por más de 100 años"</h3>
+                <p class="text-gray-600 mb-8">
+                  Promovemos la independencia en un entorno de armonía. Queremos ser el apoyo que las familias necesitan para
+                  dejarlos con plena seguridad.
+                </p>
+                <div class="space-y-4">
+                  <div class="bg-white p-4 rounded-lg border border-gray-100 flex gap-4 items-center">
+                    <i class="ph ph-house-line text-3xl text-detail-green"></i>
+                    <div>
+                      <strong class="text-primary block">Residencia Tacubaya</strong>
+                      <span class="text-sm text-gray-500">Comunidad cálida en la Ciudad de México.</span>
+                    </div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg border border-gray-100 flex gap-4 items-center">
+                    <i class="ph ph-castle-turret text-3xl text-detail-orange"></i>
+                    <div>
+                      <strong class="text-primary block">Residencia Orizaba</strong>
+                      <span class="text-sm text-gray-500">Servicios integrales en instalaciones emblemáticas.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 4: SOSTENIBILIDAD ================= -->
+      <div id="page-sostenibilidad" class="page-section">
+        <div class="bg-primary py-24 border-b border-detail-yellow/50 relative overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=2000&auto=format&fit=crop"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20"
+            alt="Fondo Sostenibilidad"
+          />
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Sostenibilidad y Modelo</h1>
+            <p class="mt-6 text-detail-yellow text-xl">El motor económico que hace posible nuestra labor filantrópica.</p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-light">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center reveal-zoom">
+              <div>
+                <h3 class="text-4xl font-serif text-primary mb-6 title-accent">Autogestión Patrimonial</h3>
+                <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+                  El <strong>85% de nuestro impacto</strong> se financia mediante la administración responsable de los inmuebles
+                  heredados por nuestra fundadora. Sin embargo, la conservación del patrimonio arquitectónico representa un costo
+                  operativo altísimo.
+                </p>
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-accent">
+                  <h4 class="font-bold text-primary mb-2 flex items-center gap-2">
+                    <i class="ph ph-trend-up text-accent"></i> El Reto del Crecimiento
+                  </h4>
+                  <p class="text-sm text-gray-600">
+                    Hoy, más que nunca, requerimos de donativos financieros y alianzas estratégicas para expandir nuestros
+                    programas educativos y asistenciales frente a los retos económicos actuales.
+                  </p>
+                </div>
+              </div>
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
+                  class="w-full h-96 object-cover"
+                  alt="[Imagen Modelo Financiero Transparente]"
+                />
+                <div class="absolute inset-0 bg-primary/20"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 5: PATRIMONIO ================= -->
+      <div id="page-patrimonio" class="page-section">
+        <div class="bg-detail-gray py-24 relative overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2000&auto=format&fit=crop"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-30 mix-blend-overlay"
+            alt="Fondo Patrimonio"
+          />
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-left">
+            <h1 class="text-5xl md:text-6xl font-serif text-white">Patrimonio Arquitectónico</h1>
+            <p class="mt-6 text-white/80 text-xl">Preservando las joyas históricas de México en favor de la asistencia social.</p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-white">
+          <div class="container mx-auto px-4 max-w-6xl reveal-right">
+            <div class="bg-light rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+              <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="h-64 md:h-auto relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop"
+                    class="absolute inset-0 w-full h-full object-cover"
+                    alt="[Imagen Edificio Ermita Antiguo]"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-r from-transparent to-light hidden md:block"></div>
+                </div>
+                <div class="p-10 md:p-16 flex flex-col justify-center">
+                  <h4 class="text-sm font-bold text-detail-orange uppercase tracking-widest mb-2">Proyecto de Conservación</h4>
+                  <h3 class="text-4xl font-serif text-primary mb-6">El Edificio Ermita</h3>
+                  <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+                    El renombrado arquitecto <strong>Juan Segura</strong> diseñó obras simbólicas para nuestra Fundación. El Edificio
+                    Ermita, tras casi nueve décadas de historia, exigió un profundo proyecto de remodelación estructural.
+                  </p>
+                  <p class="text-gray-600 mb-8 leading-relaxed">
+                    Esta intervención, guiada estrictamente por requerimientos de <strong>Seguridad y Protección Civil</strong>, se
+                    ejecutó responsablemente para prevenir riesgos y dignificar el inmueble, garantizando el sustento de nuestras
+                    obras sociales.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PÁGINA 6: ALIANZAS RSE ================= -->
+      <div id="page-alianzas" class="page-section">
+        <div class="bg-detail-yellow py-24 relative overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2000&auto=format&fit=crop"
+            class="absolute inset-0 w-full h-full object-cover blur-sm opacity-20 mix-blend-multiply"
+            alt="Fondo Alianzas"
+          />
+          <div class="container mx-auto px-4 max-w-6xl text-center relative z-10 reveal-up">
+            <h1 class="text-5xl md:text-6xl font-serif text-primary">Súmate a la Causa</h1>
+            <p class="mt-6 text-primary/80 text-xl font-bold">
+              Descubre cómo tu empresa puede transformar vidas mediante alianzas estratégicas.
+            </p>
+          </div>
+        </div>
+
+        <section class="py-20 bg-white">
+          <div class="container mx-auto px-4 max-w-6xl text-center reveal-zoom">
+            <h3 class="text-4xl font-serif text-primary mb-6 title-accent inline-block">Responsabilidad Social Empresarial</h3>
+            <p class="text-gray-600 max-w-3xl mx-auto mb-16 text-lg">
+              Las grandes transformaciones requieren grandes aliados. Invitamos a las empresas comprometidas con México a sumar
+              sus estrategias para respaldar nuestros Centros Asistenciales.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div class="bg-light rounded-2xl overflow-hidden shadow-lg border-b-4 border-detail-blue card-hover reveal-left delay-100">
+                <img
+                  src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?q=80&w=600&auto=format&fit=crop"
+                  class="w-full h-48 object-cover"
+                  alt="[Imagen Donativos Monetarios]"
+                />
+                <div class="p-8">
+                  <h4 class="font-bold text-primary mb-3 text-xl">Donativos Monetarios</h4>
+                  <p class="text-sm text-gray-600">
+                    Aporta directamente para sostener la excelencia en la atención de nuestros residentes mayores y las becas en
+                    nuestros Institutos.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-light rounded-2xl overflow-hidden shadow-lg border-b-4 border-detail-yellow card-hover reveal-up delay-200">
+                <img
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop"
+                  class="w-full h-48 object-cover"
+                  alt="[Imagen Donativos en Especie]"
+                />
+                <div class="p-8">
+                  <h4 class="font-bold text-primary mb-3 text-xl">Donativos en Especie</h4>
+                  <p class="text-sm text-gray-600">
+                    Contribuye con equipamiento tecnológico para las aulas o insumos médicos para nuestras Residencias en Tacubaya
+                    y Orizaba.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-light rounded-2xl overflow-hidden shadow-lg border-b-4 border-detail-green card-hover reveal-right delay-300">
+                <img
+                  src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=600&auto=format&fit=crop"
+                  class="w-full h-48 object-cover"
+                  alt="[Imagen Voluntariado]"
+                />
+                <div class="p-8">
+                  <h4 class="font-bold text-primary mb-3 text-xl">Voluntariado Corporativo</h4>
+                  <p class="text-sm text-gray-600">
+                    Involucra a tus colaboradores en actividades de acompañamiento geriátrico, mentorías o integración comunitaria.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-primary text-light py-16 border-t-4 border-accent mt-auto relative z-10">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-10 mb-12">
+          <div class="col-span-1 md:col-span-2">
+            <button
+              type="button"
+              class="w-56 h-16 bg-white/5 border border-white/10 flex items-center justify-center rounded mb-6 cursor-pointer hover:bg-white/10 transition-colors"
+              onclick="navigateTo('home')"
+              aria-label="Ir a Inicio"
+            >
+              <img
+                src="/assets/logos/logo-white.png"
+                alt="Fundación Mier y Pesado"
+                class="h-10 w-auto object-contain"
+                onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+              />
+              <span class="hidden text-white/70 font-bold text-xs uppercase tracking-widest">Fundación Mier y Pesado</span>
+            </button>
+            <p class="mb-4 text-sm leading-relaxed max-w-md text-white/80">
+              Institución de Asistencia Privada dedicada a la educación de excelencia y al cuidado digno de los adultos mayores
+              en México, afiliada a la JAP y CEMEFI.
+            </p>
+          </div>
+
+          <div class="col-span-1">
+            <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider border-b border-white/10 pb-2">Enlaces</h4>
+            <ul class="space-y-3 text-sm text-white/70">
+              <li>
+                <a href="#" onclick="navigateTo('quienes-somos'); return false;" class="hover:text-accent transition-colors block"
+                  >Quiénes Somos</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="navigateTo('historia'); return false;" class="hover:text-accent transition-colors block"
+                  >Historia</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="navigateTo('centros'); return false;" class="hover:text-accent transition-colors block"
+                  >Centros</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="navigateTo('renta'); return false;" class="hover:text-accent transition-colors block"
+                  >Instalaciones en renta</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="navigateTo('transparencia'); return false;" class="hover:text-accent transition-colors block"
+                  >Transparencia</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="navigateTo('contacto'); return false;" class="hover:text-accent transition-colors block"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-span-1">
+            <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider border-b border-white/10 pb-2">Servicios</h4>
+            <ul class="space-y-4 text-sm text-white/70">
+              <li class="flex items-center gap-3">
+                <i class="ph ph-receipt text-xl text-accent"></i>
+                <a href="/assets/docs/cfdi-instituto.pdf" class="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">CFDI - Instituto</a>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="ph ph-receipt text-xl text-accent"></i>
+                <a href="/assets/docs/cfdi-escuela.pdf" class="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">CFDI - Escuela</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-span-1">
+            <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider border-b border-white/10 pb-2">Newsletter</h4>
+            <p class="text-xs text-white/70 mb-4">Suscríbete para mantenerte informado sobre nuestro impacto.</p>
+            <form onsubmit="event.preventDefault();" class="flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="Correo electrónico"
+                class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-sm text-white focus:outline-none focus:border-accent focus:bg-white/20 transition-colors"
+                required
+              />
+              <button
+                type="submit"
+                class="bg-accent text-dark px-4 py-2 rounded font-bold hover:bg-white transition-colors text-sm shadow-lg"
+              >
+                Suscribirme
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50">
+          <p>&copy; 2026 Fundación Mier y Pesado I.A.P. Todos los derechos reservados.</p>
+          <div class="flex space-x-6 mt-4 md:mt-0">
+            <a href="/assets/docs/aviso-privacidad.pdf" class="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Aviso de Privacidad</a>
+            <a href="#" onclick="navigateTo('transparencia'); return false;" class="hover:text-white transition-colors">Transparencia</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL DE NOTICIAS -->
+    <div id="news-modal" class="fixed inset-0 z-[100] hidden">
+      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeNewsModal()"></div>
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+      >
+        <button
+          onclick="closeNewsModal()"
+          class="absolute top-4 right-4 w-12 h-12 bg-black/50 hover:bg-primary text-white rounded-full flex items-center justify-center transition-colors z-10 shadow-lg"
+        >
+          <i class="ph ph-x text-2xl"></i>
+        </button>
+
+        <div class="h-64 md:h-80 w-full relative flex-shrink-0">
+          <img id="modal-image" src="" class="w-full h-full object-cover" alt="Imagen de la noticia" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+            <span
+              id="modal-category"
+              class="text-xs font-bold uppercase tracking-wider mb-2 block text-white bg-primary px-3 py-1 rounded"
+            ></span>
+          </div>
+        </div>
+
+        <div class="p-8 md:p-12 overflow-y-auto bg-light">
+          <div class="flex justify-between items-center mb-6">
+            <span id="modal-date" class="text-sm text-gray-500 font-bold tracking-wider uppercase"></span>
+          </div>
+          <h3 id="modal-title" class="text-4xl font-serif text-detail-blue mb-8 leading-tight"></h3>
+          <div id="modal-content" class="text-gray-700 leading-relaxed space-y-6 text-base md:text-lg font-light"></div>
+          <div class="mt-12 pt-8 border-t border-gray-200 flex gap-4">
+            <button
+              onclick="closeNewsModal()"
+              class="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:bg-detail-blue transition-colors shadow-md hover:shadow-lg"
+            >
+              Cerrar Artículo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a
+      href="https://wa.me/525512345678?text=Hola,%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-6 right-6 bg-[#25D366] text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:shadow-green-500/50 transition-transform duration-300 z-50 group"
+    >
+      <i class="ph ph-whatsapp-logo text-4xl"></i>
+    </a>
+  </body>
+</html>
