@@ -558,6 +558,42 @@ function App() {
   }, [theme])
 
   useEffect(() => {
+    const root = document.documentElement
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let frame = null
+
+    const setPointerLight = (x, y) => {
+      root.style.setProperty('--cursor-x', `${x}px`)
+      root.style.setProperty('--cursor-y', `${y}px`)
+    }
+
+    const handlePointerMove = (event) => {
+      if (reduceMotion || event.pointerType === 'touch') {
+        return
+      }
+
+      if (frame) {
+        window.cancelAnimationFrame(frame)
+      }
+
+      frame = window.requestAnimationFrame(() => {
+        setPointerLight(event.clientX, event.clientY)
+      })
+    }
+
+    setPointerLight(window.innerWidth * 0.5, window.innerHeight * 0.32)
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame)
+      }
+
+      window.removeEventListener('pointermove', handlePointerMove)
+    }
+  }, [])
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -744,13 +780,13 @@ function App() {
           gsap.fromTo(
             divider.querySelectorAll('.motion-chip'),
             {
-              yPercent: 64,
-              rotate: (index) => (index % 2 === 0 ? -7 : 7),
+              yPercent: 34,
+              scale: 0.96,
               autoAlpha: 0,
             },
             {
               yPercent: 0,
-              rotate: 0,
+              scale: 1,
               autoAlpha: 1,
               duration: 0.9,
               ease: 'power3.out',
@@ -763,8 +799,7 @@ function App() {
             },
           )
           gsap.to(divider.querySelectorAll('.motion-chip'), {
-            y: (index) => (index % 2 === 0 ? -12 : 10),
-            x: (index) => (index % 2 === 0 ? 8 : -8),
+            y: -8,
             ease: 'none',
             scrollTrigger: {
               trigger: divider,
