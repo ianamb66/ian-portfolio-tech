@@ -387,22 +387,26 @@ function App() {
       })
 
       if (!reduceMotion) {
-        gsap.to('.core-orbit', {
-          rotate: 360,
-          duration: 24,
-          ease: 'none',
-          repeat: -1,
-        })
-        gsap.to('.dot-matrix span', {
-          opacity: () => gsap.utils.random(0.18, 1),
-          duration: 1.6,
-          ease: 'sine.inOut',
-          stagger: {
-            each: 0.012,
+        if (document.querySelector('.core-orbit')) {
+          gsap.to('.core-orbit', {
+            rotate: 360,
+            duration: 24,
+            ease: 'none',
             repeat: -1,
-            yoyo: true,
-          },
-        })
+          })
+        }
+        if (document.querySelector('.dot-matrix span')) {
+          gsap.to('.dot-matrix span', {
+            opacity: () => gsap.utils.random(0.18, 1),
+            duration: 1.6,
+            ease: 'sine.inOut',
+            stagger: {
+              each: 0.012,
+              repeat: -1,
+              yoyo: true,
+            },
+          })
+        }
       }
     }, rootRef)
 
