@@ -27,7 +27,7 @@ gsap.registerPlugin(ScrollTrigger)
 const navItems = [
   ['Perfil', '/#perfil'],
   ['Trabajo', '/#trabajo'],
-  ['Reportes', '/#webs'],
+  ['Webs', '/#webs'],
   ['Sistema', '/#sistema'],
   ['Contacto', '/#contacto'],
 ]
@@ -392,11 +392,11 @@ function SignalPanel() {
       <div className="poster-stats">
         <div>
           <strong>+250k</strong>
-          <span>alcance potencial en reportes y campañas</span>
+          <span>alcance potencial en campañas y contenidos</span>
         </div>
         <div>
           <strong>+800h</strong>
-          <span>de produccion, analisis y entrega visual</span>
+          <span>de producción, análisis y entrega visual</span>
         </div>
       </div>
     </div>
@@ -567,13 +567,13 @@ function App() {
           {
             autoAlpha: 0,
             y: reduceMotion ? 0 : 24,
-            filter: reduceMotion ? 'blur(0px)' : 'blur(10px)',
+            filter: reduceMotion ? 'blur(0px)' : 'blur(4px)',
           },
           {
             autoAlpha: 1,
             y: 0,
             filter: 'blur(0px)',
-            duration: reduceMotion ? 0.01 : 0.82,
+            duration: reduceMotion ? 0.01 : 0.58,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: element,
@@ -763,8 +763,8 @@ function App() {
             },
           )
           gsap.to(divider.querySelectorAll('.motion-chip'), {
-            y: (index) => (index % 2 === 0 ? -28 : 24),
-            x: (index) => (index % 2 === 0 ? 18 : -18),
+            y: (index) => (index % 2 === 0 ? -12 : 10),
+            x: (index) => (index % 2 === 0 ? 8 : -8),
             ease: 'none',
             scrollTrigger: {
               trigger: divider,
@@ -924,24 +924,24 @@ function App() {
           </div>
         </section>
 
-        <MotionDivider words={['reportes', 'webs', 'html']} />
+        <MotionDivider words={['webs', 'interfaces', 'publicadas']} />
 
         <section id="webs" className="section-block web-section">
           <div className="section-header">
             <div>
-              <div className="section-kicker reveal">Webs y reportes HTML</div>
-              <h2 className="section-title reveal">Interfaces publicadas y reportes navegables.</h2>
+              <div className="section-kicker reveal">Webs publicadas</div>
+              <h2 className="section-title reveal">Interfaces listas para verse, usarse y compartirse.</h2>
             </div>
             <p className="section-note reveal">
-              Una vitrina curada de sitios, experiencias y reportes HTML hechos para presentar
-              estrategia, hallazgos y propuestas con una capa visual más clara que un documento plano.
+              Una vitrina curada de sitios y experiencias digitales construidas para presentar
+              proyectos con claridad, movimiento y una capa visual más fuerte que un documento plano.
             </p>
           </div>
           <div className="web-grid">
             {webBuilds.map((site) => (
               <article className="web-card reveal" key={site.url}>
                 <a href={site.url} target="_blank" rel="noreferrer" aria-label={`Abrir ${site.title}`}>
-                  <img src={site.image} alt={`Preview del hero de ${site.title}`} decoding="async" />
+                  <img src={site.image} alt={`Preview del hero de ${site.title}`} loading="lazy" decoding="async" />
                   <div className="web-card-body">
                     <div>
                       <span>{site.type}</span>
