@@ -315,14 +315,14 @@ const tools = [
 ]
 
 const liquidDots = [
-  { x: '4vw', y: '8vh', size: '220px', delay: '0s', duration: '18s', tone: 'var(--red)' },
-  { x: '18vw', y: '28vh', size: '120px', delay: '-7s', duration: '15s', tone: 'var(--green)' },
-  { x: '68vw', y: '10vh', size: '260px', delay: '-3s', duration: '21s', tone: 'var(--red)' },
-  { x: '82vw', y: '34vh', size: '150px', delay: '-11s', duration: '16s', tone: 'var(--green)' },
-  { x: '10vw', y: '68vh', size: '320px', delay: '-5s', duration: '24s', tone: 'var(--red)' },
-  { x: '42vw', y: '76vh', size: '180px', delay: '-13s', duration: '19s', tone: 'var(--green)' },
-  { x: '76vw', y: '78vh', size: '300px', delay: '-9s', duration: '22s', tone: 'var(--red)' },
-  { x: '56vw', y: '44vh', size: '110px', delay: '-15s', duration: '14s', tone: 'var(--green)' },
+  { x: '4vw', y: '8vh', size: '220px', delay: '0s', duration: '18s', tone: 'var(--sun)' },
+  { x: '18vw', y: '28vh', size: '120px', delay: '-7s', duration: '15s', tone: 'var(--amber)' },
+  { x: '68vw', y: '10vh', size: '260px', delay: '-3s', duration: '21s', tone: 'var(--sun)' },
+  { x: '82vw', y: '34vh', size: '150px', delay: '-11s', duration: '16s', tone: 'var(--amber)' },
+  { x: '10vw', y: '68vh', size: '320px', delay: '-5s', duration: '24s', tone: 'var(--sun)' },
+  { x: '42vw', y: '76vh', size: '180px', delay: '-13s', duration: '19s', tone: 'var(--ink)' },
+  { x: '76vw', y: '78vh', size: '300px', delay: '-9s', duration: '22s', tone: 'var(--amber)' },
+  { x: '56vw', y: '44vh', size: '110px', delay: '-15s', duration: '14s', tone: 'var(--ink)' },
 ]
 
 const glassShards = ['hero-glass-a', 'hero-glass-b', 'hero-glass-c', 'hero-glass-d']
@@ -373,58 +373,41 @@ function GlassCurtain() {
   )
 }
 
-function DotMatrix() {
-  const dots = useMemo(() => Array.from({ length: 168 }, (_, index) => index), [])
-
+function WordMarquee({ words }) {
   return (
-    <div className="dot-matrix" aria-hidden="true">
-      {dots.map((dot) => (
-        <span key={dot} />
-      ))}
+    <div className="word-marquee" aria-hidden="true">
+      <div>
+        {[...words, ...words].map((word, index) => (
+          <span key={`${word}-${index}`}>{word}</span>
+        ))}
+      </div>
     </div>
   )
 }
 
 function SignalPanel() {
   return (
-    <div className="signal-panel liquid-panel reveal">
-      <span className="liquid-layer liquid-layer-a" />
-      <span className="liquid-layer liquid-layer-b" />
-      <div className="panel-top">
-        <span>IAN_OS</span>
-        <span>STRATEGY MODE</span>
-      </div>
-      <div className="portrait-card liquid-card">
+    <div className="poster-panel liquid-panel reveal">
+      <div className="poster-photo" aria-label="Espacio para foto de Ian">
+        <span className="photo-script">Ian</span>
         <div className="portrait-frame">
           <Camera size={30} strokeWidth={1.5} />
-          <span>Foto de Ian</span>
-        </div>
-        <div>
-          <small>Hero portrait</small>
-          <strong>Espacio listo para retrato profesional</strong>
+          <span>Tu foto aqui</span>
         </div>
       </div>
-      <DotMatrix />
-      <div className="core-orbit" aria-hidden="true">
-        <span className="orbit orbit-a" />
-        <span className="orbit orbit-b" />
-        <span className="orbit orbit-c" />
-        <div className="core">
-          <Sparkles size={32} strokeWidth={1.6} />
-        </div>
+      <div className="poster-side-actions" aria-hidden="true">
+        <span><Globe2 size={18} /></span>
+        <span><Sparkles size={18} /></span>
+        <span><ArrowUpRight size={18} /></span>
       </div>
-      <div className="signal-stack">
+      <div className="poster-stats">
         <div>
-          <small>Input</small>
-          <strong>Brief complejo</strong>
+          <strong>+250k</strong>
+          <span>alcance potencial en reportes y campañas</span>
         </div>
         <div>
-          <small>Proceso</small>
-          <strong>Ruta clara</strong>
-        </div>
-        <div>
-          <small>Output</small>
-          <strong>Entrega presentable</strong>
+          <strong>+800h</strong>
+          <span>de produccion, analisis y entrega visual</span>
         </div>
       </div>
     </div>
@@ -640,14 +623,6 @@ function App() {
           )
         })
 
-        if (document.querySelector('.core-orbit')) {
-          gsap.to('.core-orbit', {
-            rotate: 360,
-            duration: 24,
-            ease: 'none',
-            repeat: -1,
-          })
-        }
         if (document.querySelector('.dot-matrix span')) {
           gsap.to('.dot-matrix span', {
             opacity: () => gsap.utils.random(0.18, 1),
@@ -763,6 +738,14 @@ function App() {
             },
           })
         }
+        if (document.querySelector('.word-marquee div')) {
+          gsap.to('.word-marquee div', {
+            xPercent: -50,
+            duration: 28,
+            ease: 'none',
+            repeat: -1,
+          })
+        }
       }
     }, rootRef)
 
@@ -776,7 +759,7 @@ function App() {
       <nav className="topbar" aria-label="Navegación principal">
         <a className="brand-mark" href="/" aria-label="Ir al inicio">
           <span>IA</span>
-          <span>Portfolio</span>
+          <span>Videaste</span>
         </a>
         <div className="nav-links">
           {navItems.map(([label, href]) => (
@@ -810,7 +793,7 @@ function App() {
                 <span className="live-dot" />
                 Portfolio profesional 2026
               </div>
-              <h1 className="reveal">Ian Aceves convierte ideas difíciles en proyectos claros.</h1>
+              <h1 className="reveal">ideas que se ven, se mueven y aterrizan.</h1>
               <p className="hero-lede reveal">
                 Project Manager creativo con visión estratégica. Comunicación, producción, diseño,
                 documentación e inteligencia artificial aplicada para llevar briefs complejos a
@@ -834,6 +817,8 @@ function App() {
             <SignalPanel />
           </div>
         </section>
+
+        <WordMarquee words={['about', 'about', 'about', 'about']} />
 
         <section id="perfil" className="section-block profile-section">
           <div className="section-kicker reveal">Perfil</div>
@@ -876,6 +861,8 @@ function App() {
           </div>
         </section>
 
+        <WordMarquee words={['portfolio', 'portfolio', 'portfolio']} />
+
         <section id="trabajo" className="section-block work-section">
           <div className="section-header">
             <div>
@@ -908,6 +895,8 @@ function App() {
             ))}
           </div>
         </section>
+
+        <WordMarquee words={['reportes', 'webs', 'html', 'interfaces']} />
 
         <section id="webs" className="section-block web-section">
           <div className="section-header">
