@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { gsap } from 'gsap'
 import {
   ArrowUpRight,
+  ArrowLeft,
   Bot,
   BriefcaseBusiness,
   Cpu,
@@ -18,11 +19,11 @@ import {
 import './App.css'
 
 const navItems = [
-  ['Perfil', '#perfil'],
-  ['Trabajo', '#trabajo'],
-  ['Webs', '#webs'],
-  ['Sistema', '#sistema'],
-  ['Contacto', '#contacto'],
+  ['Perfil', '/#perfil'],
+  ['Trabajo', '/#trabajo'],
+  ['Webs', '/#webs'],
+  ['Sistema', '/#sistema'],
+  ['Contacto', '/#contacto'],
 ]
 
 const clients = [
@@ -70,52 +71,94 @@ const capabilities = [
 
 const projects = [
   {
+    slug: 'cemex-anahuacalli',
     code: '01',
     title: 'CEMEX + Museo Anahuacalli',
     type: 'Estrategia cultural',
     copy: 'Conceptualización, documentación estratégica, análisis de necesidades, ruta de implementación y presupuesto para infraestructura artística.',
     tags: ['Cultura', 'Planeación', 'Documentación'],
     visual: 'CEMEX / ANAHUACALLI',
+    xyz: {
+      x: 'CEMEX y Museo Anahuacalli necesitaban aterrizar una oportunidad cultural en una propuesta ejecutable.',
+      y: 'El resultado fue una ruta de proyecto clara para educación, infraestructura artística y toma de decisiones.',
+      z: 'Se resolvió con análisis de necesidades, documentación estratégica, presupuestos y una narrativa lista para presentación.',
+    },
+    images: ['Mapa de necesidades', 'Ruta de implementación'],
   },
   {
+    slug: 'reckitt-marcas-consumo',
     code: '02',
     title: 'Reckitt + marcas de consumo',
     type: 'Campañas y responsabilidad corporativa',
     copy: 'Propuestas, rutas de trabajo, materiales de comunicación y campañas vinculadas con salud, consumo y resistencia antimicrobiana.',
     tags: ['Campañas', 'RCA', 'Cliente'],
     visual: 'RECKITT / HEALTH',
+    xyz: {
+      x: 'Marcas de consumo necesitaban campañas y materiales corporativos con sensibilidad de salud y reputación.',
+      y: 'Se logró ordenar mensajes, piezas y rutas de trabajo para comunicar con claridad ante audiencias distintas.',
+      z: 'Se resolvió con propuestas, mensajes clave, estructura de campaña y coordinación de entregables con enfoque RCA.',
+    },
+    images: ['Arquitectura de campaña', 'Mensajes por audiencia'],
   },
   {
+    slug: 'activaciones-eventos',
     code: '03',
     title: 'Activaciones y eventos',
     type: 'Producción de campo',
     copy: 'Licitación, concepto, coordinación con proveedores, revisión de materiales, producción visual y resolución de incidencias.',
     tags: ['Producción', 'PM', 'Proveedor'],
     visual: 'FIELD / OPS',
+    xyz: {
+      x: 'Las activaciones requerían pasar de concepto creativo a ejecución real con tiempos, proveedores y cambios de campo.',
+      y: 'El resultado fue una operación más controlada y materiales listos para implementación.',
+      z: 'Se resolvió con licitación, coordinación, revisión de materiales, seguimiento y respuesta rápida a incidencias.',
+    },
+    images: ['Layout operativo', 'Checklist de producción'],
   },
   {
+    slug: 'ia-procesos-internos',
     code: '04',
     title: 'IA para procesos internos',
     type: 'Operación aumentada',
     copy: 'Flujos con ChatGPT, Claude, Gemini y NotebookLM para reportes, dashboards, documentación, CRM y prototipado rápido.',
     tags: ['IA', 'Automatización', 'Sistemas'],
     visual: 'AI / PROCESS',
+    xyz: {
+      x: 'Los equipos tenían información dispersa, reportes repetitivos y procesos que consumían demasiado tiempo.',
+      y: 'Se obtuvo una operación más ágil para documentar, analizar, prototipar y presentar avances.',
+      z: 'Se resolvió con flujos usando ChatGPT, Claude, Gemini, NotebookLM, dashboards, CRM y prototipos rápidos.',
+    },
+    images: ['Flujo IA operativo', 'Dashboard de decisiones'],
   },
   {
+    slug: 'comunicacion-politica',
     code: '05',
     title: 'Comunicación política',
     type: 'Narrativa pública',
     copy: 'Apoyo en comunicación, materiales estratégicos, comunicados y contenidos vinculados con temas legislativos.',
     tags: ['Gobierno', 'Narrativa', 'Contenido'],
     visual: 'PUBLIC / NARRATIVE',
+    xyz: {
+      x: 'La comunicación política exigía transformar temas legislativos en mensajes comprensibles y materiales accionables.',
+      y: 'El resultado fue una narrativa pública más ordenada para comunicados, contenidos y piezas estratégicas.',
+      z: 'Se resolvió con análisis de contexto, redacción, estructura de mensajes y adaptación a formatos de difusión.',
+    },
+    images: ['Mapa narrativo', 'Sistema de mensajes'],
   },
   {
+    slug: 'organizaciones-sociales',
     code: '06',
     title: 'Organizaciones sociales',
     type: 'Difusión institucional',
     copy: 'Comunicados, campañas, piezas visuales y materiales audiovisuales para proyectos de impacto y difusión.',
     tags: ['Impacto', 'Visual', 'Difusión'],
     visual: 'SOCIAL / IMPACT',
+    xyz: {
+      x: 'Organizaciones sociales necesitaban comunicar causas y proyectos con mayor claridad visual e institucional.',
+      y: 'Se generaron materiales de difusión más útiles para explicar impacto, convocar y presentar iniciativas.',
+      z: 'Se resolvió con comunicados, campañas, piezas visuales y producción audiovisual orientada a audiencias específicas.',
+    },
+    images: ['Piezas de difusión', 'Narrativa de impacto'],
   },
 ]
 
@@ -251,8 +294,85 @@ function SignalPanel() {
   )
 }
 
+function CasePage({ project }) {
+  if (!project) {
+    return (
+      <section className="case-page">
+        <div className="case-shell">
+          <a className="back-link" href="/#trabajo">
+            <ArrowLeft size={18} />
+            Volver a casos
+          </a>
+          <h1>Caso no encontrado.</h1>
+          <p>La ruta no coincide con un proyecto publicado en este portfolio.</p>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section className="case-page">
+      <div className="case-shell">
+        <a className="back-link reveal" href="/#trabajo">
+          <ArrowLeft size={18} />
+          Volver a casos
+        </a>
+        <div className="case-hero">
+          <div>
+            <div className="section-kicker reveal">Caso {project.code}</div>
+            <h1 className="reveal">{project.title}</h1>
+            <p className="case-lede reveal">{project.copy}</p>
+          </div>
+          <div className="case-hero-visual reveal" aria-hidden="true">
+            <span>{project.visual}</span>
+          </div>
+        </div>
+
+        <div className="case-media-grid">
+          {project.images.map((image, index) => (
+            <div className="case-media-card reveal" key={image}>
+              <span>Imagen {index + 1}</span>
+              <strong>{image}</strong>
+            </div>
+          ))}
+        </div>
+
+        <div className="xyz-grid">
+          <article className="xyz-card reveal">
+            <span>X</span>
+            <h2>Reto</h2>
+            <p>{project.xyz.x}</p>
+          </article>
+          <article className="xyz-card reveal">
+            <span>Y</span>
+            <h2>Resultado</h2>
+            <p>{project.xyz.y}</p>
+          </article>
+          <article className="xyz-card reveal">
+            <span>Z</span>
+            <h2>Resolución</h2>
+            <p>{project.xyz.z}</p>
+          </article>
+        </div>
+
+        <div className="case-next reveal">
+          <p>Formato XYZ: qué problema existía, qué resultado se buscó y cómo se resolvió.</p>
+          <a className="primary-action" href="/#contacto">
+            Hablemos de un proyecto
+            <ArrowUpRight size={18} />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function App() {
   const rootRef = useRef(null)
+  const caseSlug = window.location.pathname.startsWith('/casos/')
+    ? window.location.pathname.split('/').filter(Boolean).at(-1)
+    : null
+  const activeCase = caseSlug ? projects.find((project) => project.slug === caseSlug) : null
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -293,7 +413,7 @@ function App() {
     <div ref={rootRef} className="site-shell">
       <a className="skip-link" href="#main">Saltar al contenido</a>
       <nav className="topbar" aria-label="Navegación principal">
-        <a className="brand-mark" href="#inicio" aria-label="Ir al inicio">
+        <a className="brand-mark" href="/" aria-label="Ir al inicio">
           <span>IA</span>
           <span>Portfolio</span>
         </a>
@@ -311,6 +431,10 @@ function App() {
       </nav>
 
       <main id="main">
+        {caseSlug ? (
+          <CasePage project={activeCase} />
+        ) : (
+          <>
         <section id="inicio" className="hero-section">
           <div className="hero-grid">
             <div className="hero-copy">
@@ -397,7 +521,7 @@ function App() {
           </div>
           <div className="project-grid">
             {projects.map((project) => (
-              <article className="project-card reveal" key={project.code}>
+              <a className="project-card reveal" href={`/casos/${project.slug}`} key={project.code}>
                 <div className="project-visual" aria-hidden="true">
                   <span>{project.visual}</span>
                 </div>
@@ -412,7 +536,7 @@ function App() {
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         </section>
@@ -527,6 +651,8 @@ function App() {
             </div>
           </div>
         </section>
+          </>
+        )}
       </main>
 
       <footer className="footer">
