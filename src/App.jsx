@@ -6,6 +6,7 @@ import {
   BriefcaseBusiness,
   Cpu,
   FileText,
+  Globe2,
   Layers3,
   Mail,
   Megaphone,
@@ -19,6 +20,7 @@ import './App.css'
 const navItems = [
   ['Perfil', '#perfil'],
   ['Trabajo', '#trabajo'],
+  ['Webs', '#webs'],
   ['Sistema', '#sistema'],
   ['Contacto', '#contacto'],
 ]
@@ -32,6 +34,15 @@ const clients = [
   'Museo Anahuacalli',
   'Nimbus',
   'Hi-Tech',
+]
+
+const clientShowcase = [
+  ['Reckitt', 'Consumo, salud y comunicación corporativa', 'RK'],
+  ['CEMEX', 'Cultura, educación e infraestructura artística', 'CX'],
+  ['British American Tobacco', 'Comunicación y proyectos de marca', 'BT'],
+  ['Senado de la República', 'Comunicación política y narrativa pública', 'SR'],
+  ['Museo Anahuacalli', 'Proyecto cultural y educativo', 'MA'],
+  ['Nimbus Marketing y RP', 'Agencia, operación y producción creativa', 'NB'],
 ]
 
 const capabilities = [
@@ -64,6 +75,7 @@ const projects = [
     type: 'Estrategia cultural',
     copy: 'Conceptualización, documentación estratégica, análisis de necesidades, ruta de implementación y presupuesto para infraestructura artística.',
     tags: ['Cultura', 'Planeación', 'Documentación'],
+    visual: 'CEMEX / ANAHUACALLI',
   },
   {
     code: '02',
@@ -71,6 +83,7 @@ const projects = [
     type: 'Campañas y responsabilidad corporativa',
     copy: 'Propuestas, rutas de trabajo, materiales de comunicación y campañas vinculadas con salud, consumo y resistencia antimicrobiana.',
     tags: ['Campañas', 'RCA', 'Cliente'],
+    visual: 'RECKITT / HEALTH',
   },
   {
     code: '03',
@@ -78,6 +91,7 @@ const projects = [
     type: 'Producción de campo',
     copy: 'Licitación, concepto, coordinación con proveedores, revisión de materiales, producción visual y resolución de incidencias.',
     tags: ['Producción', 'PM', 'Proveedor'],
+    visual: 'FIELD / OPS',
   },
   {
     code: '04',
@@ -85,6 +99,7 @@ const projects = [
     type: 'Operación aumentada',
     copy: 'Flujos con ChatGPT, Claude, Gemini y NotebookLM para reportes, dashboards, documentación, CRM y prototipado rápido.',
     tags: ['IA', 'Automatización', 'Sistemas'],
+    visual: 'AI / PROCESS',
   },
   {
     code: '05',
@@ -92,6 +107,7 @@ const projects = [
     type: 'Narrativa pública',
     copy: 'Apoyo en comunicación, materiales estratégicos, comunicados y contenidos vinculados con temas legislativos.',
     tags: ['Gobierno', 'Narrativa', 'Contenido'],
+    visual: 'PUBLIC / NARRATIVE',
   },
   {
     code: '06',
@@ -99,6 +115,70 @@ const projects = [
     type: 'Difusión institucional',
     copy: 'Comunicados, campañas, piezas visuales y materiales audiovisuales para proyectos de impacto y difusión.',
     tags: ['Impacto', 'Visual', 'Difusión'],
+    visual: 'SOCIAL / IMPACT',
+  },
+]
+
+const webBuilds = [
+  {
+    title: 'Nimbus Landing V2',
+    type: 'Agencia de marketing y RP',
+    url: 'https://nimbus-landing-v2.vercel.app',
+    image: '/previews/nimbus.png',
+  },
+  {
+    title: 'BIM Web',
+    type: 'Agencia, reputación y posicionamiento',
+    url: 'https://bim-web-v2.vercel.app',
+    image: '/previews/bim.png',
+  },
+  {
+    title: 'Reporte 32MX',
+    type: 'Reporte editorial digital',
+    url: 'https://reporte-32mx-web.vercel.app',
+    image: '/previews/reporte-32mx.png',
+  },
+  {
+    title: 'Cheatsheet AI Enterprise',
+    type: 'Guía interactiva de IA',
+    url: 'https://cheatsheet-ai-enterprise.vercel.app',
+    image: '/previews/cheatsheet-ai.png',
+  },
+  {
+    title: 'LasarVision',
+    type: 'Landing médica premium',
+    url: 'https://lasarvision-v1.vercel.app',
+    image: '/previews/lasarvision.png',
+  },
+  {
+    title: 'GestoCar',
+    type: 'Producto digital automotriz',
+    url: 'https://gestocar-web.vercel.app',
+    image: '/previews/gestocar.png',
+  },
+  {
+    title: 'Alcaleaf',
+    type: 'Marca y experiencia web',
+    url: 'https://alcaleaf-web.vercel.app',
+    image: '/previews/alcaleaf.png',
+  },
+  {
+    title: 'Stand Builder Pro',
+    type: 'Herramienta web 3D/operativa',
+    url: 'https://stand-builder-ai.vercel.app',
+    image: '/previews/stand-builder.png',
+  },
+  {
+    title: 'Museo del Gato',
+    type: 'Experiencia cultural',
+    url: 'https://museo-del-gato-web.vercel.app',
+    image: '/previews/museo-gato.png',
+  },
+  {
+    title: 'Yum Yum',
+    type: 'Concepto food/consumer',
+    url: 'https://yum-yum-one.vercel.app',
+    image: '/previews/yum-yum.png',
   },
 ]
 
@@ -289,6 +369,19 @@ function App() {
               </article>
             ))}
           </div>
+          <div className="client-showcase">
+            {clientShowcase.map(([name, detail, initials]) => (
+              <article className="client-card reveal" key={name}>
+                <div className="client-mark" aria-hidden="true">
+                  {initials}
+                </div>
+                <div>
+                  <h3>{name}</h3>
+                  <p>{detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="trabajo" className="section-block work-section">
@@ -305,6 +398,9 @@ function App() {
           <div className="project-grid">
             {projects.map((project) => (
               <article className="project-card reveal" key={project.code}>
+                <div className="project-visual" aria-hidden="true">
+                  <span>{project.visual}</span>
+                </div>
                 <div className="project-meta">
                   <span>{project.code}</span>
                   <span>{project.type}</span>
@@ -316,6 +412,35 @@ function App() {
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="webs" className="section-block web-section">
+          <div className="section-header">
+            <div>
+              <div className="section-kicker reveal">Webs construidas</div>
+              <h2 className="section-title reveal">Interfaces publicadas, con preview real del hero.</h2>
+            </div>
+            <p className="section-note reveal">
+              Una vitrina de sitios y herramientas que muestran rango visual: landing pages,
+              productos, experiencias culturales, sistemas internos y piezas editoriales.
+            </p>
+          </div>
+          <div className="web-grid">
+            {webBuilds.map((site) => (
+              <article className="web-card reveal" key={site.url}>
+                <a href={site.url} target="_blank" rel="noreferrer" aria-label={`Abrir ${site.title}`}>
+                  <img src={site.image} alt={`Preview del hero de ${site.title}`} decoding="async" />
+                  <div className="web-card-body">
+                    <div>
+                      <span>{site.type}</span>
+                      <h3>{site.title}</h3>
+                    </div>
+                    <Globe2 size={20} strokeWidth={1.7} />
+                  </div>
+                </a>
               </article>
             ))}
           </div>
