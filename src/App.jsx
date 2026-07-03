@@ -6,7 +6,6 @@ import {
   ArrowLeft,
   Bot,
   BriefcaseBusiness,
-  Camera,
   Cpu,
   FileText,
   Globe2,
@@ -16,7 +15,7 @@ import {
   MonitorCog,
   Moon,
   Play,
-  Sparkles,
+  RadioTower,
   Sun,
   Workflow,
 } from 'lucide-react'
@@ -41,6 +40,12 @@ const clients = [
   'Museo Anahuacalli',
   'Nimbus',
   'Hi-Tech',
+]
+
+const proofPoints = [
+  ['Webs publicadas', '12+', 'Interfaces, landings y reportes listos para compartir.'],
+  ['Campos de trabajo', '4', 'Comunicación, producción, IA y operación de proyectos.'],
+  ['Modo de entrega', 'X/Y/Z', 'Reto, resultado y resolución explicados sin relleno.'],
 ]
 
 const clientShowcase = [
@@ -301,6 +306,13 @@ const liquidDots = [
   { x: '56vw', y: '44vh', size: '110px', delay: '-15s', duration: '14s', tone: 'var(--ink)' },
 ]
 
+const heroSignals = [
+  ['Brief', 'contexto limpio'],
+  ['Ruta', 'entregables claros'],
+  ['Producción', 'versiones controladas'],
+  ['Entrega', 'presentación lista'],
+]
+
 const glassShards = [
   { className: 'hero-glass-a', depth: 'back' },
   { className: 'hero-glass-b', depth: 'mid' },
@@ -376,30 +388,48 @@ function MotionDivider({ words }) {
 
 function SignalPanel() {
   return (
-    <div className="poster-panel liquid-panel reveal">
-      <div className="poster-photo" aria-label="Espacio para foto de Ian">
-        <span className="photo-script">Ian</span>
-        <div className="portrait-frame">
-          <Camera size={30} strokeWidth={1.5} />
-          <span>Tu foto aqui</span>
+    <aside className="hero-studio-panel liquid-panel reveal" aria-label="Resumen visual del portafolio">
+      <div className="studio-top">
+        <span>
+          <RadioTower size={16} />
+          Sistema activo
+        </span>
+        <strong>CDMX / remoto</strong>
+      </div>
+
+      <div className="studio-preview" aria-hidden="true">
+        <div className="mini-window mini-window-primary">
+          <div className="window-chrome">
+            <i />
+            <i />
+            <i />
+          </div>
+          <img src="/previews/nimbus.png" alt="" loading="eager" decoding="async" />
+        </div>
+        <div className="mini-window mini-window-secondary">
+          <div className="window-chrome">
+            <i />
+            <i />
+            <i />
+          </div>
+          <img src="/previews/reporte-32mx.png" alt="" loading="eager" decoding="async" />
         </div>
       </div>
-      <div className="poster-side-actions" aria-hidden="true">
-        <span><Globe2 size={18} /></span>
-        <span><Sparkles size={18} /></span>
-        <span><ArrowUpRight size={18} /></span>
+
+      <div className="focus-stack">
+        <span>Comunicación visual</span>
+        <strong>Del brief raro al entregable que sí se puede presentar.</strong>
       </div>
-      <div className="poster-stats">
-        <div>
-          <strong>+250k</strong>
-          <span>alcance potencial en campañas y contenidos</span>
-        </div>
-        <div>
-          <strong>+800h</strong>
-          <span>de producción, análisis y entrega visual</span>
-        </div>
+
+      <div className="hero-capsules" aria-hidden="true">
+        {heroSignals.map(([label, detail]) => (
+          <span key={label}>
+            <b>{label}</b>
+            {detail}
+          </span>
+        ))}
       </div>
-    </div>
+    </aside>
   )
 }
 
@@ -556,6 +586,26 @@ function App() {
     document.documentElement.dataset.theme = theme
     window.localStorage.setItem('portfolio-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    const description =
+      activeCase?.copy ||
+      'Portfolio profesional de Ian Aceves: comunicación visual, project management, producción creativa, webs e inteligencia artificial aplicada.'
+
+    document.title = activeCase
+      ? `${activeCase.title} | Caso de Ian Aceves`
+      : 'Ian Aceves | Comunicación visual, proyectos e IA aplicada'
+
+    let metaDescription = document.querySelector('meta[name="description"]')
+
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta')
+      metaDescription.setAttribute('name', 'description')
+      document.head.appendChild(metaDescription)
+    }
+
+    metaDescription.setAttribute('content', description)
+  }, [activeCase])
 
   useEffect(() => {
     const root = document.documentElement
@@ -858,9 +908,9 @@ function App() {
               </div>
               <h1 className="reveal">ideas que se ven, se mueven y aterrizan.</h1>
               <p className="hero-lede reveal">
-                Project Manager creativo con visión estratégica. Comunicación, producción, diseño,
-                documentación e inteligencia artificial aplicada para llevar briefs complejos a
-                entregables que se entienden, se ejecutan y se presentan bien.
+                Project Manager creativo para equipos que necesitan ordenar ideas, producir piezas,
+                construir interfaces y presentar decisiones con claridad. Comunicación, producción e
+                inteligencia artificial aplicada sin perder criterio visual.
               </p>
               <div className="hero-actions reveal">
                 <a className="primary-action" href="#trabajo">
@@ -870,6 +920,15 @@ function App() {
                 <a className="secondary-action" href="#sistema">
                   Ver sistema de trabajo
                 </a>
+              </div>
+              <div className="hero-proof-grid reveal" aria-label="Resumen de experiencia">
+                {proofPoints.map(([label, value, detail]) => (
+                  <article key={label}>
+                    <strong>{value}</strong>
+                    <span>{label}</span>
+                    <p>{detail}</p>
+                  </article>
+                ))}
               </div>
               <div className="client-strip reveal" aria-label="Clientes y proyectos">
                 {clients.map((client) => (
