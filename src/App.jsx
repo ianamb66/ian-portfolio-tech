@@ -15,7 +15,6 @@ import {
   MonitorCog,
   Moon,
   Play,
-  RadioTower,
   Sun,
   Workflow,
 } from 'lucide-react'
@@ -29,23 +28,6 @@ const navItems = [
   ['Webs', '/#webs'],
   ['Sistema', '/#sistema'],
   ['Contacto', '/#contacto'],
-]
-
-const clients = [
-  'Reckitt',
-  'Graneodin',
-  'CEMEX',
-  'British American Tobacco',
-  'Senado',
-  'Museo Anahuacalli',
-  'Nimbus',
-  'Hi-Tech',
-]
-
-const proofPoints = [
-  ['Webs publicadas', '12+', 'Interfaces, landings y reportes listos para compartir.'],
-  ['Campos de trabajo', '4', 'Comunicación, producción, IA y operación de proyectos.'],
-  ['Modo de entrega', 'X/Y/Z', 'Reto, resultado y resolución explicados sin relleno.'],
 ]
 
 const clientShowcase = [
@@ -89,6 +71,7 @@ const projects = [
     copy: 'Conceptualización, documentación estratégica, análisis de necesidades, ruta de implementación y presupuesto para infraestructura artística.',
     tags: ['Cultura', 'Planeación', 'Documentación'],
     visual: 'CEMEX / ANAHUACALLI',
+    cover: '/cases/cemex-anahuacalli/01-anahuacalli-el-muro-vivo-portada.jpg',
     xyz: {
       x: 'CEMEX y Museo Anahuacalli necesitaban aterrizar una oportunidad cultural en una propuesta ejecutable.',
       y: 'El resultado fue una ruta de proyecto clara para educación, infraestructura artística y toma de decisiones.',
@@ -96,16 +79,22 @@ const projects = [
     },
     images: [
       {
-        title: 'Mapa de necesidades',
-        label: 'Diagnóstico',
-        bullets: ['Espacios', 'Audiencias', 'Presupuesto'],
-        variant: 'grid',
+        title: 'El Muro Vivo',
+        label: 'Propuesta',
+        src: '/cases/cemex-anahuacalli/01-anahuacalli-el-muro-vivo-portada.jpg',
+        alt: 'Portada de la propuesta El Muro Vivo para Museo Anahuacalli y CEMEX',
       },
       {
-        title: 'Ruta de implementación',
-        label: 'Plan ejecutivo',
-        bullets: ['Fases', 'Responsables', 'Entregables'],
-        variant: 'timeline',
+        title: 'Escuela de Pintura al Fresco',
+        label: 'Concepto',
+        src: '/cases/cemex-anahuacalli/03-anahuacalli-oferta-academica-fresco.jpg',
+        alt: 'Lámina de oferta académica para la Escuela de Pintura al Fresco Anahuacalli',
+      },
+      {
+        title: 'Socio fundador CEMEX',
+        label: 'Alianza',
+        src: '/cases/cemex-anahuacalli/04-anahuacalli-socio-fundador-cemex.jpg',
+        alt: 'Lámina de socio fundador CEMEX para el proyecto cultural Anahuacalli',
       },
     ],
   },
@@ -117,6 +106,7 @@ const projects = [
     copy: 'Propuestas, rutas de trabajo, materiales de comunicación y campañas vinculadas con salud, consumo y resistencia antimicrobiana.',
     tags: ['Campañas', 'RCA', 'Cliente'],
     visual: 'RECKITT / HEALTH',
+    cover: '/cases/reckitt-marcas-consumo/01-cal-c-tose-chocomilk-presentacion.jpg',
     xyz: {
       x: 'Marcas de consumo necesitaban campañas y materiales corporativos con sensibilidad de salud y reputación.',
       y: 'Se logró ordenar mensajes, piezas y rutas de trabajo para comunicar con claridad ante audiencias distintas.',
@@ -124,16 +114,22 @@ const projects = [
     },
     images: [
       {
-        title: 'Arquitectura de campaña',
-        label: 'Sistema narrativo',
-        bullets: ['Insight', 'Mensaje', 'Piezas'],
-        variant: 'grid',
+        title: 'Cal-C-Tose + Choco Milk',
+        label: 'Marca',
+        src: '/cases/reckitt-marcas-consumo/01-cal-c-tose-chocomilk-presentacion.jpg',
+        alt: 'Presentación de campaña para Cal-C-Tose y Choco Milk',
       },
       {
-        title: 'Mensajes por audiencia',
-        label: 'Comunicación',
-        bullets: ['Cliente', 'Consumidor', 'Stakeholders'],
-        variant: 'cards',
+        title: 'Resistencia antimicrobiana',
+        label: 'Salud pública',
+        src: '/cases/reckitt-marcas-consumo/01-graneodin-amr-senado-montaje-salon.jpg',
+        alt: 'Montaje de evento sobre resistencia antimicrobiana en el Senado',
+      },
+      {
+        title: 'Activación institucional',
+        label: 'Embajada UK',
+        src: '/cases/reckitt-marcas-consumo/03-graneodin-amr-embajada-uk-terraza.jpg',
+        alt: 'Activación institucional Graneodin en terraza de la Embajada del Reino Unido',
       },
     ],
   },
@@ -145,6 +141,7 @@ const projects = [
     copy: 'Licitación, concepto, coordinación con proveedores, revisión de materiales, producción visual y resolución de incidencias.',
     tags: ['Producción', 'PM', 'Proveedor'],
     visual: 'FIELD / OPS',
+    cover: '/cases/activaciones-eventos/02-omni-veracruz-stand-expo.jpg',
     xyz: {
       x: 'Las activaciones requerían pasar de concepto creativo a ejecución real con tiempos, proveedores y cambios de campo.',
       y: 'El resultado fue una operación más controlada y materiales listos para implementación.',
@@ -152,16 +149,16 @@ const projects = [
     },
     images: [
       {
-        title: 'Layout operativo',
-        label: 'Producción',
-        bullets: ['Zona', 'Flujo', 'Montaje'],
-        variant: 'cards',
+        title: 'Stand OMNI Veracruz',
+        label: 'Expo',
+        src: '/cases/activaciones-eventos/02-omni-veracruz-stand-expo.jpg',
+        alt: 'Stand de OMNI Veracruz en expo',
       },
       {
-        title: 'Checklist de producción',
-        label: 'Control',
-        bullets: ['Proveedor', 'Materiales', 'Incidencias'],
-        variant: 'timeline',
+        title: 'Atención en campo',
+        label: 'Operación',
+        src: '/cases/activaciones-eventos/01-omni-veracruz-atencion-stand.jpg',
+        alt: 'Atención y operación en stand de OMNI Veracruz',
       },
     ],
   },
@@ -173,6 +170,7 @@ const projects = [
     copy: 'Flujos con ChatGPT, Claude, Gemini y NotebookLM para reportes, dashboards, documentación, CRM y prototipado rápido.',
     tags: ['IA', 'Automatización', 'Sistemas'],
     visual: 'AI / PROCESS',
+    cover: '/cases/ia-procesos-internos/stand-builder-ai.png',
     xyz: {
       x: 'Los equipos tenían información dispersa, reportes repetitivos y procesos que consumían demasiado tiempo.',
       y: 'Se obtuvo una operación más ágil para documentar, analizar, prototipar y presentar avances.',
@@ -180,10 +178,10 @@ const projects = [
     },
     images: [
       {
-        title: 'Flujo IA operativo',
-        label: 'Automatización',
-        bullets: ['Input', 'Prompt', 'Salida'],
-        variant: 'timeline',
+        title: 'Vibecoding AI para stands',
+        label: 'Herramienta',
+        src: '/cases/ia-procesos-internos/stand-builder-ai.png',
+        alt: 'Interfaz de herramienta AI para crear propuestas de stands',
       },
       {
         title: 'Dashboard de decisiones',
@@ -201,6 +199,7 @@ const projects = [
     copy: 'Apoyo en comunicación, materiales estratégicos, comunicados y contenidos vinculados con temas legislativos.',
     tags: ['Gobierno', 'Narrativa', 'Contenido'],
     visual: 'PUBLIC / NARRATIVE',
+    cover: '/cases/comunicacion-politica/01-senado-yeidckol-retrato-morena.jpg',
     xyz: {
       x: 'La comunicación política exigía transformar temas legislativos en mensajes comprensibles y materiales accionables.',
       y: 'El resultado fue una narrativa pública más ordenada para comunicados, contenidos y piezas estratégicas.',
@@ -208,16 +207,16 @@ const projects = [
     },
     images: [
       {
-        title: 'Mapa narrativo',
-        label: 'Contexto',
-        bullets: ['Tema', 'Audiencia', 'Ángulo'],
-        variant: 'grid',
+        title: 'Narrativa pública',
+        label: 'Senado',
+        src: '/cases/comunicacion-politica/01-senado-yeidckol-retrato-morena.jpg',
+        alt: 'Imagen de comunicación política vinculada con Senado y senadora Yeidckol',
       },
       {
-        title: 'Sistema de mensajes',
+        title: 'Contenido legislativo',
         label: 'Difusión',
-        bullets: ['Comunicado', 'Contenido', 'Seguimiento'],
-        variant: 'cards',
+        src: '/cases/comunicacion-politica/02-senado-yeidckol-tmec-pt.jpg',
+        alt: 'Pieza de contenido legislativo sobre T-MEC y Partido del Trabajo',
       },
     ],
   },
@@ -229,6 +228,7 @@ const projects = [
     copy: 'Comunicados, campañas, piezas visuales y materiales audiovisuales para proyectos de impacto y difusión.',
     tags: ['Impacto', 'Visual', 'Difusión'],
     visual: 'SOCIAL / IMPACT',
+    cover: '/cases/organizaciones-sociales/concomercio-centro-historico-mundial-2026-7649091564077174037.jpg',
     xyz: {
       x: 'Organizaciones sociales necesitaban comunicar causas y proyectos con mayor claridad visual e institucional.',
       y: 'Se generaron materiales de difusión más útiles para explicar impacto, convocar y presentar iniciativas.',
@@ -236,16 +236,28 @@ const projects = [
     },
     images: [
       {
-        title: 'Piezas de difusión',
-        label: 'Campaña',
-        bullets: ['Convocatoria', 'Visuales', 'Entrega'],
-        variant: 'cards',
+        title: 'ConComercio Pequeño',
+        label: 'Video reciente',
+        src: '/cases/organizaciones-sociales/concomercio-centro-historico-mundial-2026-7649091564077174037.jpg',
+        alt: 'Thumbnail de video reciente de ConComercio Pequeño sobre Centro Histórico y Mundial 2026',
       },
       {
-        title: 'Narrativa de impacto',
-        label: 'Institucional',
-        bullets: ['Causa', 'Evidencia', 'Acción'],
-        variant: 'timeline',
+        title: 'Comunicados institucionales',
+        label: 'ConComercio',
+        src: '/cases/organizaciones-sociales/02-comunicado-reordenamiento-via-publica.png',
+        alt: 'Comunicado de ConComercio Pequeño sobre reordenamiento de vía pública',
+      },
+      {
+        title: 'Foro latinoamericano',
+        label: 'RAUDER',
+        src: '/cases/organizaciones-sociales/02-rauder-foro-panama-panel.jpg',
+        alt: 'Panel del Foro Latinoamericano sobre nicotina y reducción de riesgo',
+      },
+      {
+        title: 'Contexto vapeo',
+        label: 'Investigación visual',
+        src: '/cases/organizaciones-sociales/05-mundo-vapeo-silueta-dispositivo-wikimedia.jpg',
+        alt: 'Imagen contextual sobre vapeo para investigación visual',
       },
     ],
   },
@@ -269,6 +281,12 @@ const webBuilds = [
     type: 'Experiencia cultural',
     url: 'https://museo-del-gato-web.vercel.app',
     image: '/previews/museo-gato.png',
+  },
+  {
+    title: 'FisioAssess INCAN',
+    type: 'Calculadora para fisioterapeutas',
+    url: 'https://fisioassess-vex1.vercel.app',
+    image: '/previews/fisioassess-incan-fisioterapia.png',
   },
 ]
 
@@ -304,21 +322,6 @@ const liquidDots = [
   { x: '42vw', y: '76vh', size: '180px', delay: '-13s', duration: '19s', tone: 'var(--ink)' },
   { x: '76vw', y: '78vh', size: '300px', delay: '-9s', duration: '22s', tone: 'var(--amber)' },
   { x: '56vw', y: '44vh', size: '110px', delay: '-15s', duration: '14s', tone: 'var(--ink)' },
-]
-
-const heroSignals = [
-  ['Brief', 'contexto limpio'],
-  ['Ruta', 'entregables claros'],
-  ['Producción', 'versiones controladas'],
-  ['Entrega', 'presentación lista'],
-]
-
-const glassShards = [
-  { className: 'hero-glass-a', depth: 'back' },
-  { className: 'hero-glass-b', depth: 'mid' },
-  { className: 'hero-glass-c', depth: 'front' },
-  { className: 'hero-glass-d', depth: 'mid' },
-  { className: 'hero-glass-e', depth: 'front' },
 ]
 
 function LiquidBackdrop() {
@@ -357,21 +360,6 @@ function LiquidBackdrop() {
   )
 }
 
-function GlassCurtain() {
-  return (
-    <div className="glass-curtain" aria-hidden="true">
-      {glassShards.map((shard, index) => (
-        <span
-          className={`glass-shard ${shard.className}`}
-          data-depth={shard.depth}
-          key={shard.className}
-          style={{ '--shard': index }}
-        />
-      ))}
-    </div>
-  )
-}
-
 function MotionDivider({ words }) {
   return (
     <div className="motion-divider reveal" aria-hidden="true">
@@ -383,53 +371,6 @@ function MotionDivider({ words }) {
         ))}
       </div>
     </div>
-  )
-}
-
-function SignalPanel() {
-  return (
-    <aside className="hero-studio-panel liquid-panel reveal" aria-label="Resumen visual del portafolio">
-      <div className="studio-top">
-        <span>
-          <RadioTower size={16} />
-          Sistema activo
-        </span>
-        <strong>CDMX / remoto</strong>
-      </div>
-
-      <div className="studio-preview" aria-hidden="true">
-        <div className="mini-window mini-window-primary">
-          <div className="window-chrome">
-            <i />
-            <i />
-            <i />
-          </div>
-          <img src="/previews/nimbus.png" alt="" loading="eager" decoding="async" />
-        </div>
-        <div className="mini-window mini-window-secondary">
-          <div className="window-chrome">
-            <i />
-            <i />
-            <i />
-          </div>
-          <img src="/previews/reporte-32mx.png" alt="" loading="eager" decoding="async" />
-        </div>
-      </div>
-
-      <div className="focus-stack">
-        <span>Comunicación visual</span>
-        <strong>Del brief raro al entregable que sí se puede presentar.</strong>
-      </div>
-
-      <div className="hero-capsules" aria-hidden="true">
-        {heroSignals.map(([label, detail]) => (
-          <span key={label}>
-            <b>{label}</b>
-            {detail}
-          </span>
-        ))}
-      </div>
-    </aside>
   )
 }
 
@@ -454,36 +395,42 @@ function CaseVisual({ item, index }) {
   const rows = useMemo(() => Array.from({ length: 18 }, (_, row) => row), [])
 
   return (
-    <div className={`case-media-card case-media-${item.variant} reveal`}>
+    <div className={`case-media-card ${item.src ? 'case-media-image' : `case-media-${item.variant}`} reveal`}>
       <div className="case-media-top">
         <span>{item.label}</span>
         <small>Imagen {index + 1}</small>
       </div>
       <strong>{item.title}</strong>
-      <div className="case-art" aria-hidden="true">
-        {item.variant === 'timeline' ? (
-          <div className="case-art-timeline">
-            {item.bullets.map((bullet, bulletIndex) => (
-              <i key={bullet}>
-                <b>{String(bulletIndex + 1).padStart(2, '0')}</b>
-                {bullet}
-              </i>
-            ))}
-          </div>
-        ) : item.variant === 'cards' ? (
-          <div className="case-art-cards">
-            {item.bullets.map((bullet) => (
-              <i key={bullet}>{bullet}</i>
-            ))}
-          </div>
-        ) : (
-          <div className="case-art-grid">
-            {rows.map((row) => (
-              <i key={row} />
-            ))}
-          </div>
-        )}
-      </div>
+      {item.src ? (
+        <figure className="case-photo">
+          <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+        </figure>
+      ) : (
+        <div className="case-art" aria-hidden="true">
+          {item.variant === 'timeline' ? (
+            <div className="case-art-timeline">
+              {item.bullets.map((bullet, bulletIndex) => (
+                <i key={bullet}>
+                  <b>{String(bulletIndex + 1).padStart(2, '0')}</b>
+                  {bullet}
+                </i>
+              ))}
+            </div>
+          ) : item.variant === 'cards' ? (
+            <div className="case-art-cards">
+              {item.bullets.map((bullet) => (
+                <i key={bullet}>{bullet}</i>
+              ))}
+            </div>
+          ) : (
+            <div className="case-art-grid">
+              {rows.map((row) => (
+                <i key={row} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -518,6 +465,7 @@ function CasePage({ project }) {
             <p className="case-lede reveal">{project.copy}</p>
           </div>
           <div className="case-hero-visual reveal" aria-hidden="true">
+            {project.cover ? <img src={project.cover} alt="" loading="eager" decoding="async" /> : null}
             <span>{project.visual}</span>
           </div>
         </div>
@@ -526,7 +474,7 @@ function CasePage({ project }) {
           <span>{project.type}</span>
           <p>
             Caso desplegado como página propia para mostrar contexto, par visual del trabajo y
-            resolución en formato X/Y/Z.
+            la forma en que convertí una idea compleja en una entrega clara.
           </p>
         </div>
 
@@ -538,24 +486,24 @@ function CasePage({ project }) {
 
         <div className="xyz-grid">
           <article className="xyz-card reveal">
-            <span>X</span>
+            <span>Reto</span>
             <h2>Reto</h2>
             <p>{project.xyz.x}</p>
           </article>
           <article className="xyz-card reveal">
-            <span>Y</span>
+            <span>Resultado</span>
             <h2>Resultado</h2>
             <p>{project.xyz.y}</p>
           </article>
           <article className="xyz-card reveal">
-            <span>Z</span>
+            <span>Resolución</span>
             <h2>Resolución</h2>
             <p>{project.xyz.z}</p>
           </article>
         </div>
 
         <div className="case-next reveal">
-          <p>Formato XYZ: qué problema existía, qué resultado se buscó y cómo se resolvió.</p>
+          <p>La idea es simple: entender el problema, producir con criterio y entregar algo claro.</p>
           <a className="primary-action" href="/#contacto">
             Hablemos de un proyecto
             <ArrowUpRight size={18} />
@@ -590,11 +538,11 @@ function App() {
   useEffect(() => {
     const description =
       activeCase?.copy ||
-      'Portfolio profesional de Ian Aceves: comunicación visual, project management, producción creativa, webs e inteligencia artificial aplicada.'
+      'Portfolio profesional de Ian Aceves: ideas, procesos creativos, campañas, producción e inteligencia artificial aplicada.'
 
     document.title = activeCase
       ? `${activeCase.title} | Caso de Ian Aceves`
-      : 'Ian Aceves | Comunicación visual, proyectos e IA aplicada'
+      : 'Ian Aceves | Creatividad, proyectos e IA aplicada'
 
     let metaDescription = document.querySelector('meta[name="description"]')
 
@@ -899,44 +847,30 @@ function App() {
         ) : (
           <>
         <section id="inicio" className="hero-section">
-          <GlassCurtain />
-          <div className="hero-grid">
+          <div className="hero-simple-grid">
+            <figure className="hero-portrait reveal">
+              <img src="/assets/img/ian-portrait.jpg" alt="Retrato de Ian Aceves" loading="eager" decoding="async" />
+            </figure>
             <div className="hero-copy">
-              <div className="system-pill reveal">
-                <span className="live-dot" />
-                Portfolio profesional 2026
-              </div>
-              <h1 className="reveal">ideas que se ven, se mueven y aterrizan.</h1>
+              <p className="hero-kicker reveal">Portfolio profesional 2026</p>
+              <h1 className="reveal">Soy Ian y amo crear.</h1>
               <p className="hero-lede reveal">
-                Project Manager creativo para equipos que necesitan ordenar ideas, producir piezas,
-                construir interfaces y presentar decisiones con claridad. Comunicación, producción e
-                inteligencia artificial aplicada sin perder criterio visual.
+                Para mí crear es desarrollar ideas hasta encontrar la solución definitiva. Me gusta
+                explorar la creatividad en procesos, equipos y campañas que no tienen una respuesta
+                sencilla a primera vista, y convertir ese caos en algo claro, visual y presentable.
+              </p>
+              <p className="hero-lede hero-lede-secondary reveal">
+                He trabajado entre comunicación visual, project management, producción, campañas,
+                instituciones, marcas y herramientas de IA. Mi experiencia vive justo ahí: en cruzar
+                criterio creativo con ejecución para que las ideas lleguen a una entrega real.
               </p>
               <div className="hero-actions reveal">
                 <a className="primary-action" href="#trabajo">
                   Ver proyectos
                   <ArrowUpRight size={18} />
                 </a>
-                <a className="secondary-action" href="#sistema">
-                  Ver sistema de trabajo
-                </a>
-              </div>
-              <div className="hero-proof-grid reveal" aria-label="Resumen de experiencia">
-                {proofPoints.map(([label, value, detail]) => (
-                  <article key={label}>
-                    <strong>{value}</strong>
-                    <span>{label}</span>
-                    <p>{detail}</p>
-                  </article>
-                ))}
-              </div>
-              <div className="client-strip reveal" aria-label="Clientes y proyectos">
-                {clients.map((client) => (
-                  <span key={client}>{client}</span>
-                ))}
               </div>
             </div>
-            <SignalPanel />
           </div>
         </section>
 
@@ -950,12 +884,14 @@ function App() {
             </div>
             <div className="profile-copy reveal">
               <p>
-                Licenciado en Comunicación Visual con experiencia en agencias, marcas comerciales,
-                sector público, organizaciones sociales e instituciones culturales.
+                Soy comunicador visual y project manager creativo. He trabajado con agencias,
+                marcas comerciales, sector público, organizaciones sociales e instituciones
+                culturales.
               </p>
               <p>
-                Su ventaja está en unir criterio visual, operación, narrativa y herramientas de IA
-                para reducir fricción entre estrategia, producción y entrega.
+                Mi forma de trabajar cruza criterio visual, operación, narrativa y herramientas de IA
+                para que las ideas no se queden en intención: se prueban, se ordenan, se producen y
+                llegan a una entrega con sentido.
               </p>
             </div>
           </div>
@@ -1000,6 +936,7 @@ function App() {
             {projects.map((project) => (
               <a className="project-card reveal" href={`/casos/${project.slug}`} key={project.code}>
                 <div className="project-visual" aria-hidden="true">
+                  {project.cover ? <img src={project.cover} alt="" loading="lazy" decoding="async" /> : null}
                   <span>{project.visual}</span>
                 </div>
                 <div className="project-meta">
@@ -1018,12 +955,12 @@ function App() {
           </div>
         </section>
 
-        <MotionDivider words={['webs', 'interfaces', 'publicadas']} />
+        <MotionDivider words={['ideas', 'interfaces', 'experiencias']} />
 
         <section id="webs" className="section-block web-section">
           <div className="section-header">
             <div>
-              <div className="section-kicker reveal">Webs publicadas</div>
+              <div className="section-kicker reveal">Experiencias digitales</div>
               <h2 className="section-title reveal">Interfaces listas para verse, usarse y compartirse.</h2>
             </div>
             <p className="section-note reveal">
