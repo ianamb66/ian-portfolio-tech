@@ -278,12 +278,19 @@ const projects = [
       'Nuestra skill de Notion funciona como puente entre conversación y seguimiento: detecta cuando un mensaje ya es una tarea, respeta clientes y campos existentes, pide confirmación si hay ambigüedad y crea o actualiza el registro con contexto suficiente para retomarlo después.',
     tags: ['Notion', 'Tareas', 'Automatización'],
     visual: 'NOTION / TASKS',
+    cover: '/cases/herramientas-trabajo/stock-notion-tasks-unsplash.jpg',
     xyz: {
       x: 'Necesitaba que las tareas no se perdieran entre chats, notas y pendientes sueltos.',
       y: 'Dejé una forma más rápida de pasar de solicitud a tarea accionable.',
       z: 'Definí reglas para detectar intención, validar cliente/campos y guardar el seguimiento.',
     },
     images: [
+      {
+        title: 'Tareas con contexto',
+        label: 'Stock / productividad',
+        src: '/cases/herramientas-trabajo/stock-notion-tasks-unsplash.jpg',
+        alt: 'Checklist de tareas junto a teclado y teléfono en un escritorio de trabajo',
+      },
       {
         title: 'De mensaje a tarea',
         label: 'Síntesis',
@@ -308,12 +315,19 @@ const projects = [
       'Esta skill ayuda a arrancar piezas audiovisuales con menos fricción: entiende el objetivo, separa guion, referencias, stock footage, música, edición y entregables; luego organiza una ruta de material de archivo para que la edición no empiece desde una pantalla vacía.',
     tags: ['Video', 'Stock', 'Producción'],
     visual: 'VIDEO / ARCHIVE',
+    cover: '/cases/herramientas-trabajo/stock-video-editing-unsplash.jpg',
     xyz: {
       x: 'Quería bajar rápido de una idea de video a una ruta de producción clara.',
       y: 'Dejé una estructura para buscar material, ordenar referencias y preparar edición.',
       z: 'Separé guion, assets, stock, música y entregables como pasos accionables.',
     },
     images: [
+      {
+        title: 'Mesa de edición',
+        label: 'Stock / postproducción',
+        src: '/cases/herramientas-trabajo/stock-video-editing-unsplash.jpg',
+        alt: 'Estación de edición de video con timeline abierto en monitor panorámico',
+      },
       {
         title: 'Ruta audiovisual',
         label: 'Proceso',
@@ -375,7 +389,7 @@ const webBuilds = [
     title: 'Propuestas de stands IA',
     type: 'Gemini para vibecoding y stands',
     url: 'https://share.gemini.google/MhRAC5ErAcda',
-    image: '/previews/stand-builder.png',
+    image: '/cases/herramientas-trabajo/stock-stand-proposals-unsplash.jpg',
     note: 'Link de Gemini para acelerar propuestas de stands y bajar ideas a una ruta visual.',
     actionLabel: 'Abrir Gemini',
   },
