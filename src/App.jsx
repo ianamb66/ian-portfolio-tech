@@ -30,14 +30,16 @@ const projects = [
     code: '01',
     title: 'CEMEX + Museo Anahuacalli',
     type: 'Estrategia cultural',
-    copy: 'Una idea cultural convertida en ruta ejecutable.',
+    copy: 'Convertí una idea cultural en una ruta ejecutable.',
+    detail:
+      'Trabajé una propuesta cultural desde la narrativa hasta la estructura operativa: qué se quería provocar, cómo se podía presentar y qué piezas hacían falta para convertir una intención amplia en un proyecto defendible.',
     tags: ['Cultura', 'Planeación', 'Documentación'],
     visual: 'CEMEX / ANAHUACALLI',
     cover: '/cases/cemex-anahuacalli/01-anahuacalli-el-muro-vivo-portada.jpg',
     xyz: {
-      x: 'Aterrizar una oportunidad cultural sin perder ambición.',
-      y: 'Una ruta clara para presentar, decidir y ejecutar.',
-      z: 'Necesidades, presupuesto y narrativa en una propuesta.',
+      x: 'Tenía que aterrizar una oportunidad cultural sin quitarle ambición.',
+      y: 'Dejé una ruta clara para presentar, decidir y ejecutar.',
+      z: 'Uní necesidades, presupuesto y narrativa en una propuesta legible.',
     },
     images: [
       {
@@ -65,14 +67,16 @@ const projects = [
     code: '02',
     title: 'Reckitt + marcas de consumo',
     type: 'Campañas y responsabilidad corporativa',
-    copy: 'Campañas sensibles para marcas y salud pública.',
+    copy: 'Desarrollé campañas sensibles para marcas y salud pública.',
+    detail:
+      'Me tocó cuidar mensajes donde la marca, la salud y la reputación conviven en el mismo espacio. Ordené la comunicación para que cada pieza pudiera hablarle a su audiencia sin perder precisión ni tono institucional.',
     tags: ['Campañas', 'RCA', 'Cliente'],
     visual: 'RECKITT / HEALTH',
     cover: '/cases/reckitt-marcas-consumo/01-cal-c-tose-chocomilk-presentacion.jpg',
     xyz: {
-      x: 'Hablar de salud, consumo y reputación con cuidado.',
-      y: 'Mensajes más claros para audiencias distintas.',
-      z: 'Campaña, piezas y entregables coordinados.',
+      x: 'Necesitaba hablar de salud, consumo y reputación con cuidado.',
+      y: 'Logré mensajes más claros para audiencias distintas.',
+      z: 'Coordiné campaña, piezas y entregables con una misma lógica.',
     },
     images: [
       {
@@ -100,14 +104,16 @@ const projects = [
     code: '03',
     title: 'Activaciones y eventos',
     type: 'Producción de campo',
-    copy: 'Del concepto a la operación en campo.',
+    copy: 'Llevé conceptos a operación real en campo.',
+    detail:
+      'En activaciones y eventos trabajo entre la idea bonita y lo que realmente se puede montar. Mi papel fue conectar brief, proveedor, tiempos, materiales y ajustes para que la ejecución no dependiera de improvisar al final.',
     tags: ['Producción', 'PM', 'Proveedor'],
     visual: 'FIELD / OPS',
     cover: '/cases/activaciones-eventos/02-omni-veracruz-stand-expo.jpg',
     xyz: {
-      x: 'Convertir idea, proveedor y tiempos en algo montable.',
-      y: 'Materiales listos y operación más controlada.',
-      z: 'Licitación, coordinación y ajustes en campo.',
+      x: 'Tenía que convertir idea, proveedor y tiempos en algo montable.',
+      y: 'Dejé materiales listos y una operación más controlada.',
+      z: 'Acompañé licitación, coordinación y ajustes en campo.',
     },
     images: [
       {
@@ -129,14 +135,16 @@ const projects = [
     code: '04',
     title: 'IA para procesos internos',
     type: 'Operación aumentada',
-    copy: 'Flujos de IA para acelerar trabajo real.',
+    copy: 'Diseñé flujos de IA para acelerar trabajo real.',
+    detail:
+      'Uso IA como una capa práctica, no como adorno. La he aplicado para ordenar información, crear prototipos, documentar procesos y convertir decisiones dispersas en sistemas que el equipo puede usar.',
     tags: ['IA', 'Automatización', 'Sistemas'],
     visual: 'AI / PROCESS',
     cover: '/cases/ia-procesos-internos/stand-builder-ai.png',
     xyz: {
-      x: 'Demasiada información dispersa y tareas repetidas.',
-      y: 'Documentar, analizar y prototipar más rápido.',
-      z: 'IA, dashboards y procesos mejor conectados.',
+      x: 'Partí de información dispersa y tareas repetidas.',
+      y: 'Pude documentar, analizar y prototipar más rápido.',
+      z: 'Conecté IA, dashboards y procesos en una rutina más útil.',
     },
     images: [
       {
@@ -158,14 +166,16 @@ const projects = [
     code: '05',
     title: 'Comunicación política',
     type: 'Narrativa pública',
-    copy: 'Narrativa pública para temas complejos.',
+    copy: 'Construí narrativa pública para temas complejos.',
+    detail:
+      'En comunicación política me interesa bajar temas densos a mensajes que se puedan entender, sostener y publicar. Trabajo el contexto, el ángulo y el formato para que la pieza no se quede en discurso interno.',
     tags: ['Gobierno', 'Narrativa', 'Contenido'],
     visual: 'PUBLIC / NARRATIVE',
     cover: '/cases/comunicacion-politica/01-senado-yeidckol-retrato-morena.jpg',
     xyz: {
-      x: 'Convertir temas legislativos en mensajes entendibles.',
-      y: 'Una narrativa más ordenada para piezas públicas.',
-      z: 'Contexto, redacción y formatos de difusión.',
+      x: 'Tenía que convertir temas legislativos en mensajes entendibles.',
+      y: 'Construí una narrativa más ordenada para piezas públicas.',
+      z: 'Trabajé contexto, redacción y formatos de difusión.',
     },
     images: [
       {
@@ -187,14 +197,16 @@ const projects = [
     code: '06',
     title: 'Organizaciones sociales',
     type: 'Difusión institucional',
-    copy: 'Difusión visual para causas y organizaciones.',
+    copy: 'Desarrollé difusión visual para causas y organizaciones.',
+    detail:
+      'Con organizaciones sociales busco que la información no se vuelva pesada. Trabajo comunicados, videos, contexto visual y piezas de apoyo para que una causa pueda explicarse, convocar y presentarse con más claridad.',
     tags: ['Impacto', 'Visual', 'Difusión'],
     visual: 'SOCIAL / IMPACT',
     cover: '/cases/organizaciones-sociales/concomercio-centro-historico-mundial-2026-7649091564077174037.jpg',
     xyz: {
-      x: 'Explicar causas sin volverlas pesadas.',
-      y: 'Materiales más útiles para convocar y presentar.',
-      z: 'Comunicados, visuales y piezas audiovisuales.',
+      x: 'Necesitaba explicar causas sin volverlas pesadas.',
+      y: 'Dejé materiales más útiles para convocar y presentar.',
+      z: 'Organicé comunicados, visuales y piezas audiovisuales.',
     },
     images: [
       {
@@ -253,10 +265,10 @@ const webBuilds = [
 ]
 
 const timeline = [
-  ['2024 - Actualidad', 'Nimbus Marketing y RP', 'Project Manager, comunicación y producción creativa.'],
-  ['2024 - Actualidad', 'Senado de la República', 'Asesoría de comunicación política y materiales estratégicos.'],
-  ['2025 - Actualidad', 'Black Intelligence Marketing', 'Comunicación para sector gubernamental y proyectos especiales.'],
-  ['2023 - 2024', 'Hi-Tech Marketing', 'Diseño senior, edición de video y producción visual.'],
+  ['2024 - Actualidad', 'Nimbus Marketing y RP', 'Lidero proyectos, comunicación y producción creativa.'],
+  ['2024 - Actualidad', 'Senado de la República', 'Desarrollo comunicación política y materiales estratégicos.'],
+  ['2025 - Actualidad', 'Black Intelligence Marketing', 'Trabajo comunicación para gobierno y proyectos especiales.'],
+  ['2023 - 2024', 'Hi-Tech Marketing', 'Diseñé, edité video y produje materiales visuales.'],
 ]
 
 const tools = [
@@ -427,7 +439,7 @@ function CasePage({ project }) {
             Volver a casos
           </a>
           <h1>Caso no encontrado.</h1>
-          <p>La ruta no coincide con un proyecto publicado en este portfolio.</p>
+          <p>No tengo publicado un caso en esta ruta.</p>
         </div>
       </section>
     )
@@ -454,7 +466,7 @@ function CasePage({ project }) {
 
         <div className="case-overview reveal">
           <span>{project.type}</span>
-          <p>{project.copy}</p>
+          <p>{project.detail}</p>
         </div>
 
         <div className="case-media-grid">
@@ -465,24 +477,24 @@ function CasePage({ project }) {
 
         <div className="xyz-grid">
           <article className="xyz-card reveal">
-            <span>Reto</span>
-            <h2>Reto</h2>
+            <span>Mi reto</span>
+            <h2>Mi reto</h2>
             <p>{project.xyz.x}</p>
           </article>
           <article className="xyz-card reveal">
             <span>Resultado</span>
-            <h2>Resultado</h2>
+            <h2>Lo que dejé</h2>
             <p>{project.xyz.y}</p>
           </article>
           <article className="xyz-card reveal">
             <span>Resolución</span>
-            <h2>Resolución</h2>
+            <h2>Cómo lo resolví</h2>
             <p>{project.xyz.z}</p>
           </article>
         </div>
 
         <div className="case-next reveal">
-          <p>Entender, producir y entregar claro.</p>
+          <p>Me gusta convertir problemas abiertos en entregas claras.</p>
           <a className="primary-action" href="/#contacto">
             Contacto
             <ArrowUpRight size={18} />
@@ -516,8 +528,8 @@ function App() {
 
   useEffect(() => {
     const description =
-      activeCase?.copy ||
-      'Portfolio profesional de Ian Aceves: ideas, procesos creativos, campañas, producción e inteligencia artificial aplicada.'
+      activeCase?.detail ||
+      'Soy Ian Aceves. Creo ideas, campañas, sistemas visuales y procesos con inteligencia artificial aplicada.'
 
     document.title = activeCase
       ? `${activeCase.title} | Caso de Ian Aceves`
@@ -843,11 +855,12 @@ function App() {
               <p className="hero-kicker reveal">Portfolio profesional 2026</p>
               <h1 className="reveal">Soy Ian y amo crear.</h1>
               <p className="hero-lede reveal">
-                Desarrollo ideas, campañas y sistemas visuales hasta volverlos claros,
-                presentables y ejecutables.
+                Me gusta tomar ideas abiertas, campañas, briefings raros o problemas sin forma
+                y convertirlos en algo claro, visual y ejecutable.
               </p>
               <p className="hero-lede hero-lede-secondary reveal">
-                Me muevo entre creatividad, producción, project management e IA aplicada.
+                He trabajado entre creatividad, producción, project management e IA aplicada:
+                ahí donde todavía no es obvio qué se tiene que hacer, pero ya urge darle forma.
               </p>
               <div className="hero-actions reveal">
                 <a className="primary-action" href="#trabajo">
@@ -865,10 +878,10 @@ function App() {
           <div className="section-header">
             <div>
               <div className="section-kicker reveal">Trabajo seleccionado</div>
-              <h2 className="section-title reveal">Casos que combinan estrategia, producción y ejecución.</h2>
+              <h2 className="section-title reveal">Casos donde combino estrategia, producción y ejecución.</h2>
             </div>
             <p className="section-note reveal">
-              Una selección breve por tipo de reto.
+              Una selección breve de retos que he convertido en entregas reales.
             </p>
           </div>
           <div className="project-grid">
@@ -900,10 +913,10 @@ function App() {
           <div className="section-header">
             <div>
               <div className="section-kicker reveal">Experiencias digitales</div>
-              <h2 className="section-title reveal">Interfaces listas para verse, usarse y compartirse.</h2>
+              <h2 className="section-title reveal">Interfaces que he creado para verse, usarse y compartirse.</h2>
             </div>
             <p className="section-note reveal">
-              Sitios y prototipos con una capa visual más fuerte que un documento plano.
+              Sitios y prototipos donde convierto una idea en una experiencia más clara que un documento plano.
             </p>
           </div>
           <div className="web-grid">
@@ -930,34 +943,34 @@ function App() {
               <div className="section-kicker reveal">Sistema</div>
               <h2 className="section-title reveal">Del caos del brief a una ruta visible.</h2>
               <p className="section-note reveal">
-                Ordenar ideas, entregables y decisiones.
+                Así ordeno ideas, entregables y decisiones.
               </p>
             </div>
             <div className="process-board reveal">
               <div className="process-row">
                 <FileText size={22} />
                 <span>Brief</span>
-                <strong>Entender el problema real</strong>
+                <strong>Entiendo el problema real</strong>
               </div>
               <div className="process-row">
                 <Workflow size={22} />
                 <span>Ruta</span>
-                <strong>Definir entregables y responsables</strong>
+                <strong>Defino entregables y responsables</strong>
               </div>
               <div className="process-row">
                 <Layers3 size={22} />
                 <span>Producción</span>
-                <strong>Coordinar materiales, versiones y revisión</strong>
+                <strong>Coordino materiales, versiones y revisión</strong>
               </div>
               <div className="process-row">
                 <Cpu size={22} />
                 <span>IA aplicada</span>
-                <strong>Acelerar documentación, reportes y prototipos</strong>
+                <strong>Acelero documentación, reportes y prototipos</strong>
               </div>
               <div className="process-row">
                 <Play size={22} />
                 <span>Entrega</span>
-                <strong>Presentar claro, medir y ajustar</strong>
+                <strong>Presento claro, mido y ajusto</strong>
               </div>
             </div>
           </div>
@@ -978,7 +991,7 @@ function App() {
           </div>
           <div className="tools-panel reveal">
             <div className="section-kicker">Stack</div>
-            <h2>Herramientas con las que piensa, produce y entrega.</h2>
+            <h2>Herramientas con las que pienso, produzco y entrego.</h2>
             <div className="tools-grid">
               {tools.map((tool) => (
                 <span key={tool}>{tool}</span>
@@ -991,7 +1004,7 @@ function App() {
           <div className="contact-panel reveal">
             <div>
               <div className="section-kicker">Contacto</div>
-              <h2>Construyamos algo que se vea bien y funcione mejor.</h2>
+              <h2>Me interesa crear cosas que se vean bien y funcionen mejor.</h2>
             </div>
             <div className="contact-actions">
               <a className="primary-action" href="mailto:ianamb.mkt@gmail.com">
