@@ -289,6 +289,10 @@ main,
   border-radius: 50%;
 }
 
+.brand-mark span:first-child svg {
+  display: block;
+}
+
 .nav-links {
   justify-content: center;
   gap: 8px;
@@ -1663,8 +1667,7 @@ p {
 }
 
 .case-media-card span,
-.case-media-card small,
-.xyz-card span {
+.case-media-card small {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 700;
@@ -1806,7 +1809,6 @@ p {
 }
 
 .xyz-card h2 {
-  margin-top: 28px;
   font-size: 34px;
   line-height: 1;
 }

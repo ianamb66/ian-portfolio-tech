@@ -8,6 +8,7 @@ import {
   Download,
   FileText,
   Globe2,
+  Home,
   Layers3,
   Mail,
   Moon,
@@ -588,19 +589,16 @@ function CasePage({ project }) {
 
         <div className="xyz-grid">
           <article className="xyz-card reveal">
-            <span>Mi reto</span>
-            <h2>Mi reto</h2>
+            <h2>Reto</h2>
             <p>{project.xyz.x}</p>
           </article>
           <article className="xyz-card reveal">
-            <span>Resultado</span>
-            <h2>Lo que dejé</h2>
-            <p>{project.xyz.y}</p>
+            <h2>Solución</h2>
+            <p>{project.xyz.z}</p>
           </article>
           <article className="xyz-card reveal">
-            <span>Resolución</span>
-            <h2>Cómo lo resolví</h2>
-            <p>{project.xyz.z}</p>
+            <h2>Resultado</h2>
+            <p>{project.xyz.y}</p>
           </article>
         </div>
 
@@ -922,8 +920,10 @@ function App() {
       <a className="skip-link" href="#main">Saltar al contenido</a>
       <nav className="topbar" aria-label="Navegación principal">
         <a className="brand-mark" href="/" aria-label="Ir al inicio">
-          <span>IA</span>
-          <span>Comunicador visual</span>
+          <span aria-hidden="true">
+            <Home size={17} strokeWidth={2.2} />
+          </span>
+          <span>Ian Aceves</span>
         </a>
         <div className="nav-links">
           {navItems.map(([label, href]) => (
@@ -990,7 +990,7 @@ function App() {
           <div className="section-header">
             <div>
               <div className="section-kicker reveal">Trabajo seleccionado</div>
-              <h2 className="section-title reveal">Casos donde combino estrategia, producción y ejecución.</h2>
+              <h2 className="section-title reveal">Proyectos donde una idea encuentra forma.</h2>
             </div>
             <p className="section-note reveal">
               Una selección breve de retos y herramientas de trabajo que he convertido en entregas reales.
@@ -1025,7 +1025,7 @@ function App() {
           <div className="section-header">
             <div>
               <div className="section-kicker reveal">Experiencias digitales</div>
-              <h2 className="section-title reveal">Interfaces que he creado para verse, usarse y compartirse.</h2>
+              <h2 className="section-title reveal">Webs y herramientas que convierten ideas en experiencia.</h2>
             </div>
             <p className="section-note reveal">
               Sitios y prototipos donde convierto una idea en una experiencia más clara que un documento plano.
@@ -1085,17 +1085,17 @@ function App() {
               <div className="process-row">
                 <Layers3 size={22} />
                 <span>Producción</span>
-                <strong>Coordino materiales, versiones y revisión</strong>
+                <strong>Cuido que la producción avance con orden</strong>
               </div>
               <div className="process-row">
                 <Cpu size={22} />
                 <span>IA aplicada</span>
-                <strong>Acelero documentación, reportes y prototipos</strong>
+                <strong>Uso IA para quitar fricción al proceso</strong>
               </div>
               <div className="process-row">
                 <Play size={22} />
                 <span>Entrega</span>
-                <strong>Presento claro, mido y ajusto</strong>
+                <strong>Entrego una versión que se puede defender</strong>
               </div>
             </div>
           </div>
@@ -1116,7 +1116,7 @@ function App() {
           </div>
           <div className="tools-panel reveal">
             <div className="section-kicker">Stack</div>
-            <h2>Herramientas con las que pienso, produzco y entrego.</h2>
+            <h2>Herramientas que me ayudan a trabajar mejor.</h2>
             <div className="tools-grid">
               {tools.map((tool) => (
                 <span key={tool}>{tool}</span>
