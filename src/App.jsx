@@ -5,6 +5,7 @@ import {
   ArrowUpRight,
   ArrowLeft,
   Cpu,
+  Download,
   FileText,
   Globe2,
   Layers3,
@@ -261,6 +262,23 @@ const webBuilds = [
     type: 'Calculadora para fisioterapeutas',
     url: 'https://fisioassess-vex1.vercel.app',
     image: '/previews/fisioassess-incan-fisioterapia.png',
+  },
+  {
+    title: 'Presupuestos Bento Pro',
+    type: 'Herramienta para cotizar y exportar',
+    url: '/tools/presupuestos-bento-pro.html',
+    image: '/previews/presupuestos-bento-pro.png',
+    note: 'HTML editable para armar presupuestos, exportar PDF/Excel y mantener vista interna o cliente.',
+    actionLabel: 'Abrir herramienta',
+    download: '/tools/presupuestos-bento-pro.html',
+  },
+  {
+    title: 'Propuestas de stands IA',
+    type: 'Gemini para vibecoding y stands',
+    url: 'https://share.gemini.google/MhRAC5ErAcda',
+    image: '/previews/stand-builder.png',
+    note: 'Link de Gemini para acelerar propuestas de stands y bajar ideas a una ruta visual.',
+    actionLabel: 'Abrir Gemini',
   },
 ]
 
@@ -922,16 +940,29 @@ function App() {
           <div className="web-grid">
             {webBuilds.map((site) => (
               <article className="web-card reveal" key={site.url}>
-                <a href={site.url} target="_blank" rel="noreferrer" aria-label={`Abrir ${site.title}`}>
+                <a className="web-card-visual" href={site.url} target="_blank" rel="noreferrer" aria-label={`Abrir ${site.title}`}>
                   <img src={site.image} alt={`Preview del hero de ${site.title}`} loading="lazy" decoding="async" />
-                  <div className="web-card-body">
-                    <div>
-                      <span>{site.type}</span>
-                      <h3>{site.title}</h3>
-                    </div>
-                    <Globe2 size={20} strokeWidth={1.7} />
-                  </div>
                 </a>
+                <div className="web-card-body">
+                  <div>
+                    <span>{site.type}</span>
+                    <h3>{site.title}</h3>
+                    {site.note ? <p>{site.note}</p> : null}
+                  </div>
+                  <Globe2 size={20} strokeWidth={1.7} />
+                </div>
+                <div className="web-card-actions">
+                  <a href={site.url} target="_blank" rel="noreferrer">
+                    {site.actionLabel || 'Abrir'}
+                    <ArrowUpRight size={16} />
+                  </a>
+                  {site.download ? (
+                    <a href={site.download} download>
+                      Descargar HTML
+                      <Download size={16} />
+                    </a>
+                  ) : null}
+                </div>
               </article>
             ))}
           </div>

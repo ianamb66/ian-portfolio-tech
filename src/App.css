@@ -1855,10 +1855,10 @@ p {
   box-shadow: var(--shadow);
 }
 
-.web-card a {
+.web-card-visual {
   display: block;
-  min-height: 100%;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .web-card img {
@@ -1881,7 +1881,7 @@ p {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 18px;
-  align-items: center;
+  align-items: start;
   padding: 18px;
 }
 
@@ -1898,6 +1898,41 @@ p {
   font-size: clamp(26px, 3vw, 32px);
   line-height: 1;
   font-style: italic;
+}
+
+.web-card-body p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.web-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 18px 18px;
+}
+
+.web-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.web-card-actions a:hover {
+  border-color: var(--ink);
+  background: var(--glass-strong);
+  transform: translateY(-1px);
 }
 
 .system-section {
