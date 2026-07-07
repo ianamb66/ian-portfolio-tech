@@ -4,15 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
   ArrowUpRight,
   ArrowLeft,
-  Bot,
-  BriefcaseBusiness,
   Cpu,
   FileText,
   Globe2,
   Layers3,
   Mail,
-  Megaphone,
-  MonitorCog,
   Moon,
   Play,
   Sun,
@@ -23,43 +19,10 @@ import './App.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const navItems = [
-  ['Perfil', '/#perfil'],
   ['Trabajo', '/#trabajo'],
   ['Webs', '/#webs'],
   ['Sistema', '/#sistema'],
   ['Contacto', '/#contacto'],
-]
-
-const clientShowcase = [
-  ['Reckitt', 'Consumo, salud y comunicación corporativa', 'RK'],
-  ['CEMEX', 'Cultura, educación e infraestructura artística', 'CX'],
-  ['British American Tobacco', 'Comunicación y proyectos de marca', 'BT'],
-  ['Senado de la República', 'Comunicación política y narrativa pública', 'SR'],
-  ['Museo Anahuacalli', 'Proyecto cultural y educativo', 'MA'],
-  ['Nimbus Marketing y RP', 'Agencia, operación y producción creativa', 'NB'],
-]
-
-const capabilities = [
-  {
-    icon: BriefcaseBusiness,
-    label: 'Project Management',
-    copy: 'Briefs, rutas, tiempos, proveedores, entregables y seguimiento ejecutivo.',
-  },
-  {
-    icon: Megaphone,
-    label: 'Comunicación',
-    copy: 'Narrativa institucional, campañas, mensajes clave y materiales de presentación.',
-  },
-  {
-    icon: MonitorCog,
-    label: 'Producción creativa',
-    copy: 'Coordinación audiovisual, diseño, edición, propuestas visuales y control de calidad.',
-  },
-  {
-    icon: Bot,
-    label: 'IA aplicada',
-    copy: 'Automatización, documentación, prototipos, reportes, CRM y flujos de trabajo.',
-  },
 ]
 
 const projects = [
@@ -356,6 +319,26 @@ function LiquidBackdrop() {
           />
         ))}
       </div>
+    </div>
+  )
+}
+
+function ResonanceField() {
+  const lines = [
+    'M -120 180 C 160 80 330 320 560 210 S 980 80 1230 230 S 1580 420 1860 250',
+    'M -140 330 C 150 470 340 110 620 300 S 1030 520 1320 310 S 1620 90 1880 350',
+    'M -120 510 C 210 360 360 640 650 480 S 1040 250 1320 500 S 1640 730 1880 510',
+    'M -100 700 C 190 860 400 590 690 740 S 1120 930 1390 720 S 1660 520 1900 760',
+    'M -120 910 C 160 760 420 1060 710 890 S 1120 690 1410 930 S 1660 1160 1900 920',
+  ]
+
+  return (
+    <div className="resonance-field" aria-hidden="true">
+      <svg viewBox="0 0 1760 1080" preserveAspectRatio="none" focusable="false">
+        {lines.map((path, index) => (
+          <path className={`resonance-line resonance-line-${index + 1}`} d={path} key={path} />
+        ))}
+      </svg>
     </div>
   )
 }
@@ -816,6 +799,7 @@ function App() {
   return (
     <div ref={rootRef} className="site-shell" data-theme={theme}>
       <LiquidBackdrop />
+      <ResonanceField />
       <a className="skip-link" href="#main">Saltar al contenido</a>
       <nav className="topbar" aria-label="Navegación principal">
         <a className="brand-mark" href="/" aria-label="Ir al inicio">
@@ -848,9 +832,17 @@ function App() {
           <>
         <section id="inicio" className="hero-section">
           <div className="hero-simple-grid">
-            <figure className="hero-portrait reveal">
-              <img src="/assets/img/ian-portrait-2026.jpg" alt="Retrato de Ian Aceves" loading="eager" decoding="async" />
-            </figure>
+            <div className="hero-portrait-wrap reveal">
+              <div className="portrait-resonance" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+              <figure className="hero-portrait">
+                <img src="/assets/img/ian-portrait-2026.jpg" alt="Retrato de Ian Aceves" loading="eager" decoding="async" />
+              </figure>
+            </div>
             <div className="hero-copy">
               <p className="hero-kicker reveal">Portfolio profesional 2026</p>
               <h1 className="reveal">Soy Ian y amo crear.</h1>
@@ -871,51 +863,6 @@ function App() {
                 </a>
               </div>
             </div>
-          </div>
-        </section>
-
-        <MotionDivider words={['about', 'criterio', 'visual']} />
-
-        <section id="perfil" className="section-block profile-section">
-          <div className="section-kicker reveal">Perfil</div>
-          <div className="two-column">
-            <div>
-              <h2 className="section-title reveal">Un perfil híbrido para equipos que necesitan avanzar.</h2>
-            </div>
-            <div className="profile-copy reveal">
-              <p>
-                Soy comunicador visual y project manager creativo. He trabajado con agencias,
-                marcas comerciales, sector público, organizaciones sociales e instituciones
-                culturales.
-              </p>
-              <p>
-                Mi forma de trabajar cruza criterio visual, operación, narrativa y herramientas de IA
-                para que las ideas no se queden en intención: se prueban, se ordenan, se producen y
-                llegan a una entrega con sentido.
-              </p>
-            </div>
-          </div>
-          <div className="capability-grid">
-            {capabilities.map(({ icon: Icon, label, copy }) => (
-              <article className="capability-card reveal" key={label}>
-                <Icon size={24} strokeWidth={1.7} />
-                <h3>{label}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-          <div className="client-showcase">
-            {clientShowcase.map(([name, detail, initials]) => (
-              <article className="client-card reveal" key={name}>
-                <div className="client-mark" aria-hidden="true">
-                  {initials}
-                </div>
-                <div>
-                  <h3>{name}</h3>
-                  <p>{detail}</p>
-                </div>
-              </article>
-            ))}
           </div>
         </section>
 
