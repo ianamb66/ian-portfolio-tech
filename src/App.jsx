@@ -164,7 +164,7 @@ const projects = [
   },
   {
     slug: 'comunicacion-politica',
-    code: '05',
+    code: '08',
     title: 'Comunicación política',
     type: 'Narrativa pública',
     copy: 'Construí narrativa pública para temas complejos.',
@@ -195,7 +195,7 @@ const projects = [
   },
   {
     slug: 'organizaciones-sociales',
-    code: '06',
+    code: '09',
     title: 'Organizaciones sociales',
     type: 'Difusión institucional',
     copy: 'Desarrollé difusión visual para causas y organizaciones.',
@@ -233,6 +233,97 @@ const projects = [
         label: 'Investigación visual',
         src: '/cases/organizaciones-sociales/05-mundo-vapeo-silueta-dispositivo-wikimedia.jpg',
         alt: 'Imagen contextual sobre vapeo para investigación visual',
+      },
+    ],
+  },
+  {
+    slug: 'chats-whatsapp-ia',
+    code: '05',
+    title: 'Chats de WhatsApp con IA',
+    type: 'Herramienta conversacional',
+    copy: 'Construí chats con IA para trabajar desde la conversación.',
+    detail:
+      'Me gusta crear mis propias herramientas de trabajo. En este proyecto conecto WhatsApp con un agente capaz de recibir mensajes, leer contexto, distinguir intención y convertir una conversación normal en respuesta, seguimiento o acción interna.',
+    tags: ['WhatsApp', 'IA', 'Operación'],
+    visual: 'WHATSAPP / AI',
+    cover: '/cases/herramientas-trabajo/whatsapp-ai-assistant-unsplash.jpg',
+    xyz: {
+      x: 'Quería que la operación no dependiera de copiar mensajes entre canales.',
+      y: 'Dejé un flujo conversacional para responder, ordenar y disparar acciones.',
+      z: 'Conecté gateway, contexto y reglas para que el chat se volviera una interfaz de trabajo.',
+    },
+    images: [
+      {
+        title: 'Conversación como interfaz',
+        label: 'Stock / IA',
+        src: '/cases/herramientas-trabajo/whatsapp-ai-assistant-unsplash.jpg',
+        alt: 'Smartphone con interfaz de asistente de IA en un escritorio de trabajo',
+      },
+      {
+        title: 'Flujo operativo',
+        label: 'Sistema',
+        bullets: ['Mensaje', 'Contexto', 'Intención', 'Acción'],
+        variant: 'timeline',
+      },
+    ],
+  },
+  {
+    slug: 'notion-skill-tareas',
+    code: '06',
+    title: 'Skill de Notion para tareas',
+    type: 'Automatización de seguimiento',
+    copy: 'Diseñé un flujo para convertir mensajes en tareas de Notion.',
+    detail:
+      'Nuestra skill de Notion funciona como puente entre conversación y seguimiento: detecta cuando un mensaje ya es una tarea, respeta clientes y campos existentes, pide confirmación si hay ambigüedad y crea o actualiza el registro con contexto suficiente para retomarlo después.',
+    tags: ['Notion', 'Tareas', 'Automatización'],
+    visual: 'NOTION / TASKS',
+    xyz: {
+      x: 'Necesitaba que las tareas no se perdieran entre chats, notas y pendientes sueltos.',
+      y: 'Dejé una forma más rápida de pasar de solicitud a tarea accionable.',
+      z: 'Definí reglas para detectar intención, validar cliente/campos y guardar el seguimiento.',
+    },
+    images: [
+      {
+        title: 'De mensaje a tarea',
+        label: 'Síntesis',
+        bullets: ['Detecto solicitud', 'Valido cliente', 'Creo tarea', 'Actualizo estado'],
+        variant: 'timeline',
+      },
+      {
+        title: 'Base ordenada',
+        label: 'Sistema',
+        bullets: ['Cliente', 'Prioridad', 'Fecha', 'Contexto'],
+        variant: 'grid',
+      },
+    ],
+  },
+  {
+    slug: 'video-stock-skill',
+    code: '07',
+    title: 'Skill para video y archivo',
+    type: 'Producción asistida',
+    copy: 'Armé un flujo para producir videos y recabar material de archivo.',
+    detail:
+      'Esta skill ayuda a arrancar piezas audiovisuales con menos fricción: entiende el objetivo, separa guion, referencias, stock footage, música, edición y entregables; luego organiza una ruta de material de archivo para que la edición no empiece desde una pantalla vacía.',
+    tags: ['Video', 'Stock', 'Producción'],
+    visual: 'VIDEO / ARCHIVE',
+    xyz: {
+      x: 'Quería bajar rápido de una idea de video a una ruta de producción clara.',
+      y: 'Dejé una estructura para buscar material, ordenar referencias y preparar edición.',
+      z: 'Separé guion, assets, stock, música y entregables como pasos accionables.',
+    },
+    images: [
+      {
+        title: 'Ruta audiovisual',
+        label: 'Proceso',
+        bullets: ['Guion', 'Referencias', 'Stock', 'Edición'],
+        variant: 'cards',
+      },
+      {
+        title: 'Material de archivo',
+        label: 'Biblioteca',
+        bullets: ['Tomas base', 'B-roll', 'Música', 'Licencias'],
+        variant: 'timeline',
       },
     ],
   },
@@ -281,6 +372,8 @@ const webBuilds = [
     actionLabel: 'Abrir Gemini',
   },
 ]
+
+const orderedProjects = [...projects].sort((first, second) => Number(first.code) - Number(second.code))
 
 const timeline = [
   ['2024 - Actualidad', 'Nimbus Marketing y RP', 'Lidero proyectos, comunicación y producción creativa.'],
@@ -879,6 +972,7 @@ function App() {
               <p className="hero-lede hero-lede-secondary reveal">
                 He trabajado entre creatividad, producción, project management e IA aplicada:
                 ahí donde todavía no es obvio qué se tiene que hacer, pero ya urge darle forma.
+                También me gusta crear mis propias herramientas de trabajo.
               </p>
               <div className="hero-actions reveal">
                 <a className="primary-action" href="#trabajo">
@@ -899,11 +993,11 @@ function App() {
               <h2 className="section-title reveal">Casos donde combino estrategia, producción y ejecución.</h2>
             </div>
             <p className="section-note reveal">
-              Una selección breve de retos que he convertido en entregas reales.
+              Una selección breve de retos y herramientas de trabajo que he convertido en entregas reales.
             </p>
           </div>
           <div className="project-grid">
-            {projects.map((project) => (
+            {orderedProjects.map((project) => (
               <a className="project-card reveal" href={`/casos/${project.slug}`} key={project.code}>
                 <div className="project-visual" aria-hidden="true">
                   {project.cover ? <img src={project.cover} alt="" loading="lazy" decoding="async" /> : null}
