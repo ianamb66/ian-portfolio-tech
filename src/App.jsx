@@ -22,7 +22,6 @@ const navItems = [
   ['Trabajo', '/#trabajo'],
   ['Webs', '/#webs'],
   ['Sistema', '/#sistema'],
-  ['Contacto', '/#contacto'],
 ]
 
 const projects = [
@@ -31,14 +30,14 @@ const projects = [
     code: '01',
     title: 'CEMEX + Museo Anahuacalli',
     type: 'Estrategia cultural',
-    copy: 'Conceptualización, documentación estratégica, análisis de necesidades, ruta de implementación y presupuesto para infraestructura artística.',
+    copy: 'Una idea cultural convertida en ruta ejecutable.',
     tags: ['Cultura', 'Planeación', 'Documentación'],
     visual: 'CEMEX / ANAHUACALLI',
     cover: '/cases/cemex-anahuacalli/01-anahuacalli-el-muro-vivo-portada.jpg',
     xyz: {
-      x: 'CEMEX y Museo Anahuacalli necesitaban aterrizar una oportunidad cultural en una propuesta ejecutable.',
-      y: 'El resultado fue una ruta de proyecto clara para educación, infraestructura artística y toma de decisiones.',
-      z: 'Se resolvió con análisis de necesidades, documentación estratégica, presupuestos y una narrativa lista para presentación.',
+      x: 'Aterrizar una oportunidad cultural sin perder ambición.',
+      y: 'Una ruta clara para presentar, decidir y ejecutar.',
+      z: 'Necesidades, presupuesto y narrativa en una propuesta.',
     },
     images: [
       {
@@ -66,14 +65,14 @@ const projects = [
     code: '02',
     title: 'Reckitt + marcas de consumo',
     type: 'Campañas y responsabilidad corporativa',
-    copy: 'Propuestas, rutas de trabajo, materiales de comunicación y campañas vinculadas con salud, consumo y resistencia antimicrobiana.',
+    copy: 'Campañas sensibles para marcas y salud pública.',
     tags: ['Campañas', 'RCA', 'Cliente'],
     visual: 'RECKITT / HEALTH',
     cover: '/cases/reckitt-marcas-consumo/01-cal-c-tose-chocomilk-presentacion.jpg',
     xyz: {
-      x: 'Marcas de consumo necesitaban campañas y materiales corporativos con sensibilidad de salud y reputación.',
-      y: 'Se logró ordenar mensajes, piezas y rutas de trabajo para comunicar con claridad ante audiencias distintas.',
-      z: 'Se resolvió con propuestas, mensajes clave, estructura de campaña y coordinación de entregables con enfoque RCA.',
+      x: 'Hablar de salud, consumo y reputación con cuidado.',
+      y: 'Mensajes más claros para audiencias distintas.',
+      z: 'Campaña, piezas y entregables coordinados.',
     },
     images: [
       {
@@ -101,14 +100,14 @@ const projects = [
     code: '03',
     title: 'Activaciones y eventos',
     type: 'Producción de campo',
-    copy: 'Licitación, concepto, coordinación con proveedores, revisión de materiales, producción visual y resolución de incidencias.',
+    copy: 'Del concepto a la operación en campo.',
     tags: ['Producción', 'PM', 'Proveedor'],
     visual: 'FIELD / OPS',
     cover: '/cases/activaciones-eventos/02-omni-veracruz-stand-expo.jpg',
     xyz: {
-      x: 'Las activaciones requerían pasar de concepto creativo a ejecución real con tiempos, proveedores y cambios de campo.',
-      y: 'El resultado fue una operación más controlada y materiales listos para implementación.',
-      z: 'Se resolvió con licitación, coordinación, revisión de materiales, seguimiento y respuesta rápida a incidencias.',
+      x: 'Convertir idea, proveedor y tiempos en algo montable.',
+      y: 'Materiales listos y operación más controlada.',
+      z: 'Licitación, coordinación y ajustes en campo.',
     },
     images: [
       {
@@ -130,14 +129,14 @@ const projects = [
     code: '04',
     title: 'IA para procesos internos',
     type: 'Operación aumentada',
-    copy: 'Flujos con ChatGPT, Claude, Gemini y NotebookLM para reportes, dashboards, documentación, CRM y prototipado rápido.',
+    copy: 'Flujos de IA para acelerar trabajo real.',
     tags: ['IA', 'Automatización', 'Sistemas'],
     visual: 'AI / PROCESS',
     cover: '/cases/ia-procesos-internos/stand-builder-ai.png',
     xyz: {
-      x: 'Los equipos tenían información dispersa, reportes repetitivos y procesos que consumían demasiado tiempo.',
-      y: 'Se obtuvo una operación más ágil para documentar, analizar, prototipar y presentar avances.',
-      z: 'Se resolvió con flujos usando ChatGPT, Claude, Gemini, NotebookLM, dashboards, CRM y prototipos rápidos.',
+      x: 'Demasiada información dispersa y tareas repetidas.',
+      y: 'Documentar, analizar y prototipar más rápido.',
+      z: 'IA, dashboards y procesos mejor conectados.',
     },
     images: [
       {
@@ -159,14 +158,14 @@ const projects = [
     code: '05',
     title: 'Comunicación política',
     type: 'Narrativa pública',
-    copy: 'Apoyo en comunicación, materiales estratégicos, comunicados y contenidos vinculados con temas legislativos.',
+    copy: 'Narrativa pública para temas complejos.',
     tags: ['Gobierno', 'Narrativa', 'Contenido'],
     visual: 'PUBLIC / NARRATIVE',
     cover: '/cases/comunicacion-politica/01-senado-yeidckol-retrato-morena.jpg',
     xyz: {
-      x: 'La comunicación política exigía transformar temas legislativos en mensajes comprensibles y materiales accionables.',
-      y: 'El resultado fue una narrativa pública más ordenada para comunicados, contenidos y piezas estratégicas.',
-      z: 'Se resolvió con análisis de contexto, redacción, estructura de mensajes y adaptación a formatos de difusión.',
+      x: 'Convertir temas legislativos en mensajes entendibles.',
+      y: 'Una narrativa más ordenada para piezas públicas.',
+      z: 'Contexto, redacción y formatos de difusión.',
     },
     images: [
       {
@@ -188,14 +187,14 @@ const projects = [
     code: '06',
     title: 'Organizaciones sociales',
     type: 'Difusión institucional',
-    copy: 'Comunicados, campañas, piezas visuales y materiales audiovisuales para proyectos de impacto y difusión.',
+    copy: 'Difusión visual para causas y organizaciones.',
     tags: ['Impacto', 'Visual', 'Difusión'],
     visual: 'SOCIAL / IMPACT',
     cover: '/cases/organizaciones-sociales/concomercio-centro-historico-mundial-2026-7649091564077174037.jpg',
     xyz: {
-      x: 'Organizaciones sociales necesitaban comunicar causas y proyectos con mayor claridad visual e institucional.',
-      y: 'Se generaron materiales de difusión más útiles para explicar impacto, convocar y presentar iniciativas.',
-      z: 'Se resolvió con comunicados, campañas, piezas visuales y producción audiovisual orientada a audiencias específicas.',
+      x: 'Explicar causas sin volverlas pesadas.',
+      y: 'Materiales más útiles para convocar y presentar.',
+      z: 'Comunicados, visuales y piezas audiovisuales.',
     },
     images: [
       {
@@ -343,12 +342,12 @@ function ResonanceField() {
   )
 }
 
-function MotionDivider({ words }) {
+function SoundDivider({ words }) {
   return (
-    <div className="motion-divider reveal" aria-hidden="true">
-      <div className="motion-track">
+    <div className="sound-divider reveal" aria-hidden="true">
+      <div className="sound-line">
         {words.map((word, index) => (
-          <span className={`motion-chip motion-chip-${index + 1}`} key={word}>
+          <span className={`sound-word sound-word-${index + 1}`} key={word}>
             {word}
           </span>
         ))}
@@ -455,10 +454,7 @@ function CasePage({ project }) {
 
         <div className="case-overview reveal">
           <span>{project.type}</span>
-          <p>
-            Caso desplegado como página propia para mostrar contexto, par visual del trabajo y
-            la forma en que convertí una idea compleja en una entrega clara.
-          </p>
+          <p>{project.copy}</p>
         </div>
 
         <div className="case-media-grid">
@@ -486,9 +482,9 @@ function CasePage({ project }) {
         </div>
 
         <div className="case-next reveal">
-          <p>La idea es simple: entender el problema, producir con criterio y entregar algo claro.</p>
+          <p>Entender, producir y entregar claro.</p>
           <a className="primary-action" href="/#contacto">
-            Hablemos de un proyecto
+            Contacto
             <ArrowUpRight size={18} />
           </a>
         </div>
@@ -757,9 +753,9 @@ function App() {
             },
           })
         }
-        gsap.utils.toArray('.motion-divider').forEach((divider) => {
+        gsap.utils.toArray('.sound-divider').forEach((divider) => {
           gsap.fromTo(
-            divider.querySelectorAll('.motion-chip'),
+            divider.querySelectorAll('.sound-word'),
             {
               yPercent: 34,
               scale: 0.96,
@@ -779,7 +775,7 @@ function App() {
               },
             },
           )
-          gsap.to(divider.querySelectorAll('.motion-chip'), {
+          gsap.to(divider.querySelectorAll('.sound-word'), {
             y: -8,
             ease: 'none',
             scrollTrigger: {
@@ -847,14 +843,11 @@ function App() {
               <p className="hero-kicker reveal">Portfolio profesional 2026</p>
               <h1 className="reveal">Soy Ian y amo crear.</h1>
               <p className="hero-lede reveal">
-                Para mí crear es desarrollar ideas hasta encontrar la solución definitiva. Me gusta
-                explorar la creatividad en procesos, equipos y campañas que no tienen una respuesta
-                sencilla a primera vista, y convertir ese caos en algo claro, visual y presentable.
+                Desarrollo ideas, campañas y sistemas visuales hasta volverlos claros,
+                presentables y ejecutables.
               </p>
               <p className="hero-lede hero-lede-secondary reveal">
-                He trabajado entre comunicación visual, project management, producción, campañas,
-                instituciones, marcas y herramientas de IA. Mi experiencia vive justo ahí: en cruzar
-                criterio creativo con ejecución para que las ideas lleguen a una entrega real.
+                Me muevo entre creatividad, producción, project management e IA aplicada.
               </p>
               <div className="hero-actions reveal">
                 <a className="primary-action" href="#trabajo">
@@ -866,7 +859,7 @@ function App() {
           </div>
         </section>
 
-        <MotionDivider words={['portfolio', 'estrategia', 'produccion']} />
+        <SoundDivider words={['portfolio', 'estrategia', 'produccion']} />
 
         <section id="trabajo" className="section-block work-section">
           <div className="section-header">
@@ -875,8 +868,7 @@ function App() {
               <h2 className="section-title reveal">Casos que combinan estrategia, producción y ejecución.</h2>
             </div>
             <p className="section-note reveal">
-              Selección organizada por tipo de reto, no por formato. La idea es mostrar criterio,
-              operación y capacidad de respuesta.
+              Una selección breve por tipo de reto.
             </p>
           </div>
           <div className="project-grid">
@@ -902,7 +894,7 @@ function App() {
           </div>
         </section>
 
-        <MotionDivider words={['ideas', 'interfaces', 'experiencias']} />
+        <SoundDivider words={['ideas', 'interfaces', 'experiencias']} />
 
         <section id="webs" className="section-block web-section">
           <div className="section-header">
@@ -911,8 +903,7 @@ function App() {
               <h2 className="section-title reveal">Interfaces listas para verse, usarse y compartirse.</h2>
             </div>
             <p className="section-note reveal">
-              Una vitrina curada de sitios y experiencias digitales construidas para presentar
-              proyectos con claridad, movimiento y una capa visual más fuerte que un documento plano.
+              Sitios y prototipos con una capa visual más fuerte que un documento plano.
             </p>
           </div>
           <div className="web-grid">
@@ -939,8 +930,7 @@ function App() {
               <div className="section-kicker reveal">Sistema</div>
               <h2 className="section-title reveal">Del caos del brief a una ruta visible.</h2>
               <p className="section-note reveal">
-                Un enfoque operativo para traducir ideas, pendientes, contenido, producción y
-                aprobación en una secuencia clara.
+                Ordenar ideas, entregables y decisiones.
               </p>
             </div>
             <div className="process-board reveal">
