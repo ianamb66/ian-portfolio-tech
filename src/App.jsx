@@ -328,6 +328,37 @@ const projects = [
       },
     ],
   },
+  {
+    slug: 'analizador-campanas-ia',
+    code: '10',
+    title: 'Analizador de campañas con IA',
+    type: 'Inteligencia de campaña',
+    copy: 'Prototipé una herramienta para revisar campañas antes de publicarlas.',
+    detail:
+      'Este proyecto nació para tomar una campaña, separar sus objetivos, mensajes, audiencia y contexto, y convertirlos en preguntas clave de investigación. La idea es anticipar riesgos, reunir evidencia y llegar a un reporte más útil antes de tomar decisiones creativas o de comunicación.',
+    tags: ['IA', 'Análisis', 'Riesgo'],
+    visual: 'CAMPAIGN / INTEL',
+    cover: '/previews/campaign-analyzer.png',
+    xyz: {
+      x: 'Quería evaluar campañas con más criterio antes de producir o publicar.',
+      y: 'Dejé un flujo que convierte el brief en preguntas, evidencia y escenarios.',
+      z: 'Armé una base local para guardar campañas y generar inteligencia accionable.',
+    },
+    images: [
+      {
+        title: 'Diagnóstico previo',
+        label: 'Herramienta',
+        src: '/previews/campaign-analyzer.png',
+        alt: 'Preview del analizador de campañas con IA',
+      },
+      {
+        title: 'Ruta de análisis',
+        label: 'Sistema',
+        bullets: ['Brief', 'Preguntas clave', 'Evidencia', 'Escenarios'],
+        variant: 'timeline',
+      },
+    ],
+  },
 ]
 
 const webBuilds = [
@@ -354,6 +385,20 @@ const webBuilds = [
     type: 'Calculadora para fisioterapeutas',
     url: 'https://fisioassess-vex1.vercel.app',
     image: '/previews/fisioassess-incan-fisioterapia.png',
+  },
+  {
+    title: 'Giro México 2026',
+    type: 'Web de evento deportivo',
+    url: 'https://giro-mexico-2026.vercel.app',
+    image: '/previews/giro-mexico-2026.png',
+    note: 'Landing para lista prioritaria, clubes, patrocinadores y prensa de una experiencia ciclista.',
+  },
+  {
+    title: 'Reporte 32MX',
+    type: 'Herramienta editorial para redes',
+    url: 'https://reporte-32mx-web.vercel.app',
+    image: '/previews/reporte-32mx.png',
+    note: 'Interfaz tipo medio digital para visualizar contenidos, ordenar secciones y reportar piezas sociales.',
   },
   {
     title: 'Presupuestos Bento Pro',
