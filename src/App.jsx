@@ -849,7 +849,7 @@ function App() {
         <section id="inicio" className="hero-section">
           <div className="hero-simple-grid">
             <figure className="hero-portrait reveal">
-              <img src="/assets/img/ian-portrait.jpg" alt="Retrato de Ian Aceves" loading="eager" decoding="async" />
+              <img src="/assets/img/ian-portrait-2026.jpg" alt="Retrato de Ian Aceves" loading="eager" decoding="async" />
             </figure>
             <div className="hero-copy">
               <p className="hero-kicker reveal">Portfolio profesional 2026</p>
